@@ -34,7 +34,7 @@ export default function Home() {
     ];
 
     return (
-        <div className="min-h-screen bg-cream text-ink font-sans">
+        <div className="min-h-screen bg-cream text-ink font-sans pb-[80px] md:pb-0">
             {/* ── Barre de navigation ── */}
             <nav className="relative z-30 flex justify-between items-center px-6 md:px-8 py-5 max-w-6xl mx-auto">
                 <div className="font-display text-2xl font-semibold tracking-tight text-ink">

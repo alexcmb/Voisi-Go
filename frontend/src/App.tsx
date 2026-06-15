@@ -21,6 +21,8 @@ import MyListings from './pages/MyListings';
 import NotFound from './pages/NotFound';
 import { UIProvider } from './context/UIContext';
 import { ThemeProvider } from './context/ThemeContext';
+import InstallPrompt from './components/InstallPrompt';
+import BottomNav from './components/BottomNav';
 
 function App() {
   return (
@@ -28,6 +30,8 @@ function App() {
       <ThemeProvider>
         <UIProvider>
           <Analytics />
+          <InstallPrompt />
+          <BottomNav />
           <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/explore" element={<Explore />} />

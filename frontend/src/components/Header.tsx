@@ -13,17 +13,13 @@ export default function Header() {
     const [unreadCount, setUnreadCount] = useState(0);
     const [notifications, setNotifications] = useState<AppNotification[]>([]);
     const [showNotifs, setShowNotifs] = useState(false);
-    const [mobileOpen, setMobileOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
     const handleLogout = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
-        setMobileOpen(false);
         navigate('/');
     };
-
-    const closeMobile = () => setMobileOpen(false);
 
     // Poll unread count
     useEffect(() => {
@@ -66,12 +62,7 @@ export default function Header() {
         return () => document.removeEventListener('mousedown', handler);
     }, []);
 
-    // Close mobile menu on resize to desktop
-    useEffect(() => {
-        const handler = () => { if (window.innerWidth >= 768) setMobileOpen(false); };
-        window.addEventListener('resize', handler);
-        return () => window.removeEventListener('resize', handler);
-    }, []);
+
 
     const handleNotifClick = async (notif: AppNotification) => {
         if (!notif.read) {
@@ -244,86 +235,31 @@ export default function Header() {
                     )}
                 </div>
 
-                {/* ── Mobile : thème + notif + burger ── */}
-                <div className="flex md:hidden items-center gap-2.5">
-                    <button onClick={toggleTheme} className={iconBtn} title={theme === 'dark' ? 'Mode clair' : 'Mode sombre'}>
-                        <Icon name={theme === 'dark' ? 'sun' : 'moon'} size={18} />
+                {/* ── Mobile : thème + notif ── */}
+                <div className="flex md:hidden items-center gap-3">
+                    <button onClick={toggleTheme} className={`${iconBtn} border-none shadow-sm`} title={theme === 'dark' ? 'Mode clair' : 'Mode sombre'}>
+                        <Icon name={theme === 'dark' ? 'sun' : 'moon'} size={20} />
                     </button>
 
-                    {token && unreadCount > 0 && (
-                        <Link to="/dashboard" className="relative p-2 text-ink/70">
-                            <Icon name="bell" />
-                            <span className="absolute -top-0.5 -right-0.5 bg-primary-600 text-paper text-[10px] font-bold rounded-full min-w-[16px] h-4 flex items-center justify-center px-1">
+                    {token && unreadCount > 0 ? (
+                        <button onClick={() => setShowNotifs(!showNotifs)} className={`relative ${iconBtn} border-none shadow-sm`}>
+                            <Icon name="bell" size={20} />
+                            <span className="absolute -top-1 -right-1 bg-primary-600 text-paper text-[10px] font-bold rounded-full min-w-[16px] h-4 flex items-center justify-center px-1">
                                 {unreadCount > 99 ? '99+' : unreadCount}
                             </span>
+                        </button>
+                    ) : token ? (
+                        <button onClick={() => setShowNotifs(!showNotifs)} className={`${iconBtn} border-none shadow-sm`}>
+                            <Icon name="bell" size={20} />
+                        </button>
+                    ) : (
+                        <Link to="/login" className="bg-primary-600 text-paper px-4 py-2 rounded-full font-bold text-sm hover:bg-primary-700 transition-colors">
+                            Connexion
                         </Link>
                     )}
-
-                    <button
-                        onClick={() => setMobileOpen(o => !o)}
-                        aria-label={mobileOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
-                        className="w-10 h-10 rounded-xl border border-ink/10 bg-paper flex items-center justify-center text-ink cursor-pointer"
-                    >
-                        <Icon name={mobileOpen ? 'close' : 'menu'} />
-                    </button>
                 </div>
             </div>
 
-            {/* ── Menu mobile ── */}
-            {mobileOpen && (
-                <div className="md:hidden fixed inset-0 z-40 flex flex-col" style={{ top: 64 }}>
-                    <div className="bg-paper border-b border-ink/8 shadow-card px-6 py-5 flex flex-col gap-1.5 animate-slideDown">
-                        <div className="grid grid-cols-3 gap-3 mb-2">
-                            <Link to="/explore" onClick={closeMobile} className="flex flex-col items-center justify-center gap-2 p-4 rounded-2xl bg-primary-50 text-primary-700 border border-primary-100 hover:bg-primary-100 transition-colors">
-                                <Icon name="search" size={22} />
-                                <span className="text-[11px] font-bold uppercase tracking-wide">Explorer</span>
-                            </Link>
-                            <Link to="/premium" onClick={closeMobile} className="flex flex-col items-center justify-center gap-2 p-4 rounded-2xl bg-accent-50 text-accent-600 border border-accent-100 hover:bg-accent-100 transition-colors">
-                                <Icon name="sparkle" size={22} />
-                                <span className="text-[11px] font-bold uppercase tracking-wide">Premium</span>
-                            </Link>
-                            <Link to={token ? "/dashboard" : "/login"} onClick={closeMobile} className="flex flex-col items-center justify-center gap-2 p-4 rounded-2xl bg-secondary-50 text-secondary-700 border border-secondary-100 hover:bg-secondary-100 transition-colors">
-                                <Icon name="home" size={22} />
-                                <span className="text-[11px] font-bold uppercase tracking-wide text-center leading-tight">Tableau</span>
-                            </Link>
-                        </div>
-
-                        {token ? (
-                            <>
-                                <div className="border-t border-ink/8 my-1" />
-                                <Link to="/trips" onClick={closeMobile} className="flex items-center gap-3 px-4 py-3 rounded-xl text-ink/80 font-semibold hover:bg-primary-50 hover:text-primary-700 transition-colors">
-                                    <Icon name="car" /> <span>Covoiturage</span>
-                                </Link>
-                                <Link to="/services" onClick={closeMobile} className="flex items-center gap-3 px-4 py-3 rounded-xl text-ink/80 font-semibold hover:bg-primary-50 hover:text-primary-700 transition-colors">
-                                    <Icon name="hands" /> <span>Services</span>
-                                </Link>
-                                <Link to="/messages" onClick={closeMobile} className="flex items-center gap-3 px-4 py-3 rounded-xl text-ink/80 font-semibold hover:bg-primary-50 hover:text-primary-700 transition-colors">
-                                    <Icon name="message" /> <span>Messages</span>
-                                </Link>
-                                <Link to="/profile" onClick={closeMobile} className="flex items-center gap-3 px-4 py-3 rounded-xl text-ink/80 font-semibold hover:bg-primary-50 hover:text-primary-700 transition-colors">
-                                    <Icon name="user" /> <span>Mon profil</span>
-                                </Link>
-                                <div className="border-t border-ink/8 my-1" />
-                                <button onClick={handleLogout} className="flex items-center gap-3 px-4 py-3 rounded-xl text-primary-600 font-semibold hover:bg-primary-50 transition-colors w-full text-left cursor-pointer">
-                                    <Icon name="logout" /> <span>Déconnexion</span>
-                                </button>
-                            </>
-                        ) : (
-                            <>
-                                <div className="border-t border-ink/8 my-1" />
-                                <Link to="/login" onClick={closeMobile} className="flex items-center gap-3 px-4 py-3 rounded-xl text-ink/80 font-semibold hover:bg-primary-50 hover:text-primary-700 transition-colors">
-                                    <Icon name="login" /> <span>Connexion</span>
-                                </Link>
-                                <Link to="/register" onClick={closeMobile} className="flex items-center justify-center gap-2 mx-4 py-3 rounded-full bg-primary-600 text-paper font-bold hover:bg-primary-700 transition-colors">
-                                    S'inscrire
-                                </Link>
-                            </>
-                        )}
-                    </div>
-
-                    <div className="flex-1 bg-ink/20" onClick={closeMobile} />
-                </div>
-            )}
         </>
     );
 }
