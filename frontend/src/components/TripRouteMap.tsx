@@ -112,14 +112,14 @@ export default function TripRouteMap({
         <div className="rounded-xl overflow-hidden border border-gray-100 shadow-sm">
             {/* Info bar — shown once route is fetched */}
             {routeInfo && (
-                <div className="flex items-center gap-4 px-4 py-2 bg-blue-50 border-b border-blue-100">
-                    <span className="text-sm font-semibold text-blue-700">
+                <div className="flex items-center gap-4 px-4 py-2 bg-primary-50 border-b border-primary-100">
+                    <span className="text-sm font-semibold text-primary-700">
                         📏 {routeInfo.distance} km
                     </span>
-                    <span className="text-sm font-semibold text-blue-700">
+                    <span className="text-sm font-semibold text-primary-700">
                         ⏱️ ~{formatDuration(routeInfo.duration)}
                     </span>
-                    <span className="ml-auto text-xs text-blue-400 italic">via OpenStreetMap</span>
+                    <span className="ml-auto text-xs text-primary-400 italic">via OpenStreetMap</span>
                 </div>
             )}
 
@@ -128,7 +128,7 @@ export default function TripRouteMap({
                 {/* Loading overlay */}
                 {status === 'loading' && (
                     <div className="absolute inset-0 flex items-center justify-center bg-slate-50 z-[1000] gap-3">
-                        <div className="w-5 h-5 border-[3px] border-blue-500 border-t-transparent rounded-full animate-spin" />
+                        <div className="w-5 h-5 border-[3px] border-primary-500 border-t-transparent rounded-full animate-spin" />
                         <span className="text-sm text-slate-500 font-medium">Calcul de l'itinéraire…</span>
                     </div>
                 )}
@@ -166,7 +166,7 @@ export default function TripRouteMap({
                     {/* Departure pin — green */}
                     <Marker position={startPos} icon={startIcon}>
                         <Popup>
-                            <span className="font-bold text-emerald-700">📍 Départ</span><br />
+                            <span className="font-bold text-secondary-700">📍 Départ</span><br />
                             {departure}
                         </Popup>
                     </Marker>

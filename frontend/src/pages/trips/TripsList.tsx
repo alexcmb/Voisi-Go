@@ -124,7 +124,7 @@ export default function TripsList() {
                         <h2 className="text-3xl font-bold text-gray-800">Trajets disponibles</h2>
                         <Link
                             to="/trips/create"
-                            className="bg-blue-600 text-white px-6 py-3 rounded-lg font-bold text-lg hover:bg-blue-700 transition shadow-md"
+                            className="bg-primary-600 text-white px-6 py-3 rounded-lg font-bold text-lg hover:bg-primary-700 transition shadow-md"
                         >
                             + Proposer un trajet
                         </Link>
@@ -141,7 +141,7 @@ export default function TripsList() {
                                     placeholder="Paris, Lyon..."
                                     value={searchDep}
                                     onChange={e => setSearchDep(e.target.value)}
-                                    className="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all"
+                                    className="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary-400 focus:border-transparent transition-all"
                                 />
                             </div>
 
@@ -153,7 +153,7 @@ export default function TripsList() {
                                     placeholder="Marseille, Bordeaux..."
                                     value={searchDest}
                                     onChange={e => setSearchDest(e.target.value)}
-                                    className="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all"
+                                    className="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary-400 focus:border-transparent transition-all"
                                 />
                             </div>
 
@@ -164,7 +164,7 @@ export default function TripsList() {
                                         type="checkbox"
                                         checked={futureOnly}
                                         onChange={e => setFutureOnly(e.target.checked)}
-                                        className="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-400 cursor-pointer"
+                                        className="w-4 h-4 rounded border-gray-300 text-primary-600 focus:ring-primary-400 cursor-pointer"
                                     />
                                     Trajets à venir
                                 </label>
@@ -193,7 +193,7 @@ export default function TripsList() {
                     {/* ── Trip list ── */}
                     {loading ? (
                         <div className="flex flex-col items-center justify-center py-20 gap-4">
-                            <div className="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" />
+                            <div className="w-10 h-10 border-4 border-primary-500 border-t-transparent rounded-full animate-spin" />
                             <p className="text-gray-500 font-medium">Chargement des trajets...</p>
                         </div>
 
@@ -206,7 +206,7 @@ export default function TripsList() {
                                     : 'Aucun trajet pour le moment.'}
                             </p>
                             {!hasSearch && (
-                                <Link to="/trips/create" className="text-blue-600 font-bold hover:underline text-lg">
+                                <Link to="/trips/create" className="text-primary-600 font-bold hover:underline text-lg">
                                     Soyez le premier à en proposer un !
                                 </Link>
                             )}
@@ -223,17 +223,17 @@ export default function TripsList() {
                                 return (
                                     <div
                                         key={trip.id}
-                                        className="bg-white rounded-xl shadow-md border-l-4 border-blue-500 hover:shadow-lg transition-shadow overflow-hidden"
+                                        className="bg-white rounded-xl shadow-md border-l-4 border-primary-500 hover:shadow-lg transition-shadow overflow-hidden"
                                     >
                                         {/* Pending badge for driver */}
                                         {isOwner && hasPending && (
-                                            <div className="bg-amber-50 border-b border-amber-200 px-4 py-2 flex items-center justify-between">
-                                                <span className="text-amber-800 text-sm font-semibold">
+                                            <div className="bg-accent-50 border-b border-accent-200 px-4 py-2 flex items-center justify-between">
+                                                <span className="text-accent-800 text-sm font-semibold">
                                                     ⏳ {trip.pendingBookingsCount} demande{(trip.pendingBookingsCount ?? 0) > 1 ? 's' : ''} en attente
                                                 </span>
                                                 <Link
                                                     to={`/trips/${trip.id}`}
-                                                    className="text-xs text-amber-700 font-bold hover:underline"
+                                                    className="text-xs text-accent-700 font-bold hover:underline"
                                                 >
                                                     Gérer →
                                                 </Link>
@@ -250,13 +250,13 @@ export default function TripsList() {
                                                     })}
                                                 </div>
                                                 <div className="text-gray-700 text-lg mb-2">
-                                                    <span className="font-semibold text-blue-700">De :</span> {trip.departure} <br />
-                                                    <span className="font-semibold text-emerald-700">Vers :</span> {trip.destination}
+                                                    <span className="font-semibold text-primary-700">De :</span> {trip.departure} <br />
+                                                    <span className="font-semibold text-secondary-700">Vers :</span> {trip.destination}
                                                 </div>
                                                 <div className="flex items-center gap-2 flex-wrap text-sm text-gray-500">
                                                     <Link
                                                         to={`/users/${trip.driverId}`}
-                                                        className="bg-gray-100 px-2 py-1 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-colors"
+                                                        className="bg-gray-100 px-2 py-1 rounded-lg hover:bg-primary-50 hover:text-primary-700 transition-colors"
                                                     >
                                                         🚗 {trip.driverName}
                                                     </Link>
@@ -267,7 +267,7 @@ export default function TripsList() {
                                                         </span>
                                                     )}
                                                     {trip.completed ? (
-                                                        <span className="bg-emerald-100 text-emerald-700 px-2 py-1 rounded-lg font-semibold">🏁 Terminé</span>
+                                                        <span className="bg-secondary-100 text-secondary-700 px-2 py-1 rounded-lg font-semibold">🏁 Terminé</span>
                                                     ) : null}
                                                 </div>
                                             </div>
@@ -281,7 +281,7 @@ export default function TripsList() {
                                                             availableSeats: available,
                                                             driverRating: driverRating && driverRating.count > 0 ? driverRating : null,
                                                         })}
-                                                        className="flex items-center gap-1.5 text-xs font-semibold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-lg transition-colors"
+                                                        className="flex items-center gap-1.5 text-xs font-semibold text-primary-600 hover:text-primary-800 bg-primary-50 hover:bg-primary-100 px-3 py-1.5 rounded-lg transition-colors"
                                                     >
                                                         🗺️ Voir l'itinéraire
                                                     </button>
@@ -291,10 +291,10 @@ export default function TripsList() {
                                             {/* Right: price + seats + actions */}
                                             <div className="flex flex-col items-end justify-between gap-2 min-w-[130px]">
                                                 <div className="text-right">
-                                                    <div className="text-2xl font-bold text-blue-600">
+                                                    <div className="text-2xl font-bold text-primary-600">
                                                         {trip.price === 0 ? 'Gratuit' : `${trip.price} €`}
                                                     </div>
-                                                    <div className={`text-sm font-medium ${available > 0 ? 'text-emerald-600' : 'text-red-500'}`}>
+                                                    <div className={`text-sm font-medium ${available > 0 ? 'text-secondary-600' : 'text-red-500'}`}>
                                                         {available} place{available !== 1 ? 's' : ''} libre{available !== 1 ? 's' : ''}
                                                     </div>
                                                 </div>
@@ -305,7 +305,7 @@ export default function TripsList() {
                                                         {myBooking ? (
                                                             <>
                                                                 {myBooking.status === 'confirmed' && (
-                                                                    <span className="text-emerald-600 font-semibold text-sm">✅ Réservé</span>
+                                                                    <span className="text-secondary-600 font-semibold text-sm">✅ Réservé</span>
                                                                 )}
                                                                 {myBooking.status === 'pending' && (
                                                                     <span className="text-orange-500 font-semibold text-sm">⏳ En attente</span>
@@ -315,7 +315,7 @@ export default function TripsList() {
                                                                 )}
                                                                 <Link
                                                                     to={`/trips/${trip.id}`}
-                                                                    className="text-xs text-blue-600 hover:underline font-semibold"
+                                                                    className="text-xs text-primary-600 hover:underline font-semibold"
                                                                 >
                                                                     Voir le trajet →
                                                                 </Link>
@@ -323,14 +323,14 @@ export default function TripsList() {
                                                         ) : !trip.completed && available > 0 ? (
                                                             <Link
                                                                 to={`/trips/${trip.id}`}
-                                                                className="bg-emerald-500 text-white px-4 py-2 rounded-xl font-bold text-sm hover:bg-emerald-600 transition-colors shadow-sm"
+                                                                className="bg-secondary-500 text-white px-4 py-2 rounded-xl font-bold text-sm hover:bg-secondary-600 transition-colors shadow-sm"
                                                             >
                                                                 Réserver →
                                                             </Link>
                                                         ) : (
                                                             <Link
                                                                 to={`/trips/${trip.id}`}
-                                                                className="text-xs text-gray-500 hover:text-blue-600 hover:underline"
+                                                                className="text-xs text-gray-500 hover:text-primary-600 hover:underline"
                                                             >
                                                                 Voir le trajet
                                                             </Link>
@@ -344,14 +344,14 @@ export default function TripsList() {
                                                         {!trip.completed && (
                                                             <button
                                                                 onClick={() => handleComplete(trip.id)}
-                                                                className="bg-emerald-100 text-emerald-800 px-3 py-1.5 rounded-lg font-semibold text-xs hover:bg-emerald-200 transition-colors"
+                                                                className="bg-secondary-100 text-secondary-800 px-3 py-1.5 rounded-lg font-semibold text-xs hover:bg-secondary-200 transition-colors"
                                                             >
                                                                 ✅ Terminer
                                                             </button>
                                                         )}
                                                         <Link
                                                             to={`/trips/${trip.id}`}
-                                                            className="bg-blue-50 text-blue-700 px-3 py-1.5 rounded-lg font-semibold text-xs hover:bg-blue-100 transition-colors"
+                                                            className="bg-primary-50 text-primary-700 px-3 py-1.5 rounded-lg font-semibold text-xs hover:bg-primary-100 transition-colors"
                                                         >
                                                             Gérer →
                                                         </Link>

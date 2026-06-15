@@ -48,7 +48,7 @@ export default function TripMapModal({ trip, onClose }: TripMapModalProps) {
                 onClick={e => e.stopPropagation()}
             >
                 {/* Header */}
-                <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-5 text-white relative">
+                <div className="bg-gradient-to-r from-primary-600 to-primary-600 p-5 text-white relative">
                     <button
                         onClick={onClose}
                         className="absolute top-3 right-3 w-8 h-8 flex items-center justify-center rounded-full bg-white/20 hover:bg-white/30 transition-colors text-white font-bold text-lg"
@@ -60,17 +60,17 @@ export default function TripMapModal({ trip, onClose }: TripMapModalProps) {
                     {/* Route */}
                     <div className="flex items-center gap-3 pr-8">
                         <div className="flex flex-col items-center gap-1">
-                            <div className="w-3 h-3 rounded-full bg-emerald-300 border-2 border-white shadow-sm" />
+                            <div className="w-3 h-3 rounded-full bg-secondary-300 border-2 border-white shadow-sm" />
                             <div className="w-0.5 h-6 bg-white/40" />
                             <div className="w-3 h-3 rounded-full bg-red-300 border-2 border-white shadow-sm" />
                         </div>
                         <div className="flex flex-col gap-1.5">
                             <div>
-                                <p className="text-xs text-blue-200 uppercase tracking-wide font-semibold">Départ</p>
+                                <p className="text-xs text-primary-200 uppercase tracking-wide font-semibold">Départ</p>
                                 <p className="font-bold text-base leading-tight">{trip.departure}</p>
                             </div>
                             <div>
-                                <p className="text-xs text-blue-200 uppercase tracking-wide font-semibold">Arrivée</p>
+                                <p className="text-xs text-primary-200 uppercase tracking-wide font-semibold">Arrivée</p>
                                 <p className="font-bold text-base leading-tight">{trip.destination}</p>
                             </div>
                         </div>
@@ -87,7 +87,7 @@ export default function TripMapModal({ trip, onClose }: TripMapModalProps) {
                         <span className="flex items-center gap-1 bg-white/15 px-2.5 py-1 rounded-full font-bold">
                             {trip.price === 0 ? '🎁 Gratuit' : `💶 ${trip.price} €`}
                         </span>
-                        <span className={`flex items-center gap-1 px-2.5 py-1 rounded-full font-semibold ${available > 0 ? 'bg-emerald-400/30' : 'bg-red-400/30'}`}>
+                        <span className={`flex items-center gap-1 px-2.5 py-1 rounded-full font-semibold ${available > 0 ? 'bg-secondary-400/30' : 'bg-red-400/30'}`}>
                             💺 {available} place{available !== 1 ? 's' : ''} libre{available !== 1 ? 's' : ''}
                         </span>
                     </div>
@@ -122,7 +122,7 @@ export default function TripMapModal({ trip, onClose }: TripMapModalProps) {
                     </button>
                     <Link
                         to={`/trips/${trip.id}`}
-                        className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-colors shadow-sm"
+                        className="bg-primary-600 hover:bg-primary-700 text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-colors shadow-sm"
                     >
                         Voir le trajet complet →
                     </Link>

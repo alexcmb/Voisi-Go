@@ -107,13 +107,13 @@ export default function ConversationView() {
             <div className="flex flex-col h-[calc(100vh-180px)] max-w-2xl mx-auto">
                 {/* Header */}
                 <div className="flex items-center gap-3 p-4 border-b border-gray-200 bg-white rounded-t-xl">
-                    <Link to="/messages" className="text-gray-400 hover:text-blue-600 text-xl transition-colors">
+                    <Link to="/messages" className="text-gray-400 hover:text-primary-600 text-xl transition-colors">
                         ←
                     </Link>
                     {otherUser?.avatarUrl ? (
                         <img src={otherUser.avatarUrl} alt="" className="w-10 h-10 rounded-full border-2 border-gray-100" />
                     ) : (
-                        <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-lg">👤</div>
+                        <div className="w-10 h-10 rounded-full bg-primary-100 flex items-center justify-center text-lg">👤</div>
                     )}
                     <div>
                         <h2 className="font-bold text-gray-800">{otherUser?.name || 'Chargement...'}</h2>
@@ -123,26 +123,26 @@ export default function ConversationView() {
 
                 {/* Related Item Context */}
                 {relatedItem && (
-                    <div className="bg-blue-50 border-b border-blue-100 p-3 flex items-center justify-between shadow-sm z-10">
+                    <div className="bg-primary-50 border-b border-primary-100 p-3 flex items-center justify-between shadow-sm z-10">
                         <div className="flex items-center gap-3">
                             <span className="text-2xl">
                                 {relatedItem.type === 'trip' || (relatedItem as any).driverId ? '🚗' :
                                     relatedItem.type === 'request' ? '🙋' : '💪'}
                             </span>
                             <div className="text-sm">
-                                <p className="font-bold text-blue-900">
+                                <p className="font-bold text-primary-900">
                                     {(relatedItem as any).driverId
                                         ? `Trajet: ${(relatedItem as any).departure} ➔ ${(relatedItem as any).destination}`
                                         : `Service: ${(relatedItem as any).title}`
                                     }
                                 </p>
-                                <p className="text-blue-700 text-xs">
+                                <p className="text-primary-700 text-xs">
                                     {new Date(relatedItem.date).toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' })}
                                     {(relatedItem as any).price > 0 ? ` • ${(relatedItem as any).price} €` : ' • Gratuit'}
                                 </p>
                             </div>
                         </div>
-                        <Link to={(relatedItem as any).driverId ? `/trips` : `/services`} className="text-xs bg-white text-blue-600 px-3 py-1 rounded-full font-bold border border-blue-200 hover:bg-blue-50">
+                        <Link to={(relatedItem as any).driverId ? `/trips` : `/services`} className="text-xs bg-white text-primary-600 px-3 py-1 rounded-full font-bold border border-primary-200 hover:bg-primary-50">
                             Voir
                         </Link>
                     </div>
@@ -174,12 +174,12 @@ export default function ConversationView() {
                                         >
                                             <div
                                                 className={`max-w-[75%] px-4 py-2.5 rounded-2xl ${isMe
-                                                    ? 'bg-blue-600 text-white rounded-br-md'
+                                                    ? 'bg-primary-600 text-white rounded-br-md'
                                                     : 'bg-white text-gray-800 border border-gray-100 rounded-bl-md shadow-sm'
                                                     }`}
                                             >
                                                 <p className="whitespace-pre-wrap break-words">{msg.content}</p>
-                                                <p className={`text-xs mt-1 ${isMe ? 'text-blue-200' : 'text-gray-400'}`}>
+                                                <p className={`text-xs mt-1 ${isMe ? 'text-primary-200' : 'text-gray-400'}`}>
                                                     {formatTime(msg.createdAt)}
                                                 </p>
                                             </div>
@@ -200,13 +200,13 @@ export default function ConversationView() {
                             value={newMessage}
                             onChange={(e) => setNewMessage(e.target.value)}
                             placeholder="Votre message..."
-                            className="flex-1 px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-200 focus:border-blue-400 transition-all"
+                            className="flex-1 px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary-200 focus:border-primary-400 transition-all"
                             disabled={sending}
                         />
                         <button
                             type="submit"
                             disabled={sending || !newMessage.trim()}
-                            className="bg-blue-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
+                            className="bg-primary-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-primary-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
                         >
                             {sending ? '...' : '➤'}
                         </button>

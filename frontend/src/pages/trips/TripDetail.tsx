@@ -243,7 +243,7 @@ export default function TripDetail() {
             <Layout>
                 <div className="flex items-center justify-center min-h-[60vh]">
                     <div className="text-center">
-                        <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+                        <div className="w-12 h-12 border-4 border-primary-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
                         <p className="text-gray-500 font-medium">Chargement du trajet...</p>
                     </div>
                 </div>
@@ -260,7 +260,7 @@ export default function TripDetail() {
 
                     {/* Back link & Share buttons */}
                     <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-6">
-                        <Link to="/trips" className="inline-flex items-center gap-2 text-gray-500 hover:text-blue-600 transition-colors font-medium">
+                        <Link to="/trips" className="inline-flex items-center gap-2 text-gray-500 hover:text-primary-600 transition-colors font-medium">
                             ← Retour aux trajets
                         </Link>
                         
@@ -272,7 +272,7 @@ export default function TripDetail() {
                                 )}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="px-3 py-1.5 bg-emerald-50 dark:bg-emerald-950/20 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-100 dark:hover:bg-emerald-900/30 rounded-xl transition-all flex items-center justify-center text-xs font-bold shadow-sm border border-emerald-200/50 dark:border-emerald-800/30"
+                                className="px-3 py-1.5 bg-secondary-50 dark:bg-secondary-950/20 text-secondary-600 dark:text-secondary-400 hover:bg-secondary-100 dark:hover:bg-secondary-900/30 rounded-xl transition-all flex items-center justify-center text-xs font-bold shadow-sm border border-secondary-200/50 dark:border-secondary-800/30"
                                 title="Partager sur WhatsApp"
                             >
                                 💬 WhatsApp
@@ -282,7 +282,7 @@ export default function TripDetail() {
                                     navigator.clipboard.writeText(window.location.href);
                                     toast.success('Lien du trajet copié !');
                                 }}
-                                className="px-3 py-1.5 bg-blue-50 dark:bg-blue-950/20 text-blue-600 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-900/30 rounded-xl transition-all flex items-center justify-center text-xs font-bold shadow-sm border border-blue-200/50 dark:border-blue-800/30 cursor-pointer"
+                                className="px-3 py-1.5 bg-primary-50 dark:bg-primary-950/20 text-primary-600 dark:text-primary-400 hover:bg-primary-100 dark:hover:bg-primary-900/30 rounded-xl transition-all flex items-center justify-center text-xs font-bold shadow-sm border border-primary-200/50 dark:border-primary-800/30 cursor-pointer"
                                 title="Copier le lien"
                             >
                                 🔗 Copier
@@ -292,14 +292,14 @@ export default function TripDetail() {
 
                     {/* Trip header card */}
                     <div className="bg-white rounded-2xl shadow-lg overflow-hidden mb-6">
-                        <div className={`h-2 ${trip.completed ? 'bg-emerald-400' : 'bg-gradient-to-r from-blue-500 to-indigo-600'}`} />
+                        <div className={`h-2 ${trip.completed ? 'bg-secondary-400' : 'bg-gradient-to-r from-primary-500 to-primary-600'}`} />
                         <div className="p-6">
                             {trip.completed ? (
-                                <span className="inline-flex items-center gap-1.5 text-xs font-bold bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full mb-4">
+                                <span className="inline-flex items-center gap-1.5 text-xs font-bold bg-secondary-100 text-secondary-700 px-3 py-1 rounded-full mb-4">
                                     🏁 Trajet terminé
                                 </span>
                             ) : (
-                                <span className="inline-flex items-center gap-1.5 text-xs font-bold bg-blue-100 text-blue-700 px-3 py-1 rounded-full mb-4">
+                                <span className="inline-flex items-center gap-1.5 text-xs font-bold bg-primary-100 text-primary-700 px-3 py-1 rounded-full mb-4">
                                     🟢 Trajet actif
                                 </span>
                             )}
@@ -307,9 +307,9 @@ export default function TripDetail() {
                             {/* Route */}
                             <div className="flex items-center gap-3 mb-4">
                                 <div className="flex flex-col items-center gap-1">
-                                    <div className="w-3 h-3 rounded-full bg-blue-500 border-2 border-white shadow" />
+                                    <div className="w-3 h-3 rounded-full bg-primary-500 border-2 border-white shadow" />
                                     <div className="w-0.5 h-8 bg-gray-200" />
-                                    <div className="w-3 h-3 rounded-full bg-emerald-500 border-2 border-white shadow" />
+                                    <div className="w-3 h-3 rounded-full bg-secondary-500 border-2 border-white shadow" />
                                 </div>
                                 <div className="flex flex-col gap-2 flex-1">
                                     <div>
@@ -331,17 +331,17 @@ export default function TripDetail() {
 
                             {/* Stats row */}
                             <div className="grid grid-cols-3 gap-3">
-                                <div className="bg-blue-50 rounded-xl p-3 text-center">
-                                    <p className="text-2xl font-bold text-blue-700">
+                                <div className="bg-primary-50 rounded-xl p-3 text-center">
+                                    <p className="text-2xl font-bold text-primary-700">
                                         {trip.price === 0 ? 'Gratuit' : `${trip.price}€`}
                                     </p>
-                                    <p className="text-xs text-blue-500 font-medium mt-0.5">par place</p>
+                                    <p className="text-xs text-primary-500 font-medium mt-0.5">par place</p>
                                 </div>
-                                <div className={`rounded-xl p-3 text-center ${available > 0 ? 'bg-emerald-50' : 'bg-red-50'}`}>
-                                    <p className={`text-2xl font-bold ${available > 0 ? 'text-emerald-700' : 'text-red-600'}`}>
+                                <div className={`rounded-xl p-3 text-center ${available > 0 ? 'bg-secondary-50' : 'bg-red-50'}`}>
+                                    <p className={`text-2xl font-bold ${available > 0 ? 'text-secondary-700' : 'text-red-600'}`}>
                                         {available}
                                     </p>
-                                    <p className={`text-xs font-medium mt-0.5 ${available > 0 ? 'text-emerald-500' : 'text-red-400'}`}>
+                                    <p className={`text-xs font-medium mt-0.5 ${available > 0 ? 'text-secondary-500' : 'text-red-400'}`}>
                                         place{available !== 1 ? 's' : ''} libre{available !== 1 ? 's' : ''}
                                     </p>
                                 </div>
@@ -360,7 +360,7 @@ export default function TripDetail() {
 
                             {/* Vehicle Details */}
                             {trip.vehicleType && (
-                                <div className="mt-4 p-3.5 bg-blue-50 dark:bg-slate-900/50 border border-blue-100 dark:border-slate-800 rounded-xl flex items-center gap-3 text-sm text-gray-700 dark:text-slate-300">
+                                <div className="mt-4 p-3.5 bg-primary-50 dark:bg-slate-900/50 border border-primary-100 dark:border-slate-800 rounded-xl flex items-center gap-3 text-sm text-gray-700 dark:text-slate-300">
                                     <span className="text-xl">🚗</span>
                                     <div>
                                         <span className="font-bold text-slate-800 dark:text-white capitalize">Véhicule de voyage :</span> {trip.vehicleType === 'electrique' ? 'Électrique ⚡' : `${trip.vehicleType} (${trip.fuelType})`}
@@ -373,12 +373,12 @@ export default function TripDetail() {
                     {/* Driver card */}
                     <div className="bg-white rounded-2xl shadow-lg p-5 mb-6 flex items-center justify-between gap-4">
                         <Link to={`/users/${trip.driverId}`} className="flex items-center gap-3 flex-1 hover:opacity-80 transition-opacity">
-                            <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-xl">
+                            <div className="w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center text-xl">
                                 🚗
                             </div>
                             <div>
                                 <p className="text-xs text-gray-400 font-semibold uppercase tracking-wide">Conducteur</p>
-                                <p className="font-bold text-gray-800 hover:text-blue-600 transition-colors">{trip.driverName}</p>
+                                <p className="font-bold text-gray-800 hover:text-primary-600 transition-colors">{trip.driverName}</p>
                                 {driverRating && driverRating.count > 0 ? (
                                     <div className="flex items-center gap-1.5 mt-0.5">
                                         <StarRating rating={driverRating.avg} size="sm" />
@@ -394,7 +394,7 @@ export default function TripDetail() {
                         {!isDriver && (
                             <Link
                                 to={`/messages?driverId=${trip.driverId}&tripId=${trip.id}`}
-                                className="flex items-center gap-2 text-sm font-semibold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 px-4 py-2 rounded-xl transition-colors"
+                                className="flex items-center gap-2 text-sm font-semibold text-primary-600 hover:text-primary-800 bg-primary-50 hover:bg-primary-100 px-4 py-2 rounded-xl transition-colors"
                             >
                                 💬 Contacter
                             </Link>
@@ -411,7 +411,7 @@ export default function TripDetail() {
                                         href={`https://www.openstreetmap.org/directions?engine=fossgis_osrm_car&route=${trip.departureLat},${trip.departureLon};${trip.destinationLat},${trip.destinationLon}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="text-xs text-blue-500 hover:text-blue-700 font-medium"
+                                        className="text-xs text-primary-500 hover:text-primary-700 font-medium"
                                     >
                                         Ouvrir dans OSM →
                                     </a>
@@ -439,7 +439,7 @@ export default function TripDetail() {
                             {myBooking ? (
                                 <div className="space-y-3">
                                     {myBooking.status === 'confirmed' && (
-                                        <div className="flex items-center gap-2 text-emerald-700 bg-emerald-50 p-3 rounded-xl font-semibold">
+                                        <div className="flex items-center gap-2 text-secondary-700 bg-secondary-50 p-3 rounded-xl font-semibold">
                                             ✅ Réservation confirmée — {myBooking.seats} place{myBooking.seats > 1 ? 's' : ''}
                                         </div>
                                     )}
@@ -467,7 +467,7 @@ export default function TripDetail() {
                                         {canReview && (
                                             <button
                                                 onClick={() => setShowReview(true)}
-                                                className="flex-1 py-2.5 bg-amber-400 hover:bg-amber-500 text-white rounded-xl font-bold transition-colors text-sm"
+                                                className="flex-1 py-2.5 bg-accent-400 hover:bg-accent-500 text-white rounded-xl font-bold transition-colors text-sm"
                                             >
                                                 ⭐ Noter le conducteur
                                             </button>
@@ -497,7 +497,7 @@ export default function TripDetail() {
                                         <button
                                             onClick={handleBook}
                                             disabled={actionLoading}
-                                            className="w-full py-3 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl font-bold text-lg transition-colors shadow-md disabled:opacity-50"
+                                            className="w-full py-3 bg-secondary-500 hover:bg-secondary-600 text-white rounded-xl font-bold text-lg transition-colors shadow-md disabled:opacity-50"
                                         >
                                             {actionLoading ? 'Envoi...' : `Réserver ${seatsToBook} place${seatsToBook > 1 ? 's' : ''} ${trip.price > 0 ? `— ${trip.price * seatsToBook}€` : '(gratuit)'}`}
                                         </button>
@@ -505,7 +505,7 @@ export default function TripDetail() {
                                 ) : (
                                     <Link
                                         to="/login"
-                                        className="block w-full py-3 bg-blue-600 text-white text-center rounded-xl font-bold text-lg hover:bg-blue-700 transition-colors"
+                                        className="block w-full py-3 bg-primary-600 text-white text-center rounded-xl font-bold text-lg hover:bg-primary-700 transition-colors"
                                     >
                                         Se connecter pour réserver
                                     </Link>
@@ -529,7 +529,7 @@ export default function TripDetail() {
                                         <button
                                             onClick={handleComplete}
                                             disabled={actionLoading}
-                                            className="flex-1 py-3 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl font-bold transition-colors disabled:opacity-50"
+                                            className="flex-1 py-3 bg-secondary-500 hover:bg-secondary-600 text-white rounded-xl font-bold transition-colors disabled:opacity-50"
                                         >
                                             ✅ Valider la course
                                         </button>
@@ -546,8 +546,8 @@ export default function TripDetail() {
 
                             {/* Pending bookings */}
                             {pendingBookings.length > 0 && (
-                                <div className="bg-amber-50 border border-amber-200 rounded-2xl p-5">
-                                    <h3 className="font-bold text-amber-900 mb-3">
+                                <div className="bg-accent-50 border border-accent-200 rounded-2xl p-5">
+                                    <h3 className="font-bold text-accent-900 mb-3">
                                         ⏳ Demandes en attente ({pendingBookings.length})
                                     </h3>
                                     <div className="space-y-2">
@@ -561,7 +561,7 @@ export default function TripDetail() {
                                                     <button
                                                         onClick={() => handleApprove(b.id)}
                                                         disabled={actionLoading}
-                                                        className="px-3 py-1.5 bg-emerald-100 text-emerald-700 rounded-lg font-semibold text-sm hover:bg-emerald-200 transition-colors disabled:opacity-50"
+                                                        className="px-3 py-1.5 bg-secondary-100 text-secondary-700 rounded-lg font-semibold text-sm hover:bg-secondary-200 transition-colors disabled:opacity-50"
                                                     >
                                                         ✓ Accepter
                                                     </button>
@@ -587,9 +587,9 @@ export default function TripDetail() {
                                     </h3>
                                     <div className="space-y-2">
                                         {confirmedBookings.map(b => (
-                                            <div key={b.id} className="flex items-center justify-between p-3 bg-emerald-50 rounded-xl">
-                                                <span className="font-semibold text-emerald-800">{b.passengerName}</span>
-                                                <span className="text-xs bg-emerald-200 text-emerald-800 px-2 py-1 rounded-full font-bold">
+                                            <div key={b.id} className="flex items-center justify-between p-3 bg-secondary-50 rounded-xl">
+                                                <span className="font-semibold text-secondary-800">{b.passengerName}</span>
+                                                <span className="text-xs bg-secondary-200 text-secondary-800 px-2 py-1 rounded-full font-bold">
                                                     {b.seats} place{b.seats > 1 ? 's' : ''}
                                                 </span>
                                             </div>

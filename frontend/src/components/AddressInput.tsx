@@ -78,7 +78,7 @@ export default function AddressInput({ value, onChange, placeholder, required }:
                 onFocus={() => suggestions.length > 0 && setShowDropdown(true)}
                 placeholder={placeholder}
                 required={required}
-                className="w-full text-lg p-3 border-2 border-gray-300 rounded-lg focus:ring-4 focus:ring-blue-200 focus:border-blue-500 transition-colors"
+                className="w-full text-lg p-3 border-2 border-gray-300 rounded-lg focus:ring-4 focus:ring-primary-200 focus:border-primary-500 transition-colors"
                 autoComplete="off"
             />
             {isLoading && (
@@ -92,9 +92,9 @@ export default function AddressInput({ value, onChange, placeholder, required }:
                         <li
                             key={i}
                             onClick={() => handleSelect(s)}
-                            className="px-4 py-3 hover:bg-blue-50 cursor-pointer text-gray-800 border-b border-gray-100 last:border-b-0 flex items-center gap-2"
+                            className="px-4 py-3 hover:bg-primary-50 cursor-pointer text-gray-800 border-b border-gray-100 last:border-b-0 flex items-center gap-2"
                         >
-                            <span className="text-blue-500">📍</span>
+                            <span className="text-primary-500">📍</span>
                             <span>{s.label}</span>
                         </li>
                     ))}

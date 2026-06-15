@@ -65,7 +65,7 @@ export default function ReviewModal({ targetUserId, targetUserName, relatedType,
                         onChange={e => setComment(e.target.value)}
                         placeholder="Un commentaire ? (optionnel)"
                         rows={3}
-                        className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none resize-none mb-4"
+                        className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none resize-none mb-4"
                     />
 
                     {error && <p className="text-red-500 text-sm mb-3">{error}</p>}
@@ -81,7 +81,7 @@ export default function ReviewModal({ targetUserId, targetUserName, relatedType,
                         <button
                             type="submit"
                             disabled={loading || rating === 0}
-                            className="flex-1 py-2.5 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition-colors disabled:opacity-50"
+                            className="flex-1 py-2.5 bg-primary-600 text-white rounded-xl font-bold hover:bg-primary-700 transition-colors disabled:opacity-50"
                         >
                             {loading ? '...' : 'Envoyer'}
                         </button>

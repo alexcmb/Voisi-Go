@@ -131,7 +131,7 @@ export default function EditProfile() {
     return (
         <Layout>
             <div className="p-4">
-                <div className="max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-lg border-t-4 border-blue-600">
+                <div className="max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-lg border-t-4 border-primary-600">
                     <h2 className="text-2xl font-bold mb-6 text-gray-800">Mon Profil</h2>
 
                     <form onSubmit={handleSubmit} className="space-y-6">
@@ -143,7 +143,7 @@ export default function EditProfile() {
                                         key={index}
                                         src={avatar}
                                         alt="Avatar"
-                                        className={`w-16 h-16 rounded-full cursor-pointer border-4 transition-all ${selectedAvatar === avatar ? 'border-blue-500 scale-110' : 'border-transparent hover:border-gray-300'}`}
+                                        className={`w-16 h-16 rounded-full cursor-pointer border-4 transition-all ${selectedAvatar === avatar ? 'border-primary-500 scale-110' : 'border-transparent hover:border-gray-300'}`}
                                         onClick={() => setSelectedAvatar(avatar)}
                                     />
                                 ))}
@@ -154,7 +154,7 @@ export default function EditProfile() {
                             <label className="block text-lg font-semibold mb-2">Nom complet</label>
                             <input
                                 type="text"
-                                className="w-full text-lg p-3 border rounded-lg focus:ring-4 focus:ring-blue-200"
+                                className="w-full text-lg p-3 border rounded-lg focus:ring-4 focus:ring-primary-200"
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
                                 required
@@ -164,7 +164,7 @@ export default function EditProfile() {
                         <div>
                             <label className="block text-lg font-semibold mb-2">Ma bio (quelques mots sur vous)</label>
                             <textarea
-                                className="w-full text-lg p-3 border rounded-lg focus:ring-4 focus:ring-blue-200"
+                                className="w-full text-lg p-3 border rounded-lg focus:ring-4 focus:ring-primary-200"
                                 rows={3}
                                 value={bio}
                                 onChange={(e) => setBio(e.target.value)}
@@ -174,32 +174,32 @@ export default function EditProfile() {
 
                         <div className="flex gap-4 pt-4">
                             <button type="button" onClick={() => navigate('/dashboard')} className="flex-1 py-3 bg-gray-200 rounded-lg font-bold text-gray-700 hover:bg-gray-300">Annuler</button>
-                            <button type="submit" className="flex-1 py-3 bg-blue-600 rounded-lg font-bold text-white hover:bg-blue-700 shadow-lg">Enregistrer</button>
+                            <button type="submit" className="flex-1 py-3 bg-primary-600 rounded-lg font-bold text-white hover:bg-primary-700 shadow-lg">Enregistrer</button>
                         </div>
                     </form>
                 </div>
 
                 {/* Premium Plan Card */}
-                <div className="max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-lg border-t-4 border-amber-500 mt-6 relative overflow-hidden">
-                    <div className="absolute top-0 right-0 p-3 bg-amber-500 text-white font-bold text-xs uppercase tracking-wider rounded-bl-xl">👑 Optionnel</div>
+                <div className="max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-lg border-t-4 border-accent-500 mt-6 relative overflow-hidden">
+                    <div className="absolute top-0 right-0 p-3 bg-accent-500 text-white font-bold text-xs uppercase tracking-wider rounded-bl-xl">👑 Optionnel</div>
                     <h3 className="text-2xl font-bold mb-2 text-gray-800 flex items-center gap-2">👑 Plan Premium VoisiGO</h3>
                     <p className="text-gray-500 text-sm mb-6 leading-relaxed">
                         Passez à la vitesse supérieure et devenez membre Premium. Supprimez automatiquement toutes les publicités et arborez un badge couronne exclusif sur vos annonces et votre profil !
                     </p>
 
                     {isPremium ? (
-                        <div className="bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-900/30 rounded-xl p-4 text-center">
-                            <p className="text-amber-800 dark:text-amber-400 font-bold flex items-center justify-center gap-2 text-lg">
+                        <div className="bg-accent-50 dark:bg-accent-950/20 border border-accent-200 dark:border-accent-900/30 rounded-xl p-4 text-center">
+                            <p className="text-accent-800 dark:text-accent-400 font-bold flex items-center justify-center gap-2 text-lg">
                                 🎉 Vous êtes Membre Premium !
                             </p>
-                            <p className="text-xs text-amber-600 dark:text-amber-500 mt-1">Merci de votre soutien ! Toutes les publicités ont été désactivées.</p>
+                            <p className="text-xs text-accent-600 dark:text-accent-500 mt-1">Merci de votre soutien ! Toutes les publicités ont été désactivées.</p>
                         </div>
                     ) : (
                         <button
                             type="button"
                             onClick={handleUpgradePremium}
                             disabled={upgrading}
-                            className="w-full py-3.5 bg-amber-500 hover:bg-amber-600 disabled:bg-amber-300 text-white font-extrabold rounded-xl transition-all shadow-md transform hover:scale-[1.01] cursor-pointer"
+                            className="w-full py-3.5 bg-accent-500 hover:bg-accent-600 disabled:bg-accent-300 text-white font-extrabold rounded-xl transition-all shadow-md transform hover:scale-[1.01] cursor-pointer"
                         >
                             {upgrading ? 'Activation en cours...' : '👑 Activer mon compte Premium (Gratuit / Démo)'}
                         </button>
@@ -207,19 +207,19 @@ export default function EditProfile() {
                 </div>
 
                 {/* Identity Verification Card */}
-                <div className="max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-lg border-t-4 border-emerald-500 mt-6 relative overflow-hidden">
-                    <div className="absolute top-0 right-0 p-3 bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider rounded-bl-xl">🔒 Sécurité</div>
+                <div className="max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-lg border-t-4 border-secondary-500 mt-6 relative overflow-hidden">
+                    <div className="absolute top-0 right-0 p-3 bg-secondary-500 text-white font-bold text-xs uppercase tracking-wider rounded-bl-xl">🔒 Sécurité</div>
                     <h3 className="text-2xl font-bold mb-2 text-gray-800 flex items-center gap-2">✅ Vérification d'Identité</h3>
                     <p className="text-gray-500 text-sm mb-6 leading-relaxed">
                         Rassurez les passagers et vos voisins de quartier en certifiant votre identité. Un badge de confiance vert (Vérifié) sera affiché sur votre profil public.
                     </p>
 
                     {isVerified ? (
-                        <div className="bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-900/30 rounded-xl p-4 text-center">
-                            <p className="text-emerald-800 dark:text-emerald-400 font-bold flex items-center justify-center gap-2 text-lg">
+                        <div className="bg-secondary-50 dark:bg-secondary-950/20 border border-secondary-200 dark:border-secondary-900/30 rounded-xl p-4 text-center">
+                            <p className="text-secondary-800 dark:text-secondary-400 font-bold flex items-center justify-center gap-2 text-lg">
                                 ✅ Identité Vérifiée
                             </p>
-                            <p className="text-xs text-emerald-600 dark:text-emerald-500 mt-1">Votre compte bénéficie de la confiance maximale de la communauté.</p>
+                            <p className="text-xs text-secondary-600 dark:text-secondary-500 mt-1">Votre compte bénéficie de la confiance maximale de la communauté.</p>
                         </div>
                     ) : (
                         <div className="space-y-4">
@@ -238,7 +238,7 @@ export default function EditProfile() {
                                 type="button"
                                 onClick={handleVerifyIdentity}
                                 disabled={verifying}
-                                className="w-full py-3.5 bg-emerald-500 hover:bg-emerald-600 disabled:bg-emerald-300 text-white font-extrabold rounded-xl transition-all shadow-md transform hover:scale-[1.01] cursor-pointer"
+                                className="w-full py-3.5 bg-secondary-500 hover:bg-secondary-600 disabled:bg-secondary-300 text-white font-extrabold rounded-xl transition-all shadow-md transform hover:scale-[1.01] cursor-pointer"
                             >
                                 {verifying ? 'Analyse des documents...' : '✅ Soumettre ma vérification (Simulée)'}
                             </button>

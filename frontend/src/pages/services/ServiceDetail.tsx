@@ -116,7 +116,7 @@ export default function ServiceDetail() {
             <Layout>
                 <div className="flex items-center justify-center py-32">
                     <div className="flex flex-col items-center gap-4">
-                        <div className="w-12 h-12 border-4 border-purple-500 border-t-transparent rounded-full animate-spin" />
+                        <div className="w-12 h-12 border-4 border-secondary-500 border-t-transparent rounded-full animate-spin" />
                         <p className="text-gray-500 font-medium">Chargement de l'annonce...</p>
                     </div>
                 </div>
@@ -129,7 +129,7 @@ export default function ServiceDetail() {
     const isRequest = service.type === 'request';
     const typeColor = isRequest
         ? { bg: 'bg-orange-500', light: 'bg-orange-50', text: 'text-orange-700', border: 'border-orange-400', badge: 'bg-orange-100 text-orange-800' }
-        : { bg: 'bg-emerald-500', light: 'bg-emerald-50', text: 'text-emerald-700', border: 'border-emerald-400', badge: 'bg-emerald-100 text-emerald-800' };
+        : { bg: 'bg-secondary-500', light: 'bg-secondary-50', text: 'text-secondary-700', border: 'border-secondary-400', badge: 'bg-secondary-100 text-secondary-800' };
 
     const categoryLabel: Record<string, string> = {
         courses: 'Courses',
@@ -257,7 +257,7 @@ export default function ServiceDetail() {
                                         className="w-14 h-14 rounded-full border-2 border-gray-100 object-cover hover:opacity-90 transition-opacity"
                                     />
                                 ) : (
-                                    <div className="w-14 h-14 rounded-full bg-gradient-to-br from-purple-400 to-blue-500 flex items-center justify-center text-white text-2xl font-bold hover:opacity-90 transition-opacity">
+                                    <div className="w-14 h-14 rounded-full bg-gradient-to-br from-secondary-400 to-primary-500 flex items-center justify-center text-white text-2xl font-bold hover:opacity-90 transition-opacity">
                                         {author.name.charAt(0).toUpperCase()}
                                     </div>
                                 )}
@@ -265,7 +265,7 @@ export default function ServiceDetail() {
                             <div className="flex-1">
                                 <Link
                                     to={`/users/${author.id}`}
-                                    className="text-lg font-bold text-gray-900 hover:text-purple-600 transition-colors"
+                                    className="text-lg font-bold text-gray-900 hover:text-secondary-600 transition-colors"
                                 >
                                     {author.name}
                                 </Link>
@@ -283,7 +283,7 @@ export default function ServiceDetail() {
                             </div>
                             <Link
                                 to={`/users/${author.id}`}
-                                className="hidden sm:flex items-center gap-1 text-sm text-purple-600 hover:text-purple-700 font-semibold border border-purple-200 hover:bg-purple-50 px-3 py-2 rounded-xl transition-colors"
+                                className="hidden sm:flex items-center gap-1 text-sm text-secondary-600 hover:text-secondary-700 font-semibold border border-secondary-200 hover:bg-secondary-50 px-3 py-2 rounded-xl transition-colors"
                             >
                                 Voir le profil →
                             </Link>
@@ -318,7 +318,7 @@ export default function ServiceDetail() {
                             {authorRating.count > reviews.length && (
                                 <Link
                                     to={`/users/${author?.id}`}
-                                    className="text-sm text-purple-600 hover:underline text-center pt-1"
+                                    className="text-sm text-secondary-600 hover:underline text-center pt-1"
                                 >
                                     Voir tous les avis →
                                 </Link>

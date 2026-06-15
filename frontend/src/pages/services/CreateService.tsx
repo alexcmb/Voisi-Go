@@ -49,21 +49,21 @@ export default function CreateService() {
     return (
         <Layout>
             <div className="p-4">
-                <div className="max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-lg border-t-4 border-purple-500">
+                <div className="max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-lg border-t-4 border-secondary-500">
                     <h2 className="text-2xl font-bold mb-6 text-gray-800">🙌 Nouvelle Annonce d'Entraide</h2>
 
                     <form onSubmit={handleSubmit} className="space-y-6">
                         <div className="flex gap-4 p-2 bg-gray-100 rounded-lg">
                             <button
                                 type="button"
-                                className={`flex-1 py-2 rounded-md font-bold transition-all ${type === 'request' ? 'bg-white shadow text-purple-700' : 'text-gray-500'}`}
+                                className={`flex-1 py-2 rounded-md font-bold transition-all ${type === 'request' ? 'bg-white shadow text-secondary-700' : 'text-gray-500'}`}
                                 onClick={() => setType('request')}
                             >
                                 Je demande de l'aide
                             </button>
                             <button
                                 type="button"
-                                className={`flex-1 py-2 rounded-md font-bold transition-all ${type === 'offer' ? 'bg-white shadow text-green-700' : 'text-gray-500'}`}
+                                className={`flex-1 py-2 rounded-md font-bold transition-all ${type === 'offer' ? 'bg-white shadow text-secondary-700' : 'text-gray-500'}`}
                                 onClick={() => setType('offer')}
                             >
                                 Je propose mon aide
@@ -138,7 +138,7 @@ export default function CreateService() {
 
                         <div className="flex gap-4 pt-4">
                             <button type="button" onClick={() => navigate('/dashboard')} className="flex-1 py-3 bg-gray-200 rounded-lg font-bold text-gray-700 hover:bg-gray-300">Annuler</button>
-                            <button type="submit" className="flex-1 py-3 bg-purple-600 rounded-lg font-bold text-white hover:bg-purple-700 shadow-lg">Publier</button>
+                            <button type="submit" className="flex-1 py-3 bg-secondary-600 rounded-lg font-bold text-white hover:bg-secondary-700 shadow-lg">Publier</button>
                         </div>
                     </form>
                 </div>

@@ -216,10 +216,10 @@ export default function Explore() {
                     <p className="text-center text-slate-500 mb-8 text-lg">Tout ce qui se passe près de chez vous : Covoiturage et Entraide.</p>
 
                     <div className="flex justify-center gap-4 mb-6">
-                        <Link to="/services/create" className="bg-purple-600 text-white px-5 py-2 rounded-full font-bold text-sm hover:bg-purple-700 shadow-md transform hover:-translate-y-1 transition">
+                        <Link to="/services/create" className="bg-secondary-600 text-white px-5 py-2 rounded-full font-bold text-sm hover:bg-secondary-700 shadow-md transform hover:-translate-y-1 transition">
                             🤝 Demander ou proposer de l'aide
                         </Link>
-                        <Link to="/trips/create" className="bg-blue-600 text-white px-5 py-2 rounded-full font-bold text-sm hover:bg-blue-700 shadow-md transform hover:-translate-y-1 transition">
+                        <Link to="/trips/create" className="bg-primary-600 text-white px-5 py-2 rounded-full font-bold text-sm hover:bg-primary-700 shadow-md transform hover:-translate-y-1 transition">
                             🚗 Proposer un trajet
                         </Link>
                     </div>
@@ -233,7 +233,7 @@ export default function Explore() {
                                 value={searchQuery}
                                 onChange={e => setSearchQuery(e.target.value)}
                                 placeholder="Rechercher un trajet, un service, un voisin..."
-                                className="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl text-lg focus:ring-4 focus:ring-blue-100 focus:border-blue-400 transition-all bg-white shadow-sm"
+                                className="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl text-lg focus:ring-4 focus:ring-primary-100 focus:border-primary-400 transition-all bg-white shadow-sm"
                             />
                             {searchQuery && (
                                 <button onClick={() => setSearchQuery('')} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 text-lg">✕</button>
@@ -260,16 +260,16 @@ export default function Explore() {
                                     </div>
                                 </div>
                                 {locationFilter.lat && (
-                                    <div className="flex items-center gap-3 bg-blue-50 p-2 rounded-lg min-w-[200px]">
-                                        <span className="text-sm font-semibold text-blue-700 whitespace-nowrap">Rayon: {radiusFilter} km</span>
-                                        <input type="range" min="1" max="50" value={radiusFilter} onChange={e => setRadiusFilter(Number(e.target.value))} className="w-full accent-blue-600 cursor-pointer" />
+                                    <div className="flex items-center gap-3 bg-primary-50 p-2 rounded-lg min-w-[200px]">
+                                        <span className="text-sm font-semibold text-primary-700 whitespace-nowrap">Rayon: {radiusFilter} km</span>
+                                        <input type="range" min="1" max="50" value={radiusFilter} onChange={e => setRadiusFilter(Number(e.target.value))} className="w-full accent-primary-600 cursor-pointer" />
                                     </div>
                                 )}
                             </div>
                             <div className="flex flex-wrap gap-4 items-center">
                                 <div className="flex-1 min-w-[140px]">
                                     <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">Type</label>
-                                    <select value={typeFilter} onChange={e => setTypeFilter(e.target.value as TypeFilter)} className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm bg-gray-50 focus:ring-2 focus:ring-blue-200 focus:border-blue-400">
+                                    <select value={typeFilter} onChange={e => setTypeFilter(e.target.value as TypeFilter)} className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm bg-gray-50 focus:ring-2 focus:ring-primary-200 focus:border-primary-400">
                                         <option value="all">Tous</option>
                                         <option value="request">🙋 Demande d'aide</option>
                                         <option value="offer">💪 Offre d'aide</option>
@@ -278,7 +278,7 @@ export default function Explore() {
                                 </div>
                                 <div className="flex-1 min-w-[140px]">
                                     <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">Catégorie</label>
-                                    <select value={categoryFilter} onChange={e => setCategoryFilter(e.target.value as ServiceCategory | 'all')} className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm bg-gray-50 focus:ring-2 focus:ring-blue-200 focus:border-blue-400">
+                                    <select value={categoryFilter} onChange={e => setCategoryFilter(e.target.value as ServiceCategory | 'all')} className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm bg-gray-50 focus:ring-2 focus:ring-primary-200 focus:border-primary-400">
                                         <option value="all">Toutes</option>
                                         <option value="courses">🛒 Courses</option>
                                         <option value="bricolage">🔨 Bricolage</option>
@@ -289,7 +289,7 @@ export default function Explore() {
                                 </div>
                                 <div className="flex-1 min-w-[140px]">
                                     <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">Prix</label>
-                                    <select value={priceFilter} onChange={e => setPriceFilter(e.target.value as PriceFilter)} className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm bg-gray-50 focus:ring-2 focus:ring-blue-200 focus:border-blue-400">
+                                    <select value={priceFilter} onChange={e => setPriceFilter(e.target.value as PriceFilter)} className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm bg-gray-50 focus:ring-2 focus:ring-primary-200 focus:border-primary-400">
                                         <option value="all">Tous les prix</option>
                                         <option value="free">Gratuit</option>
                                         <option value="under5">≤ 5 €</option>
@@ -322,7 +322,7 @@ export default function Explore() {
 
                     {loading ? (
                         <div className="flex flex-col items-center justify-center py-20 gap-4">
-                            <div className="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" />
+                            <div className="w-10 h-10 border-4 border-primary-500 border-t-transparent rounded-full animate-spin" />
                             <p className="text-gray-400 text-lg">Chargement du fil d'actualité...</p>
                         </div>
                     ) : filteredListings.length === 0 ? (
@@ -347,30 +347,30 @@ export default function Explore() {
                                     const isPremium = item.driverIsPremium === true;
                                     const owner = isOwner(item);
                                     return (
-                                        <div key={item.id} className={`rounded-xl border-l-4 border-blue-500 hover:shadow-lg transition-all relative overflow-hidden group ${
+                                        <div key={item.id} className={`rounded-xl border-l-4 border-primary-500 hover:shadow-lg transition-all relative overflow-hidden group ${
                                             isPremium 
-                                                ? 'bg-gradient-to-br from-white to-amber-50/60 dark:from-slate-800 dark:to-amber-950/30 ring-1 ring-amber-400/30 dark:ring-amber-500/30 shadow-[0_0_15px_rgba(245,158,11,0.15)] dark:shadow-[0_0_22px_rgba(245,158,11,0.25)]' 
+                                                ? 'bg-gradient-to-br from-white to-accent-50/60 dark:from-slate-800 dark:to-accent-950/30 ring-1 ring-accent-400/30 dark:ring-accent-500/30 shadow-[0_0_15px_rgba(245,158,11,0.15)] dark:shadow-[0_0_22px_rgba(245,158,11,0.25)]' 
                                                 : 'bg-white shadow-md'
                                         }`}>
                                             {/* Clickable zone → trip detail */}
                                             <Link to={`/trips/${item.id}`} className="block p-5 pb-3 pl-5">
                                                 <div className="flex items-center justify-between mb-3">
                                                     <div className="flex items-center gap-3">
-                                                        <div className="bg-blue-100 p-2 rounded-full text-xl leading-none">🚗</div>
+                                                        <div className="bg-primary-100 p-2 rounded-full text-xl leading-none">🚗</div>
                                                         <div>
-                                                            <span className="text-xs font-bold text-blue-600 uppercase tracking-wide">Covoiturage</span>
+                                                            <span className="text-xs font-bold text-primary-600 uppercase tracking-wide">Covoiturage</span>
                                                             <div className="text-sm text-gray-500 flex items-center gap-1 flex-wrap">
                                                                 Proposé par <span className="font-medium text-gray-800">{item.driverName}</span>
                                                                 {item.driverIsPremium && (
                                                                     <span className="text-xs leading-none" title="Premium 👑">👑</span>
                                                                 )}
                                                                 {item.driverIsVerified && (
-                                                                    <span className="text-emerald-500 text-xs font-bold" title="Profil vérifié ✅">✓</span>
+                                                                    <span className="text-secondary-500 text-xs font-bold" title="Profil vérifié ✅">✓</span>
                                                                 )}
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <span className="text-xl font-bold text-blue-600">{item.price === 0 ? 'Gratuit' : `${item.price} €`}</span>
+                                                    <span className="text-xl font-bold text-primary-600">{item.price === 0 ? 'Gratuit' : `${item.price} €`}</span>
                                                 </div>
                                                 <div className="ml-12">
                                                     <div className="flex items-center gap-2 mb-1 flex-wrap">
@@ -379,7 +379,7 @@ export default function Explore() {
                                                         <span className="font-semibold text-slate-900">{item.destination}</span>
                                                     </div>
                                                     <div className="text-gray-500 text-sm mb-1">📅 {formatDate(item.date)}</div>
-                                                    <div className="text-sm text-blue-500 group-hover:translate-x-1 transition-transform inline-block">Voir le trajet →</div>
+                                                    <div className="text-sm text-primary-500 group-hover:translate-x-1 transition-transform inline-block">Voir le trajet →</div>
                                                 </div>
                                             </Link>
 
@@ -396,12 +396,12 @@ export default function Explore() {
                                                     <div className="flex items-center gap-2 flex-wrap">
                                                         <button
                                                             onClick={() => handleContact(item.driverId, 'trip', item.id)}
-                                                            className="text-sm font-semibold text-blue-600 bg-blue-50 px-3 py-1.5 rounded-lg hover:bg-blue-100 transition-colors"
+                                                            className="text-sm font-semibold text-primary-600 bg-primary-50 px-3 py-1.5 rounded-lg hover:bg-primary-100 transition-colors"
                                                         >
                                                             💬 Contacter
                                                         </button>
                                                         {myBooking ? (
-                                                            <span className={`text-sm font-semibold ${myBooking.status === 'confirmed' ? 'text-green-600' : myBooking.status === 'pending' ? 'text-orange-500' : 'text-red-500'}`}>
+                                                            <span className={`text-sm font-semibold ${myBooking.status === 'confirmed' ? 'text-secondary-600' : myBooking.status === 'pending' ? 'text-orange-500' : 'text-red-500'}`}>
                                                                 {myBooking.status === 'confirmed' && '✅ Réservé'}
                                                                 {myBooking.status === 'pending' && `⏳ En attente (${myBooking.seats} pl.)`}
                                                                 {myBooking.status === 'rejected' && '❌ Refusé'}
@@ -409,7 +409,7 @@ export default function Explore() {
                                                         ) : available > 0 ? (
                                                             <button
                                                                 onClick={() => handleBook(item.id)}
-                                                                className="text-sm font-bold text-white bg-blue-600 px-3 py-1.5 rounded-lg hover:bg-blue-700 transition-colors shadow-sm"
+                                                                className="text-sm font-bold text-white bg-primary-600 px-3 py-1.5 rounded-lg hover:bg-primary-700 transition-colors shadow-sm"
                                                             >
                                                                 Réserver ({available} pl.)
                                                             </button>
@@ -423,24 +423,24 @@ export default function Explore() {
                                     );
                                 } else {
                                     const isRequest = item.type === 'request';
-                                    const colorClass = isRequest ? 'text-orange-600 bg-orange-50' : 'text-green-600 bg-green-50';
+                                    const colorClass = isRequest ? 'text-orange-600 bg-orange-50' : 'text-secondary-600 bg-secondary-50';
                                     const icon = CATEGORY_EMOJIS[item.category] || '✨';
                                     const owner = isOwner(item);
 
                                     const isPremium = item.authorIsPremium === true;
                                     return (
-                                        <div key={item.id} className={`rounded-xl border-l-4 ${isRequest ? 'border-orange-400' : 'border-green-500'} hover:shadow-lg transition-all relative overflow-hidden group ${
+                                        <div key={item.id} className={`rounded-xl border-l-4 ${isRequest ? 'border-orange-400' : 'border-secondary-500'} hover:shadow-lg transition-all relative overflow-hidden group ${
                                             isPremium 
-                                                ? 'bg-gradient-to-br from-white to-amber-50/60 dark:from-slate-800 dark:to-amber-950/30 ring-1 ring-amber-400/30 dark:ring-amber-500/30 shadow-[0_0_15px_rgba(245,158,11,0.15)] dark:shadow-[0_0_22px_rgba(245,158,11,0.25)]' 
+                                                ? 'bg-gradient-to-br from-white to-accent-50/60 dark:from-slate-800 dark:to-accent-950/30 ring-1 ring-accent-400/30 dark:ring-accent-500/30 shadow-[0_0_15px_rgba(245,158,11,0.15)] dark:shadow-[0_0_22px_rgba(245,158,11,0.25)]' 
                                                 : 'bg-white shadow-md'
                                         }`}>
                                             {/* Clickable zone → service detail */}
                                             <Link to={`/services/${item.id}`} className="block p-5 pb-3 pl-5">
                                                 <div className="flex items-center justify-between mb-3">
                                                     <div className="flex items-center gap-3">
-                                                        <div className={`p-2 rounded-full text-xl leading-none ${isRequest ? 'bg-orange-100' : 'bg-green-100'}`}>{icon}</div>
+                                                        <div className={`p-2 rounded-full text-xl leading-none ${isRequest ? 'bg-orange-100' : 'bg-secondary-100'}`}>{icon}</div>
                                                         <div>
-                                                            <span className={`text-xs font-bold uppercase tracking-wide ${isRequest ? 'text-orange-600' : 'text-green-600'}`}>
+                                                            <span className={`text-xs font-bold uppercase tracking-wide ${isRequest ? 'text-orange-600' : 'text-secondary-600'}`}>
                                                                 {isRequest ? "Demande d'aide" : "Offre d'aide"}
                                                             </span>
                                                             <div className="text-sm text-gray-500 flex items-center gap-1 flex-wrap">
@@ -449,20 +449,20 @@ export default function Explore() {
                                                                     <span className="text-xs leading-none" title="Premium 👑">👑</span>
                                                                 )}
                                                                 {item.authorIsVerified && (
-                                                                    <span className="text-emerald-500 text-xs font-bold" title="Profil vérifié ✅">✓</span>
+                                                                    <span className="text-secondary-500 text-xs font-bold" title="Profil vérifié ✅">✓</span>
                                                                 )}
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <span className={`font-bold text-base ${isRequest ? 'text-orange-600' : 'text-green-600'}`}>
+                                                    <span className={`font-bold text-base ${isRequest ? 'text-orange-600' : 'text-secondary-600'}`}>
                                                         {item.price && item.price > 0 ? `${item.price} €` : 'Gratuit ✨'}
                                                     </span>
                                                 </div>
                                                 <div className="ml-12">
-                                                    <h3 className="text-base font-bold text-slate-900 mb-1 group-hover:text-purple-700 transition-colors">{item.title}</h3>
+                                                    <h3 className="text-base font-bold text-slate-900 mb-1 group-hover:text-secondary-700 transition-colors">{item.title}</h3>
                                                     {item.location && <div className="flex items-center text-gray-500 mb-1 text-sm"><span className="mr-1">📍</span>{item.location}</div>}
                                                     <p className="text-gray-600 text-sm line-clamp-2 mb-1">{item.description}</p>
-                                                    <div className="text-sm text-purple-500 group-hover:translate-x-1 transition-transform inline-block">Voir l'annonce →</div>
+                                                    <div className="text-sm text-secondary-500 group-hover:translate-x-1 transition-transform inline-block">Voir l'annonce →</div>
                                                 </div>
                                             </Link>
 

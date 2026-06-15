@@ -21,13 +21,13 @@ export default function ListingDetailsModal({ item, onClose, onContact, onBook, 
         <>
             <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-3">
-                    <div className="bg-blue-100 p-3 rounded-full text-2xl">🚗</div>
+                    <div className="bg-primary-100 p-3 rounded-full text-2xl">🚗</div>
                     <div>
                         <h2 className="text-xl font-bold text-gray-900">Covoiturage</h2>
                         <p className="text-gray-500">Proposé par {trip.driverName}</p>
                     </div>
                 </div>
-                <div className="text-2xl font-bold text-blue-600">
+                <div className="text-2xl font-bold text-primary-600">
                     {trip.price === 0 ? 'Gratuit' : `${trip.price} €`}
                 </div>
             </div>
@@ -51,7 +51,7 @@ export default function ListingDetailsModal({ item, onClose, onContact, onBook, 
                 <Link
                     to={detailUrl}
                     onClick={onClose}
-                    className="text-sm text-blue-600 hover:text-blue-800 font-semibold hover:underline"
+                    className="text-sm text-primary-600 hover:text-primary-800 font-semibold hover:underline"
                 >
                     Voir la page complète →
                 </Link>
@@ -61,14 +61,14 @@ export default function ListingDetailsModal({ item, onClose, onContact, onBook, 
                         <>
                             <button
                                 onClick={() => onContact(trip.driverId, 'trip', trip.id)}
-                                className="px-4 py-2 bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 font-semibold"
+                                className="px-4 py-2 bg-primary-100 text-primary-700 rounded-lg hover:bg-primary-200 font-semibold"
                             >
                                 💬 Contacter
                             </button>
                             {onBook && (
                                 <button
                                     onClick={() => { onBook(trip.id); onClose(); }}
-                                    className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-bold"
+                                    className="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 font-bold"
                                 >
                                     Réserver
                                 </button>
@@ -87,13 +87,13 @@ export default function ListingDetailsModal({ item, onClose, onContact, onBook, 
         return (
             <>
                 <div className="flex items-center gap-3 mb-4">
-                    <div className={`p-3 rounded-full text-2xl ${isRequest ? 'bg-orange-100 text-orange-600' : 'bg-green-100 text-green-600'}`}>
+                    <div className={`p-3 rounded-full text-2xl ${isRequest ? 'bg-orange-100 text-orange-600' : 'bg-secondary-100 text-secondary-600'}`}>
                         {icon}
                     </div>
                     <div>
                         <h2 className="text-xl font-bold text-gray-900">{service.title}</h2>
                         <div className="flex items-center gap-2 text-sm">
-                            <span className={`font-bold uppercase ${isRequest ? 'text-orange-600' : 'text-green-600'}`}>
+                            <span className={`font-bold uppercase ${isRequest ? 'text-orange-600' : 'text-secondary-600'}`}>
                                 {isRequest ? 'Demande' : 'Offre'}
                             </span>
                             <span className="text-gray-300">•</span>
@@ -110,7 +110,7 @@ export default function ListingDetailsModal({ item, onClose, onContact, onBook, 
                     </div>
                 )}
 
-                <div className="font-bold text-lg text-purple-700 mb-4">
+                <div className="font-bold text-lg text-secondary-700 mb-4">
                     {service.price && service.price > 0 ? `${service.price} €` : 'Gratuit ✨'}
                 </div>
 
@@ -118,7 +118,7 @@ export default function ListingDetailsModal({ item, onClose, onContact, onBook, 
                     <Link
                         to={detailUrl}
                         onClick={onClose}
-                        className={`text-sm font-semibold hover:underline ${isRequest ? 'text-orange-600' : 'text-green-600'}`}
+                        className={`text-sm font-semibold hover:underline ${isRequest ? 'text-orange-600' : 'text-secondary-600'}`}
                     >
                         Voir l'annonce complète →
                     </Link>
@@ -127,7 +127,7 @@ export default function ListingDetailsModal({ item, onClose, onContact, onBook, 
                         {!isOwner && (
                             <button
                                 onClick={() => onContact(service.authorId, 'service', service.id)}
-                                className={`px-4 py-2 rounded-lg font-bold text-white ${isRequest ? 'bg-orange-500 hover:bg-orange-600' : 'bg-green-500 hover:bg-green-600'}`}
+                                className={`px-4 py-2 rounded-lg font-bold text-white ${isRequest ? 'bg-orange-500 hover:bg-orange-600' : 'bg-secondary-500 hover:bg-secondary-600'}`}
                             >
                                 💬 Contacter
                             </button>

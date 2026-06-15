@@ -60,7 +60,7 @@ export default function ServicesList() {
                 <div className="max-w-4xl mx-auto">
                     <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
                         <h2 className="text-3xl font-bold text-gray-800">Entraide entre voisins</h2>
-                        <Link to="/services/create" className="bg-purple-600 text-white px-6 py-3 rounded-lg font-bold text-lg hover:bg-purple-700 transition shadow-md">
+                        <Link to="/services/create" className="bg-secondary-600 text-white px-6 py-3 rounded-lg font-bold text-lg hover:bg-secondary-700 transition shadow-md">
                             + Publier une annonce
                         </Link>
                     </div>
@@ -70,7 +70,7 @@ export default function ServicesList() {
                     ) : services.length === 0 ? (
                         <div className="bg-white p-8 rounded-xl shadow text-center">
                             <p className="text-xl text-gray-600 mb-4">Aucune annonce pour le moment.</p>
-                            <Link to="/services/create" className="text-purple-600 font-bold hover:underline text-lg">Lancez le mouvement !</Link>
+                            <Link to="/services/create" className="text-secondary-600 font-bold hover:underline text-lg">Lancez le mouvement !</Link>
                         </div>
                     ) : (
                         <div className="grid gap-4">
@@ -78,10 +78,10 @@ export default function ServicesList() {
                                 <Link
                                     key={service.id}
                                     to={`/services/${service.id}`}
-                                    className={`bg-white p-6 rounded-xl shadow-md border-l-4 ${service.type === 'request' ? 'border-orange-400' : 'border-green-500'} hover:shadow-lg transition-shadow block group`}
+                                    className={`bg-white p-6 rounded-xl shadow-md border-l-4 ${service.type === 'request' ? 'border-orange-400' : 'border-secondary-500'} hover:shadow-lg transition-shadow block group`}
                                 >
                                     <div className="flex justify-between items-start mb-2">
-                                        <span className={`px-3 py-1 rounded-full text-sm font-bold uppercase ${service.type === 'request' ? 'bg-orange-100 text-orange-800' : 'bg-green-100 text-green-800'}`}>
+                                        <span className={`px-3 py-1 rounded-full text-sm font-bold uppercase ${service.type === 'request' ? 'bg-orange-100 text-orange-800' : 'bg-secondary-100 text-secondary-800'}`}>
                                             {service.type === 'request' ? '🙋 Demande' : '🤲 Proposition'}
                                         </span>
                                         <div className="flex items-center gap-2">
@@ -98,7 +98,7 @@ export default function ServicesList() {
                                         </div>
                                     </div>
 
-                                    <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-purple-700 transition-colors">{service.title}</h3>
+                                    <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-secondary-700 transition-colors">{service.title}</h3>
                                     {service.location && (
                                         <div className="flex items-center text-gray-500 mb-2">
                                             <span className="mr-1">📍</span>
@@ -109,12 +109,12 @@ export default function ServicesList() {
 
                                     <div className="flex justify-between items-end border-t pt-4 mt-2">
                                         <div className="text-gray-500 text-sm">
-                                            <span className="font-bold text-lg text-purple-700 block mb-1">
+                                            <span className="font-bold text-lg text-secondary-700 block mb-1">
                                                 {service.price && service.price > 0 ? `${service.price} €` : 'Gratuit ✨'}
                                             </span>
                                             Par <span className="font-semibold">{service.authorName}</span> • {new Date(service.date).toLocaleDateString()}
                                         </div>
-                                        <span className="text-purple-600 text-sm font-semibold group-hover:translate-x-1 transition-transform">
+                                        <span className="text-secondary-600 text-sm font-semibold group-hover:translate-x-1 transition-transform">
                                             Voir l'annonce →
                                         </span>
                                     </div>

@@ -94,14 +94,14 @@ export default function MyListings() {
                             <h1 className="text-3xl font-bold text-gray-800">Mes Annonces</h1>
                             <p className="text-gray-500 mt-1">Gérez vos trajets et services publiés</p>
                         </div>
-                        <Link to="/dashboard" className="text-sm font-medium text-gray-500 hover:text-blue-600 transition-colors flex items-center gap-1">
+                        <Link to="/dashboard" className="text-sm font-medium text-gray-500 hover:text-primary-600 transition-colors flex items-center gap-1">
                             ← Tableau de bord
                         </Link>
                     </div>
 
                     {loading ? (
                         <div className="flex flex-col items-center justify-center py-20 gap-4">
-                            <div className="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" />
+                            <div className="w-10 h-10 border-4 border-primary-500 border-t-transparent rounded-full animate-spin" />
                             <p className="text-gray-500 font-medium">Chargement de vos annonces...</p>
                         </div>
                     ) : (
@@ -112,13 +112,13 @@ export default function MyListings() {
                                 <div className="flex items-center justify-between mb-4">
                                     <h2 className="text-xl font-bold text-gray-800 flex items-center gap-2">
                                         🚗 Mes Trajets
-                                        <span className="bg-blue-100 text-blue-700 text-sm font-bold px-2.5 py-0.5 rounded-full">
+                                        <span className="bg-primary-100 text-primary-700 text-sm font-bold px-2.5 py-0.5 rounded-full">
                                             {trips.length}
                                         </span>
                                     </h2>
                                     <Link
                                         to="/trips/create"
-                                        className="text-sm font-semibold text-blue-600 bg-blue-50 hover:bg-blue-100 px-4 py-2 rounded-xl transition-colors"
+                                        className="text-sm font-semibold text-primary-600 bg-primary-50 hover:bg-primary-100 px-4 py-2 rounded-xl transition-colors"
                                     >
                                         + Nouveau trajet
                                     </Link>
@@ -128,7 +128,7 @@ export default function MyListings() {
                                     <div className="bg-white rounded-2xl border border-dashed border-gray-200 p-10 text-center">
                                         <p className="text-4xl mb-3">🚗</p>
                                         <p className="text-gray-500 mb-3">Vous n'avez encore publié aucun trajet.</p>
-                                        <Link to="/trips/create" className="text-blue-600 font-bold hover:underline">
+                                        <Link to="/trips/create" className="text-primary-600 font-bold hover:underline">
                                             Proposer un trajet →
                                         </Link>
                                     </div>
@@ -143,16 +143,16 @@ export default function MyListings() {
                                                 <div
                                                     key={trip.id}
                                                     className={`bg-white rounded-2xl shadow-sm border-l-4 overflow-hidden transition hover:shadow-md ${
-                                                        trip.completed ? 'border-emerald-400' : 'border-blue-500'
+                                                        trip.completed ? 'border-secondary-400' : 'border-primary-500'
                                                     }`}
                                                 >
                                                     {/* Pending badge */}
                                                     {hasPending && (
-                                                        <div className="bg-amber-50 border-b border-amber-100 px-4 py-2 flex items-center justify-between">
-                                                            <span className="text-amber-800 text-xs font-bold">
+                                                        <div className="bg-accent-50 border-b border-accent-100 px-4 py-2 flex items-center justify-between">
+                                                            <span className="text-accent-800 text-xs font-bold">
                                                                 ⏳ {trip.pendingBookingsCount} demande{(trip.pendingBookingsCount ?? 0) > 1 ? 's' : ''} en attente
                                                             </span>
-                                                            <Link to={`/trips/${trip.id}`} className="text-xs text-amber-700 font-bold hover:underline">
+                                                            <Link to={`/trips/${trip.id}`} className="text-xs text-accent-700 font-bold hover:underline">
                                                                 Gérer →
                                                             </Link>
                                                         </div>
@@ -163,8 +163,8 @@ export default function MyListings() {
                                                         <div className="flex items-center justify-between mb-3">
                                                             <span className={`text-xs font-bold px-2.5 py-1 rounded-full ${
                                                                 trip.completed
-                                                                    ? 'bg-emerald-100 text-emerald-700'
-                                                                    : 'bg-blue-100 text-blue-700'
+                                                                    ? 'bg-secondary-100 text-secondary-700'
+                                                                    : 'bg-primary-100 text-primary-700'
                                                             }`}>
                                                                 {trip.completed ? '🏁 Terminé' : '🟢 Actif'}
                                                             </span>
@@ -177,16 +177,16 @@ export default function MyListings() {
 
                                                         {/* Route */}
                                                         <p className="font-bold text-gray-800 mb-1">
-                                                            {trip.departure} <span className="text-blue-500">→</span> {trip.destination}
+                                                            {trip.departure} <span className="text-primary-500">→</span> {trip.destination}
                                                         </p>
 
                                                         {/* Stats row */}
                                                         <div className="flex items-center gap-3 text-sm text-gray-600 mb-3">
-                                                            <span className={`font-semibold ${available > 0 ? 'text-emerald-600' : 'text-red-500'}`}>
+                                                            <span className={`font-semibold ${available > 0 ? 'text-secondary-600' : 'text-red-500'}`}>
                                                                 {available}/{trip.seats} places
                                                             </span>
                                                             <span>•</span>
-                                                            <span className="font-semibold text-blue-600">
+                                                            <span className="font-semibold text-primary-600">
                                                                 {trip.price === 0 ? 'Gratuit' : `${trip.price} €`}
                                                             </span>
                                                             {driverRating && driverRating.count > 0 && (
@@ -204,14 +204,14 @@ export default function MyListings() {
                                                         <div className="flex items-center gap-2">
                                                             <Link
                                                                 to={`/trips/${trip.id}`}
-                                                                className="flex-1 text-center py-2 bg-blue-50 text-blue-700 rounded-xl text-sm font-semibold hover:bg-blue-100 transition-colors"
+                                                                className="flex-1 text-center py-2 bg-primary-50 text-primary-700 rounded-xl text-sm font-semibold hover:bg-primary-100 transition-colors"
                                                             >
                                                                 Voir le détail →
                                                             </Link>
                                                             {!trip.completed && (
                                                                 <button
                                                                     onClick={() => handleCompleteTrip(trip.id)}
-                                                                    className="py-2 px-3 bg-emerald-50 text-emerald-700 rounded-xl text-sm font-semibold hover:bg-emerald-100 transition-colors"
+                                                                    className="py-2 px-3 bg-secondary-50 text-secondary-700 rounded-xl text-sm font-semibold hover:bg-secondary-100 transition-colors"
                                                                     title="Valider la course"
                                                                 >
                                                                     ✅
@@ -238,13 +238,13 @@ export default function MyListings() {
                                 <div className="flex items-center justify-between mb-4">
                                     <h2 className="text-xl font-bold text-gray-800 flex items-center gap-2">
                                         🤝 Mes Services
-                                        <span className="bg-purple-100 text-purple-700 text-sm font-bold px-2.5 py-0.5 rounded-full">
+                                        <span className="bg-secondary-100 text-secondary-700 text-sm font-bold px-2.5 py-0.5 rounded-full">
                                             {services.length}
                                         </span>
                                     </h2>
                                     <Link
                                         to="/services/create"
-                                        className="text-sm font-semibold text-purple-600 bg-purple-50 hover:bg-purple-100 px-4 py-2 rounded-xl transition-colors"
+                                        className="text-sm font-semibold text-secondary-600 bg-secondary-50 hover:bg-secondary-100 px-4 py-2 rounded-xl transition-colors"
                                     >
                                         + Nouveau service
                                     </Link>
@@ -254,19 +254,19 @@ export default function MyListings() {
                                     <div className="bg-white rounded-2xl border border-dashed border-gray-200 p-10 text-center">
                                         <p className="text-4xl mb-3">🤝</p>
                                         <p className="text-gray-500 mb-3">Vous n'avez encore publié aucun service.</p>
-                                        <Link to="/services/create" className="text-purple-600 font-bold hover:underline">
+                                        <Link to="/services/create" className="text-secondary-600 font-bold hover:underline">
                                             Proposer ou demander de l'aide →
                                         </Link>
                                     </div>
                                 ) : (
                                     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                                         {services.map(service => (
-                                            <div key={service.id} className="bg-white rounded-2xl shadow-sm border-l-4 border-purple-400 p-5 hover:shadow-md transition">
+                                            <div key={service.id} className="bg-white rounded-2xl shadow-sm border-l-4 border-secondary-400 p-5 hover:shadow-md transition">
                                                 <div className="flex items-start justify-between mb-3">
                                                     <span className={`text-xs font-bold px-2.5 py-1 rounded-full ${
                                                         service.type === 'request'
                                                             ? 'bg-orange-100 text-orange-700'
-                                                            : 'bg-emerald-100 text-emerald-700'
+                                                            : 'bg-secondary-100 text-secondary-700'
                                                     }`}>
                                                         {service.type === 'request' ? '🙋 Demande' : '🙌 Offre'}
                                                     </span>
@@ -283,7 +283,7 @@ export default function MyListings() {
                                                 <p className="text-sm text-gray-500 line-clamp-2 mb-3">{service.description}</p>
 
                                                 <div className="flex items-center justify-between">
-                                                    <span className="text-sm font-bold text-purple-700">
+                                                    <span className="text-sm font-bold text-secondary-700">
                                                         {service.price && service.price > 0 ? `${service.price} €` : 'Gratuit ✨'}
                                                     </span>
                                                     {service.location && (

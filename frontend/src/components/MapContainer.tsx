@@ -55,7 +55,7 @@ export default function MapContainer({ items, center, zoom, onSelect }: MapConta
                                 <p className="text-xs text-gray-500 mb-2">{item.kind === 'trip' ? `Départ: ${item.departure}` : item.description.substring(0, 50) + '...'}</p>
                                 <button
                                     onClick={() => onSelect(item)}
-                                    className="text-xs text-blue-600 font-bold hover:underline"
+                                    className="text-xs text-primary-600 font-bold hover:underline"
                                 >
                                     Voir plus
                                 </button>

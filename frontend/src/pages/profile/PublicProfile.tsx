@@ -67,9 +67,9 @@ export default function PublicProfile() {
     };
 
     const ratingLabel = (avg: number) => {
-        if (avg >= 4.8) return { label: 'Excellent', color: 'text-emerald-600' };
-        if (avg >= 4) return { label: 'Très bien', color: 'text-blue-600' };
-        if (avg >= 3) return { label: 'Bien', color: 'text-yellow-600' };
+        if (avg >= 4.8) return { label: 'Excellent', color: 'text-secondary-600' };
+        if (avg >= 4) return { label: 'Très bien', color: 'text-primary-600' };
+        if (avg >= 3) return { label: 'Bien', color: 'text-accent-600' };
         if (avg > 0) return { label: 'Passable', color: 'text-orange-600' };
         return { label: 'Nouveau', color: 'text-gray-500' };
     };
@@ -85,7 +85,7 @@ export default function PublicProfile() {
             <Layout>
                 <div className="flex items-center justify-center min-h-[60vh]">
                     <div className="text-center">
-                        <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+                        <div className="w-12 h-12 border-4 border-primary-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
                         <p className="text-gray-500 font-medium">Chargement du profil...</p>
                     </div>
                 </div>
@@ -105,7 +105,7 @@ export default function PublicProfile() {
                     {/* Back */}
                     <button
                         onClick={() => navigate(-1)}
-                        className="inline-flex items-center gap-2 text-gray-500 hover:text-blue-600 transition-colors mb-6 font-medium"
+                        className="inline-flex items-center gap-2 text-gray-500 hover:text-primary-600 transition-colors mb-6 font-medium"
                     >
                         ← Retour
                     </button>
@@ -113,7 +113,7 @@ export default function PublicProfile() {
                     {/* Profile hero card */}
                     <div className="bg-white rounded-2xl shadow-lg overflow-hidden mb-6">
                         {/* Gradient banner */}
-                        <div className="h-24 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-600" />
+                        <div className="h-24 bg-gradient-to-r from-primary-500 via-primary-500 to-secondary-600" />
 
                         <div className="px-6 pb-6">
                             {/* Avatar */}
@@ -126,7 +126,7 @@ export default function PublicProfile() {
                                             className="w-24 h-24 rounded-full border-4 border-white shadow-lg bg-white"
                                         />
                                     ) : (
-                                        <div className="w-24 h-24 rounded-full border-4 border-white shadow-lg bg-gradient-to-br from-blue-400 to-indigo-600 flex items-center justify-center text-white text-3xl font-bold">
+                                        <div className="w-24 h-24 rounded-full border-4 border-white shadow-lg bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center text-white text-3xl font-bold">
                                             {user.name.charAt(0).toUpperCase()}
                                         </div>
                                     )}
@@ -143,7 +143,7 @@ export default function PublicProfile() {
                                     {!isOwnProfile && token && (
                                         <button
                                             onClick={() => setShowReview(true)}
-                                            className="text-sm font-semibold text-amber-700 bg-amber-50 hover:bg-amber-100 px-4 py-2 rounded-xl transition-colors"
+                                            className="text-sm font-semibold text-accent-700 bg-accent-50 hover:bg-accent-100 px-4 py-2 rounded-xl transition-colors"
                                         >
                                             ⭐ Laisser un avis
                                         </button>
@@ -155,12 +155,12 @@ export default function PublicProfile() {
                             <div className="flex flex-wrap items-center gap-2 mb-2">
                                 <h1 className="text-2xl font-bold text-gray-900">{user.name}</h1>
                                 {user.isPremium && (
-                                    <span className="inline-flex items-center justify-center bg-amber-100 dark:bg-amber-950/40 text-amber-700 dark:text-amber-400 px-2 py-0.5 rounded-full text-xs font-bold border border-amber-200/50 dark:border-amber-800/30 gap-1" title="Membre Premium">
+                                    <span className="inline-flex items-center justify-center bg-accent-100 dark:bg-accent-950/40 text-accent-700 dark:text-accent-400 px-2 py-0.5 rounded-full text-xs font-bold border border-accent-200/50 dark:border-accent-800/30 gap-1" title="Membre Premium">
                                         👑 Premium
                                     </span>
                                 )}
                                 {user.isVerified && (
-                                    <span className="inline-flex items-center justify-center bg-emerald-100 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 px-2 py-0.5 rounded-full text-xs font-bold border border-emerald-200/50 dark:border-emerald-800/30 gap-0.5" title="Identité vérifiée">
+                                    <span className="inline-flex items-center justify-center bg-secondary-100 dark:bg-secondary-950/40 text-secondary-700 dark:text-secondary-400 px-2 py-0.5 rounded-full text-xs font-bold border border-secondary-200/50 dark:border-secondary-800/30 gap-0.5" title="Identité vérifiée">
                                         ✅ Vérifié
                                     </span>
                                 )}
@@ -185,7 +185,7 @@ export default function PublicProfile() {
                                 {!isOwnProfile && token && (
                                     <button
                                         onClick={() => setShowReview(true)}
-                                        className="mt-3 text-sm text-blue-600 font-semibold hover:underline"
+                                        className="mt-3 text-sm text-primary-600 font-semibold hover:underline"
                                     >
                                         Soyez le premier à laisser un avis
                                     </button>
@@ -213,7 +213,7 @@ export default function PublicProfile() {
                                                 <span className="text-xs">⭐</span>
                                                 <div className="flex-1 bg-gray-100 rounded-full h-2 overflow-hidden">
                                                     <div
-                                                        className="h-2 rounded-full bg-amber-400 transition-all duration-500"
+                                                        className="h-2 rounded-full bg-accent-400 transition-all duration-500"
                                                         style={{ width: `${pct}%` }}
                                                     />
                                                 </div>
@@ -234,7 +234,7 @@ export default function PublicProfile() {
                                 <div key={review.id} className="bg-white rounded-2xl shadow-sm p-5 border border-gray-50">
                                     <div className="flex items-start justify-between gap-3 mb-3">
                                         <div className="flex items-center gap-3">
-                                            <div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center text-white text-sm font-bold flex-shrink-0">
+                                            <div className="w-9 h-9 rounded-full bg-gradient-to-br from-primary-400 to-primary-500 flex items-center justify-center text-white text-sm font-bold flex-shrink-0">
                                                 {review.reviewerName.charAt(0).toUpperCase()}
                                             </div>
                                             <div>
@@ -251,7 +251,7 @@ export default function PublicProfile() {
                                         <div className="pl-12 mt-2">
                                             <Link
                                                 to={`/trips/${review.relatedId}`}
-                                                className="text-xs text-blue-500 hover:underline"
+                                                className="text-xs text-primary-500 hover:underline"
                                             >
                                                 🚗 Voir le trajet →
                                             </Link>

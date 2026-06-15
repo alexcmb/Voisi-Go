@@ -7,36 +7,29 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Outfit', 'sans-serif'],
+                sans: ['Mulish', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+                display: ['Fraunces', 'ui-serif', 'Georgia', 'serif'],
             },
             colors: {
+                // Terracotta — couleur de marque principale (chaleureuse, locale)
                 primary: {
-                    50: '#f0f9ff',
-                    100: '#e0f2fe',
-                    200: '#bae6fd',
-                    300: '#7dd3fc',
-                    400: '#38bdf8',
-                    500: '#0ea5e9',
-                    600: '#0284c7', // Main Brand Color
-                    700: '#0369a1',
-                    800: '#075985',
-                    900: '#0c4a6e',
+                    50: '#fbf3ef',
+                    100: '#f6e1d7',
+                    200: '#ebc3af',
+                    300: '#dd9e80',
+                    400: '#ce7c57',
+                    500: '#c2613f', // Main Brand Color
+                    600: '#a94f31',
+                    700: '#8a3f28',
+                    800: '#6e3422',
+                    900: '#5a2c1e',
                 },
+                // Olive — secondaire (nature, entraide)
                 secondary: {
-                    50: '#ecfdf5',
-                    100: '#d1fae5',
-                    500: '#10b981', // Success/Nature
-                    600: '#059669',
-                    700: '#047857',
-                }
-            },
-            boxShadow: {
-                'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
-            },
-            backdropBlur: {
-                'xs': '2px',
-            }
-        },
-    },
-    plugins: [],
-}
+                    50: '#f2f4ea',
+                    100: '#e0e5c9',
+                    200: '#c4cd9d',
+                    300: '#a3b06e',
+                    400: '#84934b',
+                    500: '#6b7a3b',
+                    600: 

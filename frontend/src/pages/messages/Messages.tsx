@@ -110,7 +110,7 @@ export default function Messages() {
                                 ) : (
                                     <button
                                         onClick={() => setIsEditing(true)}
-                                        className="text-blue-600 hover:text-blue-800 font-medium px-3 py-1 rounded-lg hover:bg-blue-50 transition"
+                                        className="text-primary-600 hover:text-primary-800 font-medium px-3 py-1 rounded-lg hover:bg-primary-50 transition"
                                     >
                                         Modifier
                                     </button>
@@ -126,7 +126,7 @@ export default function Messages() {
                             <div className="text-6xl mb-4">💬</div>
                             <h2 className="text-xl font-bold text-gray-700 mb-2">Pas encore de messages</h2>
                             <p className="text-gray-500 mb-6">Contactez un voisin depuis le fil d'actualité pour démarrer une conversation !</p>
-                            <Link to="/explore" className="bg-blue-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-blue-700 transition shadow-md">
+                            <Link to="/explore" className="bg-primary-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-primary-700 transition shadow-md">
                                 Explorer le fil
                             </Link>
                         </div>
@@ -152,15 +152,15 @@ export default function Messages() {
                                                 toggleSelection(conv.id);
                                             }
                                         }}
-                                        className={`block bg-white p-4 rounded-xl border border-gray-100 hover:border-blue-200 hover:shadow-md transition-all ${isEditing ? 'pl-12 cursor-pointer' : ''}`}
+                                        className={`block bg-white p-4 rounded-xl border border-gray-100 hover:border-primary-200 hover:shadow-md transition-all ${isEditing ? 'pl-12 cursor-pointer' : ''}`}
                                     >
                                         <div className="flex items-center gap-4">
                                             {/* Avatar */}
                                             <div className="flex-shrink-0">
                                                 {conv.otherUserAvatar ? (
-                                                    <img src={conv.otherUserAvatar} alt="" className="w-12 h-12 rounded-full border-2 border-gray-100 group-hover:border-blue-200 transition" />
+                                                    <img src={conv.otherUserAvatar} alt="" className="w-12 h-12 rounded-full border-2 border-gray-100 group-hover:border-primary-200 transition" />
                                                 ) : (
-                                                    <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-xl group-hover:bg-blue-200 transition">
+                                                    <div className="w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center text-xl group-hover:bg-primary-200 transition">
                                                         👤
                                                     </div>
                                                 )}
@@ -183,7 +183,7 @@ export default function Messages() {
                                             </div>
 
                                             {/* Arrow */}
-                                            {!isEditing && <div className="text-gray-300 group-hover:text-blue-400 transition">›</div>}
+                                            {!isEditing && <div className="text-gray-300 group-hover:text-primary-400 transition">›</div>}
                                         </div>
                                     </Link>
                                 </div>

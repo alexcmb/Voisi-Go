@@ -85,9 +85,9 @@ export function UIProvider({ children }: { children: ReactNode }) {
 
 // ─── Toast Item Component ─────────────────────────────────
 const TOAST_STYLES: Record<ToastType, { bg: string; icon: string; border: string }> = {
-    success: { bg: 'bg-white', border: 'border-l-4 border-emerald-500', icon: '✅' },
+    success: { bg: 'bg-white', border: 'border-l-4 border-secondary-500', icon: '✅' },
     error:   { bg: 'bg-white', border: 'border-l-4 border-red-500', icon: '❌' },
-    info:    { bg: 'bg-white', border: 'border-l-4 border-blue-500', icon: 'ℹ️' },
+    info:    { bg: 'bg-white', border: 'border-l-4 border-primary-500', icon: 'ℹ️' },
 };
 
 function ToastItem({ toast, onClose }: { toast: ToastItem; onClose: () => void }) {
@@ -141,7 +141,7 @@ function ConfirmModalInner({ state, onResolve }: { state: ConfirmState; onResolv
                         className={`flex-1 py-2.5 rounded-xl font-bold text-white text-sm transition-colors ${
                             state.danger
                                 ? 'bg-red-500 hover:bg-red-600'
-                                : 'bg-blue-600 hover:bg-blue-700'
+                                : 'bg-primary-600 hover:bg-primary-700'
                         }`}
                     >
                         {state.confirmLabel ?? 'Confirmer'}
