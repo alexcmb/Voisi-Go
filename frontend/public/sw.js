@@ -29,7 +29,12 @@ self.addEventListener('fetch', (event) => {
 
     if (req.mode === 'navigate') {
         event.respondWith(
-            fetch(req).catch(() => caches.match('/index.html').then((r) => r || caches.match('/')))
+            fetch(req).then((res) => {
+                if (res.status === 404) {
+                    return caches.match('/index.html').then((r) => r || caches.match('/'));
+                }
+                return res;
+            }).catch(() => caches.match('/index.html').then((r) => r || caches.match('/')))
         );
         return;
     }
