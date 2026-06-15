@@ -1,6 +1,7 @@
 [build]
 builder = "nixpacks"
-buildCommand = "npm install && npm run build"
+# --include=dev garantit la présence de TypeScript pour le build, même si NODE_ENV=production
+buildCommand = "npm install --include=dev && npm run build"
 
 [deploy]
 startCommand = "npm start"

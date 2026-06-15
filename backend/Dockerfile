@@ -1,26 +1,16 @@
-# node:20-slim = Debian slim → glibc + OpenSSL disponible, compatible Prisma
-FROM node:20-slim AS base
-
+# Backend VoisiGo — image de production (Node, sans Prisma)
+FROM node:20-slim AS build
 WORKDIR /app
-
-# Installer OpenSSL (requis par Prisma Query Engine)
-RUN apt-get update -y && apt-get install -y openssl && rm -rf /var/lib/apt/lists/*
-
 COPY package*.json ./
-RUN npm ci && \
-    npm install --save-dev prisma@5.22.0 && \
-    npm install @prisma/client@5.22.0
-
+RUN npm ci
 COPY . .
+RUN npm run build
 
-# Génération du client Prisma (après COPY pour que schema.prisma soit présent)
-RUN ./node_modules/.bin/prisma generate
-
-# Build TypeScript
-RUN npm run build || true
-
+FROM node:20-slim AS runtime
+WORKDIR /app
+ENV NODE_ENV=production
+COPY package*.json ./
+RUN npm ci --omit=dev
+COPY --from=build /app/dist ./dist
 EXPOSE 3000
-
-# Migrations + démarrage
-# Utilisation de || true sur migrate pour ne pas bloquer si aucune migration n'est définie
-CMD sh -c "./node_modules/.bin/prisma migrate deploy || ./node_modules/.bin/prisma db push && npm start"
+CMD ["npm", "start"]
