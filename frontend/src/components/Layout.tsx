@@ -1,7 +1,6 @@
 import Header from './Header';
 import Footer from './Footer';
 import BottomNav from './BottomNav';
-import InstallPrompt from './InstallPrompt';
 
 interface LayoutProps {
     children: React.ReactNode;
