@@ -4,8 +4,7 @@ import { findUserByEmail, createUser as dbCreateUser, User } from '../utils/db';
 import { z } from 'zod';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-
-const JWT_SECRET = process.env.JWT_SECRET || 'dev_secret_key_123';
+import { JWT_SECRET } from '../utils/config';
 
 const registerSchema = z.object({
     email: z.string().email(),

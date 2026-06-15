@@ -13,7 +13,7 @@ Application d'entraide et de covoiturage local.
 
 ### Prérequis
 - Node.js (v18+)
-- SQLite (géré via `better-sqlite3`)
+- PostgreSQL (accès via le driver `pg`)
 
 ### Démarrage
 
@@ -21,9 +21,13 @@ Application d'entraide et de covoiturage local.
    ```bash
    cd backend
    npm install
+   cp .env.example .env   # puis renseignez DATABASE_URL et JWT_SECRET
    npm run dev
    ```
    Le serveur démarre sur `http://localhost:3000`.
+
+   > **Important** : `JWT_SECRET` doit être défini. Hors développement, le
+   > serveur refuse de démarrer si la variable est absente.
 
 2. **Frontend**
    ```bash
@@ -62,13 +66,4 @@ export default function AdBanner({ format = 'banner', className = '' }: { format
             <img 
                 src={adImageUrl} 
                 alt="Publicité" 
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-            />
-        </a>
-    );
-}
-```
-
-### Emplacements actuels
-- **Fil d'actualité (Explore)** : Haut de page.
-- **Tableau de bord** : Entre les sections "Covoiturage" et "Entraide".
+                className="w-full h-full object-cover group-hover:scale-105 transition-trans
