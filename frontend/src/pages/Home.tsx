@@ -99,7 +99,7 @@ export default function Home() {
 
                     <h1 className="font-display text-[2.7rem] leading-[1.05] md:text-6xl md:leading-[1.04] font-semibold text-ink mt-6">
                         L'entraide entre voisins,<br />
-                        <span className="text-primary-600 italic">à portée de rue.</span>
+                        <span className="text-primary-600">à portée de rue.</span>
                     </h1>
 
                     <p className="text-lg md:text-xl text-ink/70 mt-6 leading-relaxed max-w-2xl">

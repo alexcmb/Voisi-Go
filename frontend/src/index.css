@@ -3,57 +3,57 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-    /* ── Terracotta : couleur de marque ── */
-    --color-primary-50: #fbf3ef;
-    --color-primary-100: #f6e1d7;
-    --color-primary-200: #ebc3af;
-    --color-primary-300: #dd9e80;
-    --color-primary-400: #ce7c57;
-    --color-primary-500: #c2613f;
-    --color-primary-600: #a94f31;
-    --color-primary-700: #8a3f28;
-    --color-primary-800: #6e3422;
-    --color-primary-900: #5a2c1e;
-    --color-primary-950: #4a2418;
+    /* ── Bleu pétrole : couleur de marque ── */
+    --color-primary-50: #eef4f5;
+    --color-primary-100: #d4e4e7;
+    --color-primary-200: #abc9ce;
+    --color-primary-300: #78a6af;
+    --color-primary-400: #45818d;
+    --color-primary-500: #2a6573;
+    --color-primary-600: #1f5562;
+    --color-primary-700: #1a454f;
+    --color-primary-800: #163840;
+    --color-primary-900: #132e34;
+    --color-primary-950: #0d1f23;
 
-    /* ── Olive : secondaire (nature, entraide) ── */
-    --color-secondary-50: #f2f4ea;
-    --color-secondary-100: #e0e5c9;
-    --color-secondary-200: #c4cd9d;
-    --color-secondary-300: #a3b06e;
-    --color-secondary-400: #84934b;
-    --color-secondary-500: #6b7a3b;
-    --color-secondary-600: #55642f;
-    --color-secondary-700: #434e26;
-    --color-secondary-800: #353d20;
-    --color-secondary-900: #2c331c;
-    --color-secondary-950: #1f2412;
+    /* ── Ardoise teal : secondaire (surfaces sombres, companion) ── */
+    --color-secondary-50: #eef3f3;
+    --color-secondary-100: #d2e0e0;
+    --color-secondary-200: #aac3c4;
+    --color-secondary-300: #79a0a1;
+    --color-secondary-400: #4e7b7d;
+    --color-secondary-500: #356164;
+    --color-secondary-600: #285054;
+    --color-secondary-700: #214246;
+    --color-secondary-800: #1a363a;
+    --color-secondary-900: #12262b;
+    --color-secondary-950: #0d1d21;
 
-    /* ── Ocre : accent ponctuel (premium) ── */
-    --color-accent-50: #fbf4e6;
-    --color-accent-100: #f4e1bd;
-    --color-accent-200: #e9cd90;
-    --color-accent-300: #e0b65a;
-    --color-accent-400: #cf9a32;
-    --color-accent-500: #bd8527;
-    --color-accent-600: #9c6c1f;
-    --color-accent-700: #7c551c;
-    --color-accent-800: #61431b;
-    --color-accent-900: #503818;
-    --color-accent-950: #2e1f0d;
+    /* ── Corail : accent ponctuel (premium, mise en avant) ── */
+    --color-accent-50: #fdf0ec;
+    --color-accent-100: #f9d3c8;
+    --color-accent-200: #f3b1a0;
+    --color-accent-300: #ec8a72;
+    --color-accent-400: #e6735a;
+    --color-accent-500: #e0654b;
+    --color-accent-600: #c44c34;
+    --color-accent-700: #a03c29;
+    --color-accent-800: #7c2f21;
+    --color-accent-900: #5f261b;
+    --color-accent-950: #38150e;
 
-    /* ── Neutres chauds ── */
-    --color-cream: #f4efe6;
-    --color-paper: #fbf8f2;
-    --color-ink: #2b2622;
+    /* ── Neutres frais ── */
+    --color-cream: #f1f4f4;
+    --color-paper: #fafbfb;
+    --color-ink: #1b2a2e;
 
-    --font-sans: "Mulish", ui-sans-serif, system-ui, sans-serif;
-    --font-display: "Fraunces", ui-serif, Georgia, serif;
+    --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+    --font-display: "Inter", ui-sans-serif, system-ui, sans-serif;
 }
 
 body {
-    background-color: #f4efe6;
-    color: #2b2622;
+    background-color: #f1f4f4;
+    color: #1b2a2e;
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
@@ -61,40 +61,40 @@ body {
 }
 
 .dark body {
-    background-color: #1c1814;
-    color: #f1eadf;
+    background-color: #0f1f22;
+    color: #e8eeed;
 }
 
-/* Les titres passent en serif (Fraunces) par défaut */
+/* Titres en Inter (sans), hiérarchie par taille/graisse */
 h1, h2, h3, h4, .font-display {
     font-family: var(--font-display);
     font-optical-sizing: auto;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.022em;
 }
 
 /* ── Surfaces (remplace l'ancien glassmorphism) ── */
 .surface-card,
 .glass-panel {
-    background: #fbf8f2;
-    border: 1px solid #ece3d4;
-    box-shadow: 0 1px 0 rgba(43, 38, 34, 0.03), 0 18px 40px -24px rgba(43, 38, 34, 0.28);
+    background: #fafbfb;
+    border: 1px solid #e2e8e8;
+    box-shadow: 0 1px 0 rgba(20, 30, 32, 0.03), 0 18px 40px -24px rgba(20, 30, 32, 0.22);
     transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .dark .surface-card,
 .dark .glass-panel {
-    background: #262019;
-    border: 1px solid #3a322a;
+    background: #18302f;
+    border: 1px solid #2a3f42;
     box-shadow: 0 18px 40px -24px rgba(0, 0, 0, 0.55);
 }
 
-/* L'ancienne classe gradient-text devient un aplat terracotta */
+/* L'ancienne classe gradient-text devient un aplat pétrole */
 .gradient-text {
-    color: #a94f31;
+    color: #1f5562;
 }
 
 .dark .gradient-text {
-    color: #dd9e80;
+    color: #78a6af;
 }
 
 /* Liseré décoratif discret (substitut sobre aux dégradés) */
@@ -102,16 +102,14 @@ h1, h2, h3, h4, .font-display {
     height: 3px;
     width: 3rem;
     border-radius: 999px;
-    background: #c2613f;
+    background: #1f5562;
 }
 
-/* Toast animation */
 @keyframes slideInRight {
     from { opacity: 0; transform: translateX(2rem); }
     to   { opacity: 1; transform: translateX(0); }
 }
 
-/* Confirm modal animation */
 @keyframes scaleIn {
     from { opacity: 0; transform: scale(0.96); }
     to   { opacity: 1; transform: scale(1); }
@@ -121,7 +119,6 @@ h1, h2, h3, h4, .font-display {
     animation: scaleIn 0.2s ease-out;
 }
 
-/* Mobile menu slide down */
 @keyframes slideDown {
     from { opacity: 0; transform: translateY(-8px); }
     to   { opacity: 1; transform: translateY(0); }
@@ -131,7 +128,6 @@ h1, h2, h3, h4, .font-display {
     animation: slideDown 0.2s ease-out;
 }
 
-/* Réservé pour compat : drift très léger, désormais quasi statique */
 @keyframes blob {
     0%, 100% { transform: translate(0, 0) scale(1); }
     50%      { transform: translate(8px, -8px) scale(1.02); }
@@ -144,46 +140,108 @@ h1, h2, h3, h4, .font-display {
 .animation-delay-2000 { animation-delay: 2s; }
 .animation-delay-4000 { animation-delay: 4s; }
 
-/* ── Dark Mode Class Overrides ── */
+/* ── Dark Mode ── */
 .dark {
-    /* Backgrounds */
-    .bg-white {
-        background-color: #262019 !important;
-    }
-    .bg-gray-50, .bg-slate-50, .bg-cream, .bg-paper {
-        background-color: #1c1814 !important;
-    }
-    .bg-gray-100, .bg-slate-100 {
-        background-color: #262019 !important;
-    }
-    .bg-primary-50, .bg-blue-50 {
-        background-color: rgba(58, 50, 42, 0.45) !important;
+    /* Bascule des neutres : tout ce qui consomme les tokens ink/cream/paper
+       suit automatiquement, y compris les variantes d'opacité
+       (text-ink/70, border-ink/8, bg-paper/60…). */
+    --color-cream: #0f1f22;
+    --color-paper: #18302f;
+    --color-ink: #e8eeed;
+
+    /* Texte de marque (pétrole) éclairci pour rester lisible sur fond sombre */
+    .text-primary-600, .text-primary-700 {
+        color: #78a6af !important;
     }
 
-    /* Text colors */
-    .text-ink,
+    /* Backgrounds des pages historiques (slate/gray/white) */
+    .bg-white {
+        background-color: #18302f !important;
+    }
+    .bg-gray-50, .bg-slate-50 {
+        background-color: #0f1f22 !important;
+    }
+    .bg-gray-100, .bg-slate-100 {
+        background-color: #18302f !important;
+    }
+    .bg-primary-50, .bg-blue-50 {
+        background-color: rgba(42, 63, 66, 0.45) !important;
+    }
+
+    /* Text colors des pages historiques */
     .text-slate-800, .text-gray-800, .text-gray-900, .text-slate-900 {
-        color: #f1eadf !important;
+        color: #e8eeed !important;
     }
     .text-gray-700, .text-slate-700 {
-        color: #e6ddcf !important;
+        color: #d3dcdb !important;
     }
     .text-gray-600, .text-slate-600 {
-        color: #cabda9 !important;
+        color: #a7b6b5 !important;
     }
     .text-gray-500, .text-slate-500 {
-        color: #a89a86 !important;
+        color: #8fa3a2 !important;
     }
 
     /* Borders */
     .border-gray-100, .border-gray-200, .border-gray-300,
     .border-slate-100, .border-slate-200, .border-cream {
-        border-color: #3a322a !important;
+        border-color: #2a3f42 !important;
     }
     .divide-gray-100 > * + *, .divide-gray-200 > * + * {
-        border-color: #3a322a !important;
+        border-color: #2a3f42 !important;
     }
 
     /* Form Fields */
     input, textarea, select {
-        background-color:
+        background-color: #0f1f22 !important;
+        color: #e8eeed !important;
+        border-color: #2a3f42 !important;
+    }
+    input:focus, textarea:focus, select:focus {
+        border-color: #45818d !important;
+        outline: none !important;
+    }
+    input::placeholder, textarea::placeholder {
+        color: #6f8584 !important;
+    }
+
+    /* Interactive / Hover overrides */
+    .hover\:bg-gray-50:hover, .hover\:bg-slate-50:hover,
+    .hover\:bg-gray-100:hover, .hover\:bg-slate-100:hover {
+        background-color: #2a3f42 !important;
+    }
+    .hover\:bg-primary-50:hover, .hover\:bg-blue-50:hover {
+        background-color: rgba(42, 63, 66, 0.7) !important;
+        color: #78a6af !important;
+    }
+    .hover\:text-primary-600:hover, .hover\:text-blue-600:hover {
+        color: #78a6af !important;
+    }
+
+    /* Leaflet popup overrides */
+    .leaflet-popup-content-wrapper, .leaflet-popup-tip {
+        background-color: #18302f !important;
+        color: #e8eeed !important;
+        box-shadow: 0 3px 14px rgba(0, 0, 0, 0.45) !important;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .leaflet-container {
+        background-color: #0f1f22 !important;
+    }
+}
+
+/* ── Garde-fou responsive : pas de scroll horizontal parasite sur mobile ── */
+html {
+    -webkit-text-size-adjust: 100%;
+}
+body {
+    overflow-x: hidden;
+}
+#root {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+img, svg, video, canvas {
+    max-width: 100%;
+}

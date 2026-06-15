@@ -66,4 +66,13 @@ export default function AdBanner({ format = 'banner', className = '' }: { format
             <img 
                 src={adImageUrl} 
                 alt="Publicité" 
-                className="w-full h-full object-cover group-hover:scale-105 transition-trans
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            />
+        </a>
+    );
+}
+```
+
+### Emplacements actuels
+- **Fil d'actualité (Explore)** : Haut de page.
+- **Tableau de bord** : Entre les sections "Covoiturage" et "Entraide".
