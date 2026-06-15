@@ -1,0 +1,196 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+    --color-primary-50: #f0f9ff;
+    --color-primary-100: #e0f2fe;
+    --color-primary-200: #bae6fd;
+    --color-primary-300: #7dd3fc;
+    --color-primary-400: #38bdf8;
+    --color-primary-500: #0ea5e9;
+    --color-primary-600: #0284c7;
+    --color-primary-700: #0369a1;
+    --color-primary-800: #075985;
+    --color-primary-900: #0c4a6e;
+
+    --color-secondary-50: #ecfdf5;
+    --color-secondary-100: #d1fae5;
+    --color-secondary-500: #10b981;
+    --color-secondary-600: #059669;
+    --color-secondary-700: #047857;
+
+    --font-sans: "Outfit", sans-serif;
+
+    --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+}
+
+body {
+    background-color: #f8fafc;
+    color: #1e293b;
+    font-family: var(--font-sans);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dark body {
+    background-color: #0f172a;
+    color: #f8fafc;
+}
+
+/* Glassmorphism Utilities */
+.glass-panel {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.dark .glass-panel {
+    background: rgba(15, 23, 42, 0.65);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.gradient-text {
+    background: linear-gradient(135deg, #0284c7 0%, #059669 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Toast animation */
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(2rem);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Confirm modal animation */
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.92);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.animate-in {
+    animation: scaleIn 0.2s ease-out;
+}
+
+/* Mobile menu slide down */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-slideDown {
+    animation: slideDown 0.2s ease-out;
+}
+
+/* Blob animation for Home */
+@keyframes blob {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(30px, -50px) scale(1.1); }
+    66% { transform: translate(-20px, 20px) scale(0.9); }
+}
+
+.animate-blob {
+    animation: blob 8s infinite;
+}
+
+.animation-delay-2000 { animation-delay: 2s; }
+.animation-delay-4000 { animation-delay: 4s; }
+
+/* ── Dark Mode Class Overrides ── */
+.dark {
+    /* Backgrounds */
+    .bg-white {
+        background-color: #1e293b !important;
+    }
+    .bg-gray-50, .bg-slate-50 {
+        background-color: #0f172a !important;
+    }
+    .bg-gray-100, .bg-slate-100 {
+        background-color: #1e293b !important;
+    }
+    .bg-blue-50 {
+        background-color: rgba(30, 41, 59, 0.45) !important;
+    }
+    
+    /* Text colors */
+    .text-slate-800, .text-gray-800, .text-gray-900, .text-slate-900 {
+        color: #f8fafc !important;
+    }
+    .text-gray-700, .text-slate-700 {
+        color: #e2e8f0 !important;
+    }
+    .text-gray-600, .text-slate-600 {
+        color: #cbd5e1 !important;
+    }
+    .text-gray-500, .text-slate-500 {
+        color: #94a3b8 !important;
+    }
+    .text-slate-500 {
+        color: #cbd5e1 !important;
+    }
+
+    /* Borders */
+    .border-gray-100, .border-gray-200, .border-gray-300, .border-slate-100, .border-slate-200 {
+        border-color: #334155 !important;
+    }
+    .divide-gray-100 > * + *, .divide-gray-200 > * + * {
+        border-color: #334155 !important;
+    }
+
+    /* Form Fields */
+    input, textarea, select {
+        background-color: #0f172a !important;
+        color: #f8fafc !important;
+        border-color: #334155 !important;
+    }
+    input:focus, textarea:focus, select:focus {
+        border-color: #38bdf8 !important;
+        outline: none !important;
+    }
+    input::placeholder, textarea::placeholder {
+        color: #64748b !important;
+    }
+
+    /* Interactive / Hover overrides */
+    .hover\:bg-gray-50:hover, .hover\:bg-slate-50:hover, .hover\:bg-gray-100:hover, .hover\:bg-slate-100:hover {
+        background-color: #334155 !important;
+    }
+    .hover\:bg-blue-50:hover {
+        background-color: rgba(30, 41, 59, 0.7) !important;
+        color: #38bdf8 !important;
+    }
+    .hover\:text-blue-600:hover {
+        color: #38bdf8 !important;
+    }
+
+    /* Leaflet popup overrides */
+    .leaflet-popup-content-wrapper, .leaflet-popup-tip {
+        background-color: #1e293b !important;
+        color: #f8fafc !important;
+        box-shadow: 0 3px 14px rgba(0, 0, 0, 0.45) !important;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .leaflet-container {
+        background-color: #0f172a !important;
+    }
+}
