@@ -76,3 +76,35 @@ export default function AdBanner({ format = 'banner', className = '' }: { format
 ### Emplacements actuels
 - **Fil d'actualité (Explore)** : Haut de page.
 - **Tableau de bord** : Entre les sections "Covoiturage" et "Entraide".
+
+---
+
+## Application mobile (PWA & notifications push)
+
+VoisiGo est une **PWA** : installable sur l'écran d'accueil, elle s'ouvre en plein écran comme une app native et peut recevoir des **notifications push** (même fermée).
+
+### Installer sur le téléphone
+- **Android / Chrome** : menu ⋮ → « Installer l'application ».
+- **iOS / Safari** : bouton Partager → « Sur l'écran d'accueil ».
+  (Sur iOS, le push ne fonctionne qu'une fois l'app **installée** — iOS 16.4+.)
+
+### Activer les notifications push (serveur)
+1. Générer les clés VAPID une seule fois :
+   ```bash
+   cd backend
+   npm run generate-vapid
+   ```
+2. Renseigner `backend/.env` :
+   ```
+   VAPID_PUBLIC_KEY=...
+   VAPID_PRIVATE_KEY=...
+   VAPID_SUBJECT=mailto:vous@exemple.fr
+   ```
+3. Redémarrer le backend. Sans ces clés, le push est simplement **désactivé** (le reste de l'app fonctionne normalement, et la carte d'activation est masquée).
+
+Les utilisateurs activent ensuite le push depuis leur **Tableau de bord** (carte « Notifications push »). L'envoi est automatique à chaque événement : nouveau message, demande/confirmation de réservation, nouvel avis, etc.
+
+### À savoir
+- Le push exige **HTTPS** (déjà géré en prod via nginx + Certbot). En local, le service worker tourne sur `http://localhost`, mais l'envoi réel nécessite des clés VAPID valides.
+- Après modification du service worker (`frontend/public/sw.js`), recharger avec vidage du cache.
+- Endpoints backend : `GET /api/push/vapid-public-key`, `POST /api/push/subscribe`, `POST /api/push/unsubscribe`, `POST /api/push/test`.

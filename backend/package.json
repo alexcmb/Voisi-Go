@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
     "start": "node dist/server.js",
-    "dev": "nodemon src/server.ts"
+    "dev": "nodemon src/server.ts",
+    "generate-vapid": "web-push generate-vapid-keys"
   },
   "keywords": [],
   "author": "",
@@ -27,7 +28,8 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3",
     "uuid": "^13.0.0",
-    "zod": "^4.3.5"
+    "zod": "^4.3.5",
+    "web-push": "^3.6.7"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
@@ -35,6 +37,7 @@
     "@types/jsonwebtoken": "^9.0.10",
     "@types/pg": "^8.11.14",
     "@types/uuid": "^10.0.0",
-    "nodemon": "^3.1.11"
+    "nodemon": "^3.1.11",
+    "@types/web-push": "^3.6.4"
   }
 }

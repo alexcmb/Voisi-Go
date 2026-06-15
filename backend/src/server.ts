@@ -11,6 +11,7 @@ import messagesRoutes from './routes/messages.routes';
 import notificationsRoutes from './routes/notifications.routes';
 import reviewsRoutes from './routes/reviews.routes';
 import bookingsRoutes from './routes/bookings.routes';
+import pushRoutes from './routes/push.routes';
 
 dotenv.config();
 
@@ -45,6 +46,7 @@ app.use('/api/messages', messagesRoutes);
 app.use('/api/notifications', notificationsRoutes);
 app.use('/api/reviews', reviewsRoutes);
 app.use('/api/bookings', bookingsRoutes);
+app.use('/api/push', pushRoutes);
 
 app.get('/health', (req, res) => {
     res.json({ status: 'ok', timestamp: new Date() });

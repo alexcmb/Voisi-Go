@@ -1,4 +1,6 @@
 import { Pool } from 'pg';
+import { randomUUID } from 'node:crypto';
+import { sendPush } from './push';
 
 // ─── Types ───────────────────────────────────────────────
 export interface User {
@@ -275,6 +277,18 @@ export const initDb = async (): Promise<void> => {
                 "createdAt" TEXT NOT NULL,
                 FOREIGN KEY ("tripId") REFERENCES trips(id),
                 FOREIGN KEY ("passengerId") REFERENCES users(id)
+            )
+        `);
+
+        await client.query(`
+            CREATE TABLE IF NOT EXISTS push_subscriptions (
+                id TEXT PRIMARY KEY,
+                "userId" TEXT NOT NULL,
+                endpoint TEXT UNIQUE NOT NULL,
+                p256dh TEXT NOT NULL,
+                auth TEXT NOT NULL,
+                "createdAt" TEXT NOT NULL,
+                FOREIGN KEY ("userId") REFERENCES users(id)
             )
         `);
 
@@ -585,6 +599,8 @@ export const createNotification = async (notification: Notification): Promise<vo
             notification.createdAt,
         ]
     );
+    // Envoi push best-effort : n'interrompt jamais la création de la notification
+    void sendPushForNotification(notification);
 };
 
 export const getNotificationsForUser = (userId: string): Promise<Notification[]> =>
@@ -790,3 +806,72 @@ export const upgradeUserToPremium = async (userId: string, isPremium = true): Pr
 export const verifyUserIdentity = async (userId: string, isVerified = true): Promise<void> => {
     await exec('UPDATE users SET "isVerified" = $1 WHERE id = $2', [isVerified, userId]);
 };
+
+// ─── Push subscriptions ──────────────────────────────────
+export interface PushSubscriptionRow {
+    id: string;
+    userId: string;
+    endpoint: string;
+    p256dh: string;
+    auth: string;
+    createdAt: string;
+}
+
+export const savePushSubscription = async (
+    userId: string,
+    sub: { endpoint: string; p256dh: string; auth: string }
+): Promise<void> => {
+    await exec(
+        `INSERT INTO push_subscriptions (id, "userId", endpoint, p256dh, auth, "createdAt")
+         VALUES ($1, $2, $3, $4, $5, $6)
+         ON CONFLICT (endpoint) DO UPDATE
+            SET "userId" = EXCLUDED."userId", p256dh = EXCLUDED.p256dh, auth = EXCLUDED.auth`,
+        [randomUUID(), userId, sub.endpoint, sub.p256dh, sub.auth, new Date().toISOString()]
+    );
+};
+
+export const deleteSubscriptionByEndpoint = async (endpoint: string): Promise<void> => {
+    await exec(`DELETE FROM push_subscriptions WHERE endpoint = $1`, [endpoint]);
+};
+
+export const getPushSubscriptionsForUser = (userId: string): Promise<PushSubscriptionRow[]> =>
+    rows<PushSubscriptionRow>(`SELECT * FROM push_subscriptions WHERE "userId" = $1`, [userId]);
+
+function notifUrl(n: Notification): string {
+    if (n.type === 'new_message' && n.relatedId) return `/messages/${n.relatedId}`;
+    if (
+        ['new_booking_request', 'booking_cancelled', 'booking_approved', 'booking_rejected', 'trip_completed'].includes(n.type) &&
+        n.relatedId
+    ) {
+        return `/trips/${n.relatedId}`;
+    }
+    if (n.type === 'new_review' || n.type === 'review') return '/profile';
+    return '/';
+}
+
+async function sendPushForNotification(n: Notification): Promise<void> {
+    try {
+        const subs = await getPushSubscriptionsForUser(n.userId);
+        if (subs.length === 0) return;
+        const payload = {
+            title: n.title,
+            body: n.message,
+            url: notifUrl(n),
+            tag: n.relatedId || n.type,
+        };
+        await Promise.all(
+            subs.map(async (s) => {
+                try {
+                    await sendPush({ endpoint: s.endpoint, keys: { p256dh: s.p256dh, auth: s.auth } }, payload);
+                } catch (err: any) {
+                    const code = err?.statusCode;
+                    if (code === 404 || code === 410) {
+                        await deleteSubscriptionByEndpoint(s.endpoint);
+                    }
+                }
+            })
+        );
+    } catch {
+        // best-effort : on n'interrompt jamais le flux applicatif
+    }
+}

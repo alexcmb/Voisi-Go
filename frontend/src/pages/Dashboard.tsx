@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Layout from '../components/Layout';
 import AdBanner from '../components/AdBanner';
 import { API_BASE_URL } from '../lib/api';
+import PushToggle from '../components/PushToggle';
 
 interface DashboardStats {
     tripsCount: number;
@@ -51,6 +52,8 @@ export default function Dashboard() {
                             </div>
                         </div>
                     </div>
+
+                    <PushToggle className="mb-8" />
 
                     {/* Stats Dashboard Grid */}
                     {!loading && stats && (
