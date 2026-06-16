@@ -8,9 +8,10 @@ interface RevealProps {
 }
 
 /**
- * Révèle son contenu (fondu + léger glissement) lorsqu'il entre dans le viewport,
- * via IntersectionObserver. Animation en styles inline (fiable, non purgeable).
- * En mode "animations réduites", on garde le fondu et on retire le glissement.
+ * Fond enchaîné au scroll : le contenu apparaît (fondu + léger glissement)
+ * quand il entre dans le viewport, et redisparaît quand il en sort — dans les
+ * deux sens. Styles inline (fiables, non purgeables). En mode "animations
+ * réduites", on garde le fondu et on retire le glissement.
  */
 export default function Reveal({ children, className = '', delay = 0 }: RevealProps) {
     const ref = useRef<HTMLDivElement>(null);
@@ -31,13 +32,11 @@ export default function Reveal({ children, className = '', delay = 0 }: RevealPr
         const observer = new IntersectionObserver(
             (entries) => {
                 for (const entry of entries) {
-                    if (entry.isIntersecting) {
-                        setVisible(true);
-                        observer.unobserve(entry.target);
-                    }
+                    // bidirectionnel : visible à l'entrée, masqué à la sortie
+                    setVisible(entry.isIntersecting);
                 }
             },
-            { threshold: 0.1, rootMargin: '0px 0px -5% 0px' }
+            { threshold: 0, rootMargin: '-10% 0px -10% 0px' }
         );
 
         observer.observe(el);
