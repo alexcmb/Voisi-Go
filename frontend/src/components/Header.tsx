@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { API_BASE_URL } from '../lib/api';
 import type { AppNotification } from '../types';
@@ -13,7 +13,6 @@ export default function Header() {
     const [unreadCount, setUnreadCount] = useState(0);
     const [notifications, setNotifications] = useState<AppNotification[]>([]);
     const [showNotifs, setShowNotifs] = useState(false);
-    const dropdownRef = useRef<HTMLDivElement>(null);
 
     const handleLogout = () => {
         localStorage.removeItem('token');
@@ -37,7 +36,7 @@ export default function Header() {
         return () => clearInterval(interval);
     }, [token]);
 
-    // Fetch full notifications when dropdown opens
+    // Fetch full notifications when the panel opens
     useEffect(() => {
         if (!showNotifs || !token) return;
         fetch(`${API_BASE_URL}/api/notifications`, {
@@ -50,19 +49,6 @@ export default function Header() {
             })
             .catch(() => { });
     }, [showNotifs, token]);
-
-    // Close notification dropdown on outside click
-    useEffect(() => {
-        const handler = (e: MouseEvent) => {
-            if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-                setShowNotifs(false);
-            }
-        };
-        document.addEventListener('mousedown', handler);
-        return () => document.removeEventListener('mousedown', handler);
-    }, []);
-
-
 
     const handleNotifClick = async (notif: AppNotification) => {
         if (!notif.read) {
@@ -143,55 +129,18 @@ export default function Header() {
                         <>
                             <Link to="/messages" className={iconBtn} title="Messages"><Icon name="message" /></Link>
 
-                            {/* Cloche de notifications */}
-                            <div className="relative" ref={dropdownRef}>
-                                <button
-                                    onClick={() => setShowNotifs(!showNotifs)}
-                                    className={`${iconBtn} relative`}
-                                    title="Notifications"
-                                >
-                                    <Icon name="bell" />
-                                    {unreadCount > 0 && (
-                                        <span className="absolute -top-1 -right-1 bg-primary-600 text-paper text-[10px] font-bold rounded-full min-w-[16px] h-4 flex items-center justify-center px-1">
-                                            {unreadCount > 99 ? '99+' : unreadCount}
-                                        </span>
-                                    )}
-                                </button>
-
-                                {showNotifs && (
-                                    <div className="absolute right-0 top-11 w-80 bg-paper rounded-xl shadow-card border border-ink/8 z-50 overflow-hidden">
-                                        <div className="flex justify-between items-center px-4 py-3 border-b border-ink/8">
-                                            <span className="font-semibold text-ink">Notifications</span>
-                                            {unreadCount > 0 && (
-                                                <button onClick={markAllRead} className="text-xs text-primary-600 hover:underline cursor-pointer">
-                                                    Tout marquer lu
-                                                </button>
-                                            )}
-                                        </div>
-                                        <div className="max-h-80 overflow-y-auto">
-                                            {notifications.length === 0 ? (
-                                                <div className="p-6 text-center text-ink/40 text-sm">Aucune notification</div>
-                                            ) : (
-                                                notifications.map(notif => (
-                                                    <button
-                                                        key={notif.id}
-                                                        onClick={() => handleNotifClick(notif)}
-                                                        className={`w-full text-left px-4 py-3 hover:bg-primary-50 transition-colors border-b border-ink/5 flex gap-3 items-start cursor-pointer ${!notif.read ? 'bg-primary-50/60' : ''}`}
-                                                    >
-                                                        <span className="mt-0.5 text-primary-600"><Icon name={notifIcon(notif.type)} size={18} /></span>
-                                                        <div className="flex-1 min-w-0">
-                                                            <div className="text-sm font-semibold text-ink truncate">{notif.title}</div>
-                                                            <div className="text-xs text-ink/55 truncate">{notif.message}</div>
-                                                            <div className="text-[10px] text-ink/40 mt-0.5">{timeAgo(notif.createdAt)}</div>
-                                                        </div>
-                                                        {!notif.read && <span className="w-2 h-2 rounded-full bg-primary-500 mt-2 flex-shrink-0" />}
-                                                    </button>
-                                                ))
-                                            )}
-                                        </div>
-                                    </div>
+                            <button
+                                onClick={() => setShowNotifs(s => !s)}
+                                className={`${iconBtn} relative`}
+                                title="Notifications"
+                            >
+                                <Icon name="bell" />
+                                {unreadCount > 0 && (
+                                    <span className="absolute -top-1 -right-1 bg-primary-600 text-paper text-[10px] font-bold rounded-full min-w-[16px] h-4 flex items-center justify-center px-1">
+                                        {unreadCount > 99 ? '99+' : unreadCount}
+                                    </span>
                                 )}
-                            </div>
+                            </button>
 
                             <Link to="/dashboard" className={navLink}>Tableau de bord</Link>
                             <div className="h-6 w-px bg-ink/15 mx-1" />
@@ -241,16 +190,14 @@ export default function Header() {
                         <Icon name={theme === 'dark' ? 'sun' : 'moon'} size={20} />
                     </button>
 
-                    {token && unreadCount > 0 ? (
-                        <button onClick={() => setShowNotifs(!showNotifs)} className={`relative ${iconBtn} border-none shadow-sm`}>
+                    {token ? (
+                        <button onClick={() => setShowNotifs(s => !s)} className={`relative ${iconBtn} border-none shadow-sm`} title="Notifications">
                             <Icon name="bell" size={20} />
-                            <span className="absolute -top-1 -right-1 bg-primary-600 text-paper text-[10px] font-bold rounded-full min-w-[16px] h-4 flex items-center justify-center px-1">
-                                {unreadCount > 99 ? '99+' : unreadCount}
-                            </span>
-                        </button>
-                    ) : token ? (
-                        <button onClick={() => setShowNotifs(!showNotifs)} className={`${iconBtn} border-none shadow-sm`}>
-                            <Icon name="bell" size={20} />
+                            {unreadCount > 0 && (
+                                <span className="absolute -top-1 -right-1 bg-primary-600 text-paper text-[10px] font-bold rounded-full min-w-[16px] h-4 flex items-center justify-center px-1">
+                                    {unreadCount > 99 ? '99+' : unreadCount}
+                                </span>
+                            )}
                         </button>
                     ) : (
                         <Link to="/login" className="bg-primary-600 text-paper px-4 py-2 rounded-full font-bold text-sm hover:bg-primary-700 transition-colors">
@@ -260,6 +207,43 @@ export default function Header() {
                 </div>
             </div>
 
+            {/* ── Panneau notifications (responsive : desktop ancré à droite, mobile pleine largeur) ── */}
+            {token && showNotifs && (
+                <>
+                    <div className="fixed inset-0 z-40" onClick={() => setShowNotifs(false)} aria-hidden="true" />
+                    <div className="fixed z-50 top-16 left-3 right-3 sm:left-auto sm:right-6 sm:w-80 bg-paper rounded-xl shadow-card border border-ink/8 overflow-hidden animate-slideDown">
+                        <div className="flex justify-between items-center px-4 py-3 border-b border-ink/8">
+                            <span className="font-semibold text-ink">Notifications</span>
+                            {unreadCount > 0 && (
+                                <button onClick={markAllRead} className="text-xs text-primary-600 hover:underline cursor-pointer">
+                                    Tout marquer lu
+                                </button>
+                            )}
+                        </div>
+                        <div className="max-h-[70vh] sm:max-h-80 overflow-y-auto">
+                            {notifications.length === 0 ? (
+                                <div className="p-6 text-center text-ink/40 text-sm">Aucune notification</div>
+                            ) : (
+                                notifications.map(notif => (
+                                    <button
+                                        key={notif.id}
+                                        onClick={() => handleNotifClick(notif)}
+                                        className={`w-full text-left px-4 py-3 hover:bg-primary-50 transition-colors border-b border-ink/5 flex gap-3 items-start cursor-pointer ${!notif.read ? 'bg-primary-50/60' : ''}`}
+                                    >
+                                        <span className="mt-0.5 text-primary-600"><Icon name={notifIcon(notif.type)} size={18} /></span>
+                                        <div className="flex-1 min-w-0">
+                                            <div className="text-sm font-semibold text-ink truncate">{notif.title}</div>
+                                            <div className="text-xs text-ink/55 truncate">{notif.message}</div>
+                                            <div className="text-[10px] text-ink/40 mt-0.5">{timeAgo(notif.createdAt)}</div>
+                                        </div>
+                                        {!notif.read && <span className="w-2 h-2 rounded-full bg-primary-500 mt-2 flex-shrink-0" />}
+                                    </button>
+                                ))
+                            )}
+                        </div>
+                    </div>
+                </>
+            )}
         </>
     );
 }
