@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Icon from '../components/Icon';
+import Reveal from '../components/Reveal';
 
 export default function Home() {
     const [mobileOpen, setMobileOpen] = useState(false);
@@ -90,9 +91,9 @@ export default function Home() {
                 </div>
             )}
 
-            {/* ── Hero (plein écran sur mobile) ── */}
+            {/* ── Hero (plein écran) ── */}
             <header className="relative max-w-6xl mx-auto px-6 flex flex-col justify-center min-h-[calc(100svh_-_72px)] py-12 md:py-16">
-                <div className="max-w-3xl">
+                <Reveal className="max-w-3xl">
                     <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-primary-700">
                         <span className="rule-accent" /> Bêta privée
                     </span>
@@ -134,35 +135,39 @@ export default function Home() {
                             </div>
                         ))}
                     </dl>
-                </div>
+                </Reveal>
             </header>
 
-            {/* ── Piliers (plein écran sur mobile) ── */}
+            {/* ── Piliers (plein écran) ── */}
             <section className="border-t border-ink/8 bg-paper/60 flex items-center min-h-[100svh]">
                 <div className="max-w-6xl mx-auto px-6 py-16 md:py-20 w-full">
-                    <h2 className="font-display text-3xl md:text-4xl font-semibold text-ink">
-                        Une plateforme, trois usages
-                    </h2>
-                    <div className="rule-accent mt-4 mb-12" />
+                    <Reveal>
+                        <h2 className="font-display text-3xl md:text-4xl font-semibold text-ink">
+                            Une plateforme, trois usages
+                        </h2>
+                        <div className="rule-accent mt-4 mb-12" />
+                    </Reveal>
 
                     <div className="grid md:grid-cols-3 gap-6">
-                        {features.map(f => (
-                            <article key={f.title} className="surface-card rounded-2xl p-7">
-                                <span className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary-50 text-primary-600 border border-primary-100">
-                                    <Icon name={f.icon} size={24} />
-                                </span>
-                                <h3 className="font-display text-xl font-semibold text-ink mt-5 mb-2">{f.title}</h3>
-                                <p className="text-ink/65 leading-relaxed">{f.text}</p>
-                            </article>
+                        {features.map((f, i) => (
+                            <Reveal key={f.title} delay={i * 120}>
+                                <article className="surface-card rounded-2xl p-7 h-full">
+                                    <span className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary-50 text-primary-600 border border-primary-100">
+                                        <Icon name={f.icon} size={24} />
+                                    </span>
+                                    <h3 className="font-display text-xl font-semibold text-ink mt-5 mb-2">{f.title}</h3>
+                                    <p className="text-ink/65 leading-relaxed">{f.text}</p>
+                                </article>
+                            </Reveal>
                         ))}
                     </div>
                 </div>
             </section>
 
-            {/* ── Confiance & sécurité (plein écran sur mobile) ── */}
+            {/* ── Confiance & sécurité (plein écran) ── */}
             <section className="bg-secondary-800 text-secondary-50 flex items-center min-h-[100svh]">
                 <div className="max-w-6xl mx-auto px-6 py-16 md:py-24 grid lg:grid-cols-2 gap-12 items-center w-full">
-                    <div>
+                    <Reveal>
                         <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-secondary-200">
                             <Icon name="shield" size={16} /> Confiance & sécurité
                         </span>
@@ -189,43 +194,45 @@ export default function Home() {
                                 </li>
                             ))}
                         </ul>
-                    </div>
+                    </Reveal>
 
                     {/* Carte Premium */}
-                    <div className="rounded-2xl p-8 bg-secondary-900/60 border border-secondary-700/60">
-                        <div className="flex items-center justify-between mb-4">
-                            <h3 className="font-display text-2xl font-semibold text-secondary-50">Premium</h3>
-                            <span className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-accent-300 border border-accent-300/40 rounded-full px-3 py-1">
-                                <Icon name="sparkle" size={14} /> Recommandé
-                            </span>
-                        </div>
-                        <p className="text-secondary-100/75 text-sm leading-relaxed mb-7">
-                            Soutenez ce projet communautaire et profitez d'avantages de visibilité et de confort.
-                        </p>
+                    <Reveal delay={150}>
+                        <div className="rounded-2xl p-8 bg-secondary-900/60 border border-secondary-700/60">
+                            <div className="flex items-center justify-between mb-4">
+                                <h3 className="font-display text-2xl font-semibold text-secondary-50">Premium</h3>
+                                <span className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-accent-300 border border-accent-300/40 rounded-full px-3 py-1">
+                                    <Icon name="sparkle" size={14} /> Recommandé
+                                </span>
+                            </div>
+                            <p className="text-secondary-100/75 text-sm leading-relaxed mb-7">
+                                Soutenez ce projet communautaire et profitez d'avantages de visibilité et de confort.
+                            </p>
 
-                        <ul className="space-y-3.5 mb-8 text-sm text-secondary-100">
-                            {[
-                                'Badge Premium sur votre profil',
-                                'Mise en avant de vos annonces',
-                                'Navigation sans publicité',
-                                "Vérification d'identité incluse",
-                            ].map(item => (
-                                <li key={item} className="flex items-center gap-2.5">
-                                    <span className="text-accent-300"><Icon name="check" size={18} /></span>
-                                    {item}
-                                </li>
-                            ))}
-                        </ul>
+                            <ul className="space-y-3.5 mb-8 text-sm text-secondary-100">
+                                {[
+                                    'Badge Premium sur votre profil',
+                                    'Mise en avant de vos annonces',
+                                    'Navigation sans publicité',
+                                    "Vérification d'identité incluse",
+                                ].map(item => (
+                                    <li key={item} className="flex items-center gap-2.5">
+                                        <span className="text-accent-300"><Icon name="check" size={18} /></span>
+                                        {item}
+                                    </li>
+                                ))}
+                            </ul>
 
-                        <div className="flex flex-col sm:flex-row gap-3">
-                            <Link to="/premium" className="flex-1 text-center py-3 bg-accent-400 hover:bg-accent-500 text-secondary-900 font-bold text-sm rounded-full transition-colors">
-                                Découvrir Premium
-                            </Link>
-                            <Link to="/register" className="flex-1 text-center py-3 bg-transparent hover:bg-secondary-50/10 text-secondary-50 font-bold text-sm rounded-full border border-secondary-50/20 transition-colors">
-                                S'inscrire
-                            </Link>
+                            <div className="flex flex-col sm:flex-row gap-3">
+                                <Link to="/premium" className="flex-1 text-center py-3 bg-accent-400 hover:bg-accent-500 text-secondary-900 font-bold text-sm rounded-full transition-colors">
+                                    Découvrir Premium
+                                </Link>
+                                <Link to="/register" className="flex-1 text-center py-3 bg-transparent hover:bg-secondary-50/10 text-secondary-50 font-bold text-sm rounded-full border border-secondary-50/20 transition-colors">
+                                    S'inscrire
+                                </Link>
+                            </div>
                         </div>
-                    </div>
+                    </Reveal>
                 </div>
             </section>
 
