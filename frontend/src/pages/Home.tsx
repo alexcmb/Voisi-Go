@@ -98,12 +98,12 @@ export default function Home() {
                         <span className="rule-accent" /> Bêta privée
                     </span>
 
-                    <h1 className="font-display text-[2.7rem] leading-[1.05] md:text-6xl md:leading-[1.04] font-semibold text-ink mt-6">
+                    <h1 className="font-display text-5xl leading-[1.05] md:text-7xl md:leading-[1.04] font-semibold text-ink mt-6">
                         L'entraide entre voisins,<br />
                         <span className="text-primary-600">à portée de rue.</span>
                     </h1>
 
-                    <p className="text-lg md:text-xl text-ink/70 mt-6 leading-relaxed max-w-2xl">
+                    <p className="text-xl md:text-2xl text-ink/70 mt-7 leading-relaxed max-w-2xl">
                         Petits services, jardinage, courses et covoiturage du quotidien.
                         VoisiGo relie les habitants d'un même quartier pour se simplifier la vie, ensemble.
                     </p>
@@ -142,7 +142,7 @@ export default function Home() {
             <section className="border-t border-ink/8 bg-paper/60 flex items-center min-h-[100svh]">
                 <div className="max-w-6xl mx-auto px-6 py-16 md:py-20 w-full">
                     <Reveal>
-                        <h2 className="font-display text-3xl md:text-4xl font-semibold text-ink">
+                        <h2 className="font-display text-4xl md:text-5xl font-semibold text-ink">
                             Une plateforme, trois usages
                         </h2>
                         <div className="rule-accent mt-4 mb-12" />
@@ -171,7 +171,7 @@ export default function Home() {
                         <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-secondary-200">
                             <Icon name="shield" size={16} /> Confiance & sécurité
                         </span>
-                        <h2 className="font-display text-3xl md:text-5xl font-semibold leading-tight mt-5 mb-6">
+                        <h2 className="font-display text-4xl md:text-6xl font-semibold leading-tight mt-5 mb-6">
                             Un réseau local où l'on sait à qui l'on parle
                         </h2>
                         <p className="text-secondary-100/80 text-lg leading-relaxed mb-9">

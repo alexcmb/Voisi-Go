@@ -5,7 +5,7 @@ interface RevealProps {
     className?: string;
     /** Décalage d'apparition en ms (pour les effets en cascade). */
     delay?: number;
-    /** Durée du fondu en ms (par défaut 1800). */
+    /** Durée du fondu en ms (par défaut 2400). */
     duration?: number;
 }
 
@@ -15,7 +15,7 @@ interface RevealProps {
  * deux sens. Styles inline (fiables, non purgeables). En mode "animations
  * réduites", on garde le fondu seul (sans mouvement ni zoom).
  */
-export default function Reveal({ children, className = '', delay = 0, duration = 1800 }: RevealProps) {
+export default function Reveal({ children, className = '', delay = 0, duration = 2400 }: RevealProps) {
     const ref = useRef<HTMLDivElement>(null);
     const [visible, setVisible] = useState(false);
     const [reduced, setReduced] = useState(false);
