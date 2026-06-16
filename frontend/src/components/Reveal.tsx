@@ -5,17 +5,17 @@ interface RevealProps {
     className?: string;
     /** Décalage d'apparition en ms (pour les effets en cascade). */
     delay?: number;
-    /** Durée du fondu en ms (par défaut 1200). */
+    /** Durée du fondu en ms (par défaut 1800). */
     duration?: number;
 }
 
 /**
- * Fond enchaîné au scroll : le contenu apparaît (fondu + léger glissement)
+ * Fond enchaîné au scroll : le contenu apparaît (fondu + glissement + zoom)
  * quand il entre dans le viewport, et redisparaît quand il en sort — dans les
  * deux sens. Styles inline (fiables, non purgeables). En mode "animations
- * réduites", on garde le fondu et on retire le glissement.
+ * réduites", on garde le fondu seul (sans mouvement ni zoom).
  */
-export default function Reveal({ children, className = '', delay = 0, duration = 1200 }: RevealProps) {
+export default function Reveal({ children, className = '', delay = 0, duration = 1800 }: RevealProps) {
     const ref = useRef<HTMLDivElement>(null);
     const [visible, setVisible] = useState(false);
     const [reduced, setReduced] = useState(false);
@@ -55,7 +55,7 @@ export default function Reveal({ children, className = '', delay = 0, duration =
             className={className}
             style={{
                 opacity: visible ? 1 : 0,
-                transform: visible || reduced ? 'none' : 'translateY(2rem)',
+                transform: visible || reduced ? 'none' : 'translateY(1.5rem) scale(0.92)',
                 transition: `opacity ${duration}ms ${ease}, transform ${duration}ms ${ease}`,
                 transitionDelay: delay + 'ms',
                 willChange: 'opacity, transform',
