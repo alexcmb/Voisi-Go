@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Icon from '../components/Icon';
 import Reveal from '../components/Reveal';
+import AnimatedCounter from '../components/AnimatedCounter';
 
 export default function Home() {
     const [mobileOpen, setMobileOpen] = useState(false);
@@ -176,7 +177,9 @@ export default function Home() {
                             ].map(([label, value]) => (
                                 <div key={label} className="transition-all duration-500 hover:scale-105 origin-left">
                                     <dt className="text-sm text-ink/55">{label}</dt>
-                                    <dd className="font-display text-2xl font-semibold text-ink">{value}</dd>
+                                    <dd className="font-display text-2xl font-semibold text-ink">
+                                        <AnimatedCounter value={value} />
+                                    </dd>
                                 </div>
                             ))}
                         </dl>
