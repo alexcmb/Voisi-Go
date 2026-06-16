@@ -2,7 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    branches: 
+      - main
+      - 'feat/**'
   pull_request:
     branches: [main]
 
@@ -40,6 +42,8 @@ jobs:
         run: npm test
       - name: Build (tsc + Vite)
         run: npm run build
+      - name: Vérifier la taille du bundle
+        run: npx size-limit
 
   backend:
     name: Backend — types · tests · build
