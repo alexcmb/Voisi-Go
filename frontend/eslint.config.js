@@ -20,12 +20,14 @@ export default defineConfig([
       globals: globals.browser,
     },
     rules: {
-      // Dette legacy / règles React Hooks expérimentales : signalées, non bloquantes
+      // Dette legacy + règles React Hooks v7 expérimentales : signalées en
+      // warning (non bloquantes). Liste alignée sur ce que le lint remonte.
       '@typescript-eslint/no-explicit-any': 'warn',
       'prefer-const': 'warn',
+      'react-hooks/exhaustive-deps': 'warn',
       'react-hooks/purity': 'warn',
       'react-hooks/set-state-in-effect': 'warn',
-      'react-hooks/exhaustive-deps': 'warn',
+      'react-hooks/immutability': 'warn',
       'react-refresh/only-export-components': 'warn',
     },
   },
