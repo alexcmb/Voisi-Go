@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { API_BASE_URL } from '../lib/api';
 import type { AppNotification } from '../types';
 import { useTheme } from '../context/ThemeContext';
 import Icon, { type IconName } from './Icon';
+import { playNotificationSound } from '../utils/sound';
 
 export default function Header() {
     const navigate = useNavigate();
@@ -11,6 +12,7 @@ export default function Header() {
     const token = localStorage.getItem('token');
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     const [unreadCount, setUnreadCount] = useState(0);
+    const firstFetch = useRef(true);
     const [notifications, setNotifications] = useState<AppNotification[]>([]);
     const [showNotifs, setShowNotifs] = useState(false);
 
@@ -28,7 +30,16 @@ export default function Header() {
                 headers: { 'Authorization': `Bearer ${token}` },
             })
                 .then(res => res.json())
-                .then(data => setUnreadCount(data.unreadCount || 0))
+                .then(data => {
+                    const newCount = data.unreadCount || 0;
+                    setUnreadCount(prev => {
+                        if (newCount > prev && !firstFetch.current) {
+                            playNotificationSound();
+                        }
+                        return newCount;
+                    });
+                    firstFetch.current = false;
+                })
                 .catch(() => { });
         };
         fetchCount();

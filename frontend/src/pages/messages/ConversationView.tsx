@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import Layout from '../../components/Layout';
 import { API_BASE_URL } from '../../lib/api';
 import type { Message } from '../../types';
+import { playNotificationSound } from '../../utils/sound';
 
 interface OtherUser {
     id: string;
@@ -32,7 +33,16 @@ export default function ConversationView() {
         })
             .then(res => res.json())
             .then(data => {
-                setMessages(data.messages || []);
+                const newMessages = data.messages || [];
+                setMessages(prev => {
+                    if (newMessages.length > prev.length) {
+                        const lastMsg = newMessages[newMessages.length - 1];
+                        if (lastMsg && lastMsg.senderId !== currentUser.id && prev.length > 0) {
+                            playNotificationSound();
+                        }
+                    }
+                    return newMessages;
+                });
                 setOtherUser(data.otherUser);
                 setRelatedItem(data.relatedItem);
                 setLoading(false);
