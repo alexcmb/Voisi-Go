@@ -56,8 +56,10 @@ export default function Reveal({ children, className = '', delay = 0, duration =
             style={{
                 opacity: visible ? 1 : 0,
                 transform: visible || reduced ? 'none' : 'translateY(1.5rem) scale(0.92)',
-                transition: `opacity ${duration}ms ${ease}, transform ${duration}ms ${ease}`,
-                transitionDelay: delay + 'ms',
+                transition: visible 
+                    ? `opacity ${duration}ms ${ease}, transform ${duration}ms ${ease}`
+                    : `opacity 400ms ${ease}, transform 400ms ${ease}`,
+                transitionDelay: visible ? delay + 'ms' : '0ms',
                 willChange: 'opacity, transform',
             }}
         >
