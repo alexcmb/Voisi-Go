@@ -5,6 +5,8 @@ interface RevealProps {
     className?: string;
     /** Décalage d'apparition en ms (pour les effets en cascade). */
     delay?: number;
+    /** Durée du fondu en ms (par défaut 1200). */
+    duration?: number;
 }
 
 /**
@@ -13,7 +15,7 @@ interface RevealProps {
  * deux sens. Styles inline (fiables, non purgeables). En mode "animations
  * réduites", on garde le fondu et on retire le glissement.
  */
-export default function Reveal({ children, className = '', delay = 0 }: RevealProps) {
+export default function Reveal({ children, className = '', delay = 0, duration = 1200 }: RevealProps) {
     const ref = useRef<HTMLDivElement>(null);
     const [visible, setVisible] = useState(false);
     const [reduced, setReduced] = useState(false);
@@ -36,12 +38,16 @@ export default function Reveal({ children, className = '', delay = 0 }: RevealPr
                     setVisible(entry.isIntersecting);
                 }
             },
-            { threshold: 0, rootMargin: '-10% 0px -10% 0px' }
+            // marge faible : le contenu reste visible plus longtemps et ne se
+            // fond qu'au tout bord du viewport
+            { threshold: 0, rootMargin: '-4% 0px -4% 0px' }
         );
 
         observer.observe(el);
         return () => observer.disconnect();
     }, []);
+
+    const ease = 'cubic-bezier(0.22, 1, 0.36, 1)';
 
     return (
         <div
@@ -50,7 +56,7 @@ export default function Reveal({ children, className = '', delay = 0 }: RevealPr
             style={{
                 opacity: visible ? 1 : 0,
                 transform: visible || reduced ? 'none' : 'translateY(2rem)',
-                transition: 'opacity 700ms cubic-bezier(0.22, 1, 0.36, 1), transform 700ms cubic-bezier(0.22, 1, 0.36, 1)',
+                transition: `opacity ${duration}ms ${ease}, transform ${duration}ms ${ease}`,
                 transitionDelay: delay + 'ms',
                 willChange: 'opacity, transform',
             }}

@@ -150,7 +150,7 @@ export default function Home() {
 
                     <div className="grid md:grid-cols-3 gap-6">
                         {features.map((f, i) => (
-                            <Reveal key={f.title} delay={i * 120}>
+                            <Reveal key={f.title} delay={i * 260}>
                                 <article className="surface-card rounded-2xl p-7 h-full">
                                     <span className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary-50 text-primary-600 border border-primary-100">
                                         <Icon name={f.icon} size={24} />
@@ -197,7 +197,7 @@ export default function Home() {
                     </Reveal>
 
                     {/* Carte Premium */}
-                    <Reveal delay={150}>
+                    <Reveal delay={300}>
                         <div className="rounded-2xl p-8 bg-secondary-900/60 border border-secondary-700/60">
                             <div className="flex items-center justify-between mb-4">
                                 <h3 className="font-display text-2xl font-semibold text-secondary-50">Premium</h3>
