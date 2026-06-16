@@ -202,14 +202,19 @@ export default function Header() {
                     </button>
 
                     {token ? (
-                        <button onClick={() => setShowNotifs(s => !s)} className={`relative ${iconBtn} border-none shadow-sm`} title="Notifications">
-                            <Icon name="bell" size={20} />
-                            {unreadCount > 0 && (
-                                <span className="absolute -top-1 -right-1 bg-primary-600 text-paper text-[10px] font-bold rounded-full min-w-[16px] h-4 flex items-center justify-center px-1">
-                                    {unreadCount > 99 ? '99+' : unreadCount}
-                                </span>
-                            )}
-                        </button>
+                        <>
+                            <button onClick={() => setShowNotifs(s => !s)} className={`relative ${iconBtn} border-none shadow-sm`} title="Notifications">
+                                <Icon name="bell" size={20} />
+                                {unreadCount > 0 && (
+                                    <span className="absolute -top-1 -right-1 bg-primary-600 text-paper text-[10px] font-bold rounded-full min-w-[16px] h-4 flex items-center justify-center px-1">
+                                        {unreadCount > 99 ? '99+' : unreadCount}
+                                    </span>
+                                )}
+                            </button>
+                            <button onClick={handleLogout} className={`${iconBtn} border-none shadow-sm text-ink/50 hover:text-red-500`} title="Déconnexion">
+                                <Icon name="logout" size={20} />
+                            </button>
+                        </>
                     ) : (
                         <Link to="/login" className="bg-primary-600 text-paper px-4 py-2 rounded-full font-bold text-sm hover:bg-primary-700 transition-colors">
                             Connexion

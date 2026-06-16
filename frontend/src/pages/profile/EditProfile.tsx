@@ -245,6 +245,25 @@ export default function EditProfile() {
                         </div>
                     )}
                 </div>
+
+                {/* Deconnexion Card */}
+                <div className="max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-lg border-t-4 border-red-500 mt-6 relative overflow-hidden">
+                    <h3 className="text-2xl font-bold mb-2 text-gray-800 flex items-center gap-2">👋 Déconnexion</h3>
+                    <p className="text-gray-500 text-sm mb-6 leading-relaxed">
+                        Souhaitez-vous vous déconnecter de votre compte ? Vos préférences et sessions seront conservées localement.
+                    </p>
+                    <button
+                        type="button"
+                        onClick={() => {
+                            localStorage.removeItem('token');
+                            localStorage.removeItem('user');
+                            navigate('/');
+                        }}
+                        className="w-full py-3.5 bg-red-500 hover:bg-red-600 text-white font-extrabold rounded-xl transition-all shadow-md transform hover:scale-[1.01] cursor-pointer text-center font-bold"
+                    >
+                        Se déconnecter de mon compte
+                    </button>
+                </div>
             </div>
         </Layout>
     );
