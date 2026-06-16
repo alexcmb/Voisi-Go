@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Icon from '../components/Icon';
@@ -8,6 +8,9 @@ import AnimatedCounter from '../components/AnimatedCounter';
 export default function Home() {
     const [mobileOpen, setMobileOpen] = useState(false);
     const [scrollY, setScrollY] = useState(0);
+    const pathRef = useRef<SVGPathElement>(null);
+    const [pathLength, setPathLength] = useState(0);
+    const [scrollPercentage, setScrollPercentage] = useState(0);
     const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
 
     const closeMobile = () => setMobileOpen(false);
@@ -19,11 +22,26 @@ export default function Home() {
     }, []);
 
     useEffect(() => {
+        const updateLength = () => {
+            if (pathRef.current) {
+                setPathLength(pathRef.current.getTotalLength());
+            }
+        };
+        updateLength();
+        window.addEventListener('resize', updateLength);
+        return () => window.removeEventListener('resize', updateLength);
+    }, []);
+
+    useEffect(() => {
         let handle = 0;
         const onScroll = () => {
             handle = requestAnimationFrame(() => {
                 const top = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
                 setScrollY(top);
+
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const pct = docHeight > 0 ? Math.min(top / docHeight, 1) : 0;
+                setScrollPercentage(pct);
             });
         };
         window.addEventListener('scroll', onScroll, { passive: true });
@@ -54,7 +72,45 @@ export default function Home() {
     ];
 
     return (
-        <div className="min-h-screen bg-cream text-ink font-sans pb-[80px] md:pb-0">
+        <div className="relative min-h-screen bg-cream text-ink font-sans pb-[80px] md:pb-0">
+            {/* Ligne connective au scroll (SVG pleine page) */}
+            <svg 
+                className="hidden md:block absolute inset-0 w-full h-full pointer-events-none z-0" 
+                viewBox="0 0 100 100" 
+                preserveAspectRatio="none"
+            >
+                <defs>
+                    <linearGradient id="line-gradient" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#1f5562" stopOpacity="0.4" />
+                        <stop offset="50%" stopColor="#e6735a" stopOpacity="0.5" />
+                        <stop offset="100%" stopColor="#1f5562" stopOpacity="0.4" />
+                    </linearGradient>
+                </defs>
+                {/* Tracé de base (faint dotted path) */}
+                <path 
+                    d="M 25,5 C 5,25 95,30 50,50 C 5,70 95,75 25,90 C 20,95 45,98 50,100" 
+                    fill="none" 
+                    stroke="#1f5562" 
+                    strokeWidth="2.5" 
+                    strokeOpacity="0.06"
+                    strokeDasharray="6 8"
+                    vectorEffect="non-scaling-stroke"
+                />
+                {/* Tracé de surbrillance animé au scroll */}
+                <path 
+                    ref={pathRef}
+                    d="M 25,5 C 5,25 95,30 50,50 C 5,70 95,75 25,90 C 20,95 45,98 50,100" 
+                    fill="none" 
+                    stroke="url(#line-gradient)" 
+                    strokeWidth="2.5" 
+                    vectorEffect="non-scaling-stroke"
+                    strokeDasharray={pathLength}
+                    style={{
+                        strokeDashoffset: pathLength - (scrollPercentage * pathLength),
+                        transition: 'stroke-dashoffset 150ms ease-out'
+                    }}
+                />
+            </svg>
             {/* ── Barre de navigation ── */}
             <nav className="relative z-30 flex justify-between items-center px-6 md:px-8 py-5 max-w-6xl mx-auto">
                 <Link to="/" className="font-display text-2xl font-semibold tracking-tight text-ink transition-transform duration-300 hover:scale-105 active:scale-95">
