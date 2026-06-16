@@ -90,8 +90,8 @@ export default function Home() {
                 </div>
             )}
 
-            {/* ── Hero ── */}
-            <header className="relative max-w-6xl mx-auto px-6 pt-12 pb-20 md:pt-20 md:pb-28">
+            {/* ── Hero (plein écran sur mobile) ── */}
+            <header className="relative max-w-6xl mx-auto px-6 flex flex-col justify-center min-h-[calc(100svh_-_72px)] py-12 md:min-h-0 md:py-0 md:pt-20 md:pb-28 md:block">
                 <div className="max-w-3xl">
                     <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-primary-700">
                         <span className="rule-accent" /> Bêta privée
@@ -137,9 +137,9 @@ export default function Home() {
                 </div>
             </header>
 
-            {/* ── Piliers ── */}
-            <section className="border-t border-ink/8 bg-paper/60">
-                <div className="max-w-6xl mx-auto px-6 py-16 md:py-20">
+            {/* ── Piliers (plein écran sur mobile) ── */}
+            <section className="border-t border-ink/8 bg-paper/60 flex items-center min-h-[100svh] md:min-h-0 md:block">
+                <div className="max-w-6xl mx-auto px-6 py-16 md:py-20 w-full">
                     <h2 className="font-display text-3xl md:text-4xl font-semibold text-ink">
                         Une plateforme, trois usages
                     </h2>
@@ -159,9 +159,9 @@ export default function Home() {
                 </div>
             </section>
 
-            {/* ── Confiance & sécurité ── */}
-            <section className="bg-secondary-800 text-secondary-50">
-                <div className="max-w-6xl mx-auto px-6 py-16 md:py-24 grid lg:grid-cols-2 gap-12 items-center">
+            {/* ── Confiance & sécurité (plein écran sur mobile) ── */}
+            <section className="bg-secondary-800 text-secondary-50 flex items-center min-h-[100svh] md:min-h-0 md:block">
+                <div className="max-w-6xl mx-auto px-6 py-16 md:py-24 grid lg:grid-cols-2 gap-12 items-center w-full">
                     <div>
                         <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-secondary-200">
                             <Icon name="shield" size={16} /> Confiance & sécurité

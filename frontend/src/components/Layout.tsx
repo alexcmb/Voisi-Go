@@ -1,6 +1,5 @@
 import Header from './Header';
 import Footer from './Footer';
-import BottomNav from './BottomNav';
 
 interface LayoutProps {
     children: React.ReactNode;
@@ -15,8 +14,6 @@ export default function Layout({
     showFooter = true,
     className = ''
 }: LayoutProps) {
-    const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
-
     return (
         <div className={`min-h-screen bg-cream text-ink transition-colors duration-300 font-sans flex flex-col pb-[80px] md:pb-0 ${className}`}>
             {showHeader && <Header />}
@@ -24,9 +21,6 @@ export default function Layout({
                 {children}
             </main>
             {showFooter && <Footer />}
-            
-            {/* Mobile Bottom Navigation */}
-            {token && <BottomNav />}
         </div>
     );
 }
