@@ -44,6 +44,8 @@ jobs:
         run: npm run build
       - name: Vérifier la taille du bundle
         run: npx size-limit
+      - name: chemin
+        run: pwd
       - name: Rapport FinOps (estimation coût Vercel)
         run: node scripts/finops-report.mjs dist/assets 100000 finops-report.txt
       - name: Publier le rapport FinOps en artifact
