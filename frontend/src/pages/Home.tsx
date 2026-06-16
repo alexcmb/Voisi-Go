@@ -38,9 +38,9 @@ export default function Home() {
         <div className="min-h-screen bg-cream text-ink font-sans pb-[80px] md:pb-0">
             {/* ── Barre de navigation ── */}
             <nav className="relative z-30 flex justify-between items-center px-6 md:px-8 py-5 max-w-6xl mx-auto">
-                <div className="font-display text-2xl font-semibold tracking-tight text-ink">
+                <Link to="/" className="font-display text-2xl font-semibold tracking-tight text-ink transition-transform duration-300 hover:scale-105 active:scale-95">
                     Voisi<span className="text-primary-600">Go</span>
-                </div>
+                </Link>
 
                 <div className="hidden md:flex gap-7 items-center">
                     <Link to="/explore" className="text-sm font-semibold text-ink/70 hover:text-primary-600 transition-colors">Explorer</Link>
@@ -92,56 +92,70 @@ export default function Home() {
             )}
 
             {/* ── Hero (plein écran) ── */}
-            <header className="relative max-w-6xl mx-auto px-6 flex flex-col justify-center min-h-[calc(100svh_-_72px)] py-12 md:py-16">
-                <Reveal className="max-w-3xl">
-                    <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-primary-700">
-                        <span className="rule-accent" /> Bêta privée
-                    </span>
+            <header className="relative max-w-6xl mx-auto px-6 flex flex-col justify-center min-h-[calc(100svh_-_72px)] py-12 md:py-16 overflow-hidden">
+                {/* Blobs d'arrière-plan animés */}
+                <div className="absolute top-1/4 left-[10%] w-72 h-72 bg-primary-300/15 rounded-full blur-3xl filter animate-blob pointer-events-none -z-10" />
+                <div className="absolute bottom-1/4 right-[10%] w-80 h-80 bg-accent-300/10 rounded-full blur-3xl filter animate-blob animation-delay-4000 pointer-events-none -z-10" />
 
-                    <h1 className="font-display text-5xl leading-[1.05] md:text-7xl md:leading-[1.04] font-semibold text-ink mt-6">
-                        L'entraide entre voisins,<br />
-                        <span className="text-primary-600">à portée de rue.</span>
-                    </h1>
+                <div className="max-w-3xl relative z-10">
+                    <Reveal delay={0} duration={1200}>
+                        <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-primary-700">
+                            <span className="rule-accent" /> Bêta privée
+                        </span>
+                    </Reveal>
 
-                    <p className="text-xl md:text-2xl text-ink/70 mt-7 leading-relaxed max-w-2xl">
-                        Petits services, jardinage, courses et covoiturage du quotidien.
-                        VoisiGo relie les habitants d'un même quartier pour se simplifier la vie, ensemble.
-                    </p>
+                    <Reveal delay={150} duration={1200}>
+                        <h1 className="font-display text-5xl leading-[1.05] md:text-7xl md:leading-[1.04] font-semibold text-ink mt-6">
+                            L'entraide entre voisins,<br />
+                            <span className="text-primary-600">à portée de rue.</span>
+                        </h1>
+                    </Reveal>
 
-                    <div className="flex flex-col sm:flex-row gap-3 mt-9">
-                        <Link
-                            to="/register"
-                            className="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-primary-600 hover:bg-primary-700 text-paper text-base font-bold rounded-full transition-colors"
-                        >
-                            Je participe <Icon name="arrow-right" size={18} />
-                        </Link>
-                        <Link
-                            to="/explore"
-                            className="inline-flex items-center justify-center px-7 py-3.5 bg-transparent hover:bg-paper text-ink text-base font-bold rounded-full border border-ink/15 transition-colors"
-                        >
-                            Voir les annonces
-                        </Link>
-                    </div>
+                    <Reveal delay={300} duration={1200}>
+                        <p className="text-xl md:text-2xl text-ink/70 mt-7 leading-relaxed max-w-2xl">
+                            Petits services, jardinage, courses et covoiturage du quotidien.
+                            VoisiGo relie les habitants d'un même quartier pour se simplifier la vie, ensemble.
+                        </p>
+                    </Reveal>
 
-                    <dl className="flex flex-wrap gap-x-10 gap-y-4 mt-12">
-                        {[
-                            ['Communes pilotes', '12'],
-                            ['Trajets partagés', '480+'],
-                            ['Services rendus', '1 300+'],
-                        ].map(([label, value]) => (
-                            <div key={label}>
-                                <dt className="text-sm text-ink/55">{label}</dt>
-                                <dd className="font-display text-2xl font-semibold text-ink">{value}</dd>
-                            </div>
-                        ))}
-                    </dl>
-                </Reveal>
+                    <Reveal delay={450} duration={1200}>
+                        <div className="flex flex-col sm:flex-row gap-3 mt-9">
+                            <Link
+                                to="/register"
+                                className="group inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-primary-600 hover:bg-primary-700 text-paper text-base font-bold rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-primary-600/20 active:scale-95"
+                            >
+                                Je participe <Icon name="arrow-right" size={18} className="transition-transform duration-300 group-hover:translate-x-1.5" />
+                            </Link>
+                            <Link
+                                to="/explore"
+                                className="inline-flex items-center justify-center px-7 py-3.5 bg-transparent hover:bg-paper text-ink text-base font-bold rounded-full border border-ink/15 hover:border-ink/30 transition-all duration-300 hover:shadow-md active:scale-95 hover:scale-[1.02]"
+                            >
+                                Voir les annonces
+                            </Link>
+                        </div>
+                    </Reveal>
+
+                    <Reveal delay={600} duration={1200}>
+                        <dl className="flex flex-wrap gap-x-10 gap-y-4 mt-12">
+                            {[
+                                ['Communes pilotes', '12'],
+                                ['Trajets partagés', '480+'],
+                                ['Services rendus', '1 300+'],
+                            ].map(([label, value]) => (
+                                <div key={label} className="transition-all duration-500 hover:scale-105 origin-left">
+                                    <dt className="text-sm text-ink/55">{label}</dt>
+                                    <dd className="font-display text-2xl font-semibold text-ink">{value}</dd>
+                                </div>
+                            ))}
+                        </dl>
+                    </Reveal>
+                </div>
             </header>
 
             {/* ── Piliers (plein écran) ── */}
-            <section className="border-t border-ink/8 bg-paper/60 flex items-center min-h-[100svh]">
+            <section className="border-t border-ink/8 bg-paper/60 flex items-center min-h-[100svh] overflow-hidden">
                 <div className="max-w-6xl mx-auto px-6 py-16 md:py-20 w-full">
-                    <Reveal>
+                    <Reveal duration={1200}>
                         <h2 className="font-display text-4xl md:text-5xl font-semibold text-ink">
                             Une plateforme, trois usages
                         </h2>
@@ -150,12 +164,12 @@ export default function Home() {
 
                     <div className="grid md:grid-cols-3 gap-6">
                         {features.map((f, i) => (
-                            <Reveal key={f.title} delay={i * 260}>
-                                <article className="surface-card rounded-2xl p-7 h-full">
-                                    <span className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary-50 text-primary-600 border border-primary-100">
+                            <Reveal key={f.title} delay={i * 200} duration={1200}>
+                                <article className="group surface-card rounded-2xl p-7 h-full transition-all duration-500 ease-out hover:-translate-y-2.5 hover:shadow-xl hover:shadow-primary-900/5 hover:border-primary-200 dark:hover:border-primary-400">
+                                    <span className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary-50 text-primary-600 border border-primary-100 transition-all duration-500 ease-out group-hover:scale-110 group-hover:bg-primary-100/60 group-hover:border-primary-300 dark:bg-primary-950/20 dark:border-primary-900">
                                         <Icon name={f.icon} size={24} />
                                     </span>
-                                    <h3 className="font-display text-xl font-semibold text-ink mt-5 mb-2">{f.title}</h3>
+                                    <h3 className="font-display text-xl font-semibold text-ink mt-5 mb-2 group-hover:text-primary-600 dark:group-hover:text-primary-300 transition-colors duration-300">{f.title}</h3>
                                     <p className="text-ink/65 leading-relaxed">{f.text}</p>
                                 </article>
                             </Reveal>
@@ -165,44 +179,54 @@ export default function Home() {
             </section>
 
             {/* ── Confiance & sécurité (plein écran) ── */}
-            <section className="bg-secondary-800 text-secondary-50 flex items-center min-h-[100svh]">
-                <div className="max-w-6xl mx-auto px-6 py-16 md:py-24 grid lg:grid-cols-2 gap-12 items-center w-full">
-                    <Reveal>
-                        <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-secondary-200">
-                            <Icon name="shield" size={16} /> Confiance & sécurité
-                        </span>
-                        <h2 className="font-display text-4xl md:text-6xl font-semibold leading-tight mt-5 mb-6">
-                            Un réseau local où l'on sait à qui l'on parle
-                        </h2>
-                        <p className="text-secondary-100/80 text-lg leading-relaxed mb-9">
-                            En validant une pièce d'identité officielle, chaque voisin obtient un badge vérifié.
-                            De quoi rendre service et covoiturer l'esprit tranquille.
-                        </p>
+            <section className="relative bg-secondary-800 text-secondary-50 flex items-center min-h-[100svh] overflow-hidden">
+                {/* Blobs d'arrière-plan accentué */}
+                <div className="absolute top-1/3 -right-20 w-96 h-96 bg-accent-500/8 rounded-full blur-[100px] filter animate-blob pointer-events-none -z-10" />
+                <div className="absolute bottom-1/4 -left-20 w-80 h-80 bg-primary-400/5 rounded-full blur-[80px] filter animate-blob animation-delay-4000 pointer-events-none -z-10" />
+
+                <div className="max-w-6xl mx-auto px-6 py-16 md:py-24 grid lg:grid-cols-2 gap-12 items-center w-full relative z-10">
+                    <div>
+                        <Reveal duration={1200}>
+                            <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-secondary-200">
+                                <Icon name="shield" size={16} /> Confiance & sécurité
+                            </span>
+                            <h2 className="font-display text-4xl md:text-6xl font-semibold leading-tight mt-5 mb-6">
+                                Un réseau local où l'on sait à qui l'on parle
+                            </h2>
+                            <p className="text-secondary-100/80 text-lg leading-relaxed mb-9">
+                                En validant une pièce d'identité officielle, chaque voisin obtient un badge vérifié.
+                                De quoi rendre service et covoiturer l'esprit tranquille.
+                            </p>
+                        </Reveal>
 
                         <ul className="space-y-5">
                             {[
                                 ['Identité vérifiée', "CNI, passeport ou permis pour certifier chaque membre."],
                                 ['Avis après échange', "Notes et commentaires sincères à chaque service rendu."],
                                 ['Protection anti-spam', "Une modération active qui protège vos données et vos conversations."],
-                            ].map(([t, d]) => (
-                                <li key={t} className="flex items-start gap-3">
-                                    <span className="mt-0.5 text-secondary-200"><Icon name="check" size={20} /></span>
-                                    <div>
-                                        <h4 className="font-semibold text-secondary-50">{t}</h4>
-                                        <p className="text-secondary-100/70 text-sm">{d}</p>
-                                    </div>
-                                </li>
+                            ].map(([t, d], i) => (
+                                <Reveal key={t} delay={150 * i + 100} duration={1200}>
+                                    <li className="flex items-start gap-3 group">
+                                        <span className="mt-0.5 text-secondary-200 transition-transform duration-300 group-hover:scale-120 group-hover:text-accent-300">
+                                            <Icon name="check" size={20} />
+                                        </span>
+                                        <div>
+                                            <h4 className="font-semibold text-secondary-50 transition-colors duration-300 group-hover:text-accent-200">{t}</h4>
+                                            <p className="text-secondary-100/70 text-sm">{d}</p>
+                                        </div>
+                                    </li>
+                                </Reveal>
                             ))}
                         </ul>
-                    </Reveal>
+                    </div>
 
                     {/* Carte Premium */}
-                    <Reveal delay={300}>
-                        <div className="rounded-2xl p-8 bg-secondary-900/60 border border-secondary-700/60">
+                    <Reveal delay={300} duration={1200}>
+                        <div className="group rounded-2xl p-8 bg-secondary-900/60 border border-secondary-700/60 transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-accent-500/10 animate-premium-glow">
                             <div className="flex items-center justify-between mb-4">
-                                <h3 className="font-display text-2xl font-semibold text-secondary-50">Premium</h3>
-                                <span className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-accent-300 border border-accent-300/40 rounded-full px-3 py-1">
-                                    <Icon name="sparkle" size={14} /> Recommandé
+                                <h3 className="font-display text-2xl font-semibold text-secondary-50 transition-colors duration-300 group-hover:text-accent-200">Premium</h3>
+                                <span className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-accent-300 border border-accent-300/40 rounded-full px-3 py-1 transition-all duration-300 group-hover:bg-accent-400/10 group-hover:border-accent-300">
+                                    <Icon name="sparkle" size={14} className="animate-spin-slow" /> Recommandé
                                 </span>
                             </div>
                             <p className="text-secondary-100/75 text-sm leading-relaxed mb-7">
@@ -216,7 +240,7 @@ export default function Home() {
                                     'Navigation sans publicité',
                                     "Vérification d'identité incluse",
                                 ].map(item => (
-                                    <li key={item} className="flex items-center gap-2.5">
+                                    <li key={item} className="flex items-center gap-2.5 transition-transform duration-300 hover:translate-x-1">
                                         <span className="text-accent-300"><Icon name="check" size={18} /></span>
                                         {item}
                                     </li>
@@ -224,10 +248,10 @@ export default function Home() {
                             </ul>
 
                             <div className="flex flex-col sm:flex-row gap-3">
-                                <Link to="/premium" className="flex-1 text-center py-3 bg-accent-400 hover:bg-accent-500 text-secondary-900 font-bold text-sm rounded-full transition-colors">
+                                <Link to="/premium" className="flex-1 text-center py-3 bg-accent-400 hover:bg-accent-500 text-secondary-900 font-bold text-sm rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-accent-400/25 active:scale-98">
                                     Découvrir Premium
                                 </Link>
-                                <Link to="/register" className="flex-1 text-center py-3 bg-transparent hover:bg-secondary-50/10 text-secondary-50 font-bold text-sm rounded-full border border-secondary-50/20 transition-colors">
+                                <Link to="/register" className="flex-1 text-center py-3 bg-transparent hover:bg-secondary-50/10 text-secondary-50 font-bold text-sm rounded-full border border-secondary-50/20 transition-all duration-300 active:scale-98">
                                     S'inscrire
                                 </Link>
                             </div>

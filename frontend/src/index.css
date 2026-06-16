@@ -130,15 +130,50 @@ h1, h2, h3, h4, .font-display {
 
 @keyframes blob {
     0%, 100% { transform: translate(0, 0) scale(1); }
-    50%      { transform: translate(8px, -8px) scale(1.02); }
+    33%      { transform: translate(30px, -50px) scale(1.1); }
+    66%      { transform: translate(-20px, 20px) scale(0.95); }
 }
 
 .animate-blob {
-    animation: blob 16s ease-in-out infinite;
+    animation: blob 20s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-12px) rotate(2deg); }
+}
+
+.animate-float {
+    animation: float 8s ease-in-out infinite;
+}
+
+@keyframes border-glow {
+    0%, 100% { 
+        border-color: rgba(236, 138, 114, 0.3); 
+        box-shadow: 0 0 15px rgba(236, 138, 114, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.05); 
+    }
+    50% { 
+        border-color: rgba(236, 138, 114, 0.75); 
+        box-shadow: 0 0 25px rgba(236, 138, 114, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05); 
+    }
+}
+
+.animate-premium-glow {
+    animation: border-glow 4s ease-in-out infinite;
+}
+
+@keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+    animation: spin-slow 12s linear infinite;
 }
 
 .animation-delay-2000 { animation-delay: 2s; }
 .animation-delay-4000 { animation-delay: 4s; }
+
 
 /* ── Dark Mode ── */
 .dark {
