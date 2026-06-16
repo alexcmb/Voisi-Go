@@ -114,13 +114,13 @@ export default function Home() {
 
                 {/* Éléments parallaxes flottants */}
                 <div 
-                    className="hidden md:block absolute left-8 top-1/3 text-primary-600/15 pointer-events-none -z-10 transition-transform duration-75 ease-out"
+                    className="hidden md:block absolute left-8 top-1/3 text-primary-600/15 pointer-events-none z-0"
                     style={{ transform: `translateY(${scrollY * -0.15}px) rotate(${scrollY * 0.05}deg)` }}
                 >
                     <Icon name="map-pin" size={56} />
                 </div>
                 <div 
-                    className="hidden md:block absolute right-8 top-1/4 text-accent-500/10 pointer-events-none -z-10 transition-transform duration-75 ease-out"
+                    className="hidden md:block absolute right-8 top-1/4 text-accent-500/10 pointer-events-none z-0"
                     style={{ transform: `translateY(${scrollY * -0.22}px) rotate(${scrollY * -0.03}deg)` }}
                 >
                     <Icon name="car" size={64} />
@@ -185,13 +185,13 @@ export default function Home() {
             <section className="relative border-t border-ink/8 bg-paper/60 flex items-center min-h-[100svh] overflow-hidden">
                 {/* Éléments parallaxes flottants */}
                 <div 
-                    className="hidden md:block absolute left-10 top-1/4 text-primary-500/12 pointer-events-none -z-10 transition-transform duration-75 ease-out"
+                    className="hidden md:block absolute left-10 top-1/4 text-primary-500/12 pointer-events-none z-0"
                     style={{ transform: `translateY(${(scrollY - 600) * 0.12}px) rotate(${(scrollY - 600) * -0.04}deg)` }}
                 >
                     <Icon name="leaf" size={64} />
                 </div>
                 <div 
-                    className="hidden md:block absolute right-10 bottom-1/4 text-primary-600/12 pointer-events-none -z-10 transition-transform duration-75 ease-out"
+                    className="hidden md:block absolute right-10 bottom-1/4 text-primary-600/12 pointer-events-none z-0"
                     style={{ transform: `translateY(${(scrollY - 600) * -0.1}px) rotate(${(scrollY - 600) * 0.03}deg)` }}
                 >
                     <Icon name="hands" size={56} />
@@ -229,13 +229,13 @@ export default function Home() {
 
                 {/* Éléments parallaxes flottants */}
                 <div 
-                    className="hidden md:block absolute left-12 top-1/3 text-secondary-50/8 pointer-events-none -z-10 transition-transform duration-75 ease-out"
+                    className="hidden md:block absolute left-12 top-1/3 text-secondary-50/8 pointer-events-none z-0"
                     style={{ transform: `translateY(${(scrollY - 1400) * 0.15}px) rotate(${(scrollY - 1400) * 0.05}deg)` }}
                 >
                     <Icon name="shield" size={64} />
                 </div>
                 <div 
-                    className="hidden md:block absolute right-12 bottom-1/3 text-accent-300/10 pointer-events-none -z-10 transition-transform duration-75 ease-out"
+                    className="hidden md:block absolute right-12 bottom-1/3 text-accent-300/10 pointer-events-none z-0"
                     style={{ transform: `translateY(${(scrollY - 1400) * -0.12}px) rotate(${(scrollY - 1400) * -0.04}deg)` }}
                 >
                     <Icon name="star" size={56} />
