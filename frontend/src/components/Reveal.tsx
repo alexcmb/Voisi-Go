@@ -9,17 +9,21 @@ interface RevealProps {
 
 /**
  * Révèle son contenu (fondu + léger glissement) lorsqu'il entre dans le viewport,
- * via IntersectionObserver (pas de listener scroll). Respecte prefers-reduced-motion.
+ * via IntersectionObserver. Animation en styles inline (fiable, non purgeable).
+ * En mode "animations réduites", on garde le fondu et on retire le glissement.
  */
 export default function Reveal({ children, className = '', delay = 0 }: RevealProps) {
     const ref = useRef<HTMLDivElement>(null);
     const [visible, setVisible] = useState(false);
+    const [reduced, setReduced] = useState(false);
 
     useEffect(() => {
         const el = ref.current;
         if (!el) return;
 
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        setReduced(window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+        if (typeof IntersectionObserver === 'undefined') {
             setVisible(true);
             return;
         }
@@ -33,7 +37,7 @@ export default function Reveal({ children, className = '', delay = 0 }: RevealPr
                     }
                 }
             },
-            { threshold: 0.15, rootMargin: '0px 0px -8% 0px' }
+            { threshold: 0.1, rootMargin: '0px 0px -5% 0px' }
         );
 
         observer.observe(el);
@@ -43,10 +47,14 @@ export default function Reveal({ children, className = '', delay = 0 }: RevealPr
     return (
         <div
             ref={ref}
-            style={{ transitionDelay: `${delay}ms` }}
-            className={`transition-all duration-700 ease-out motion-reduce:transition-none motion-reduce:transform-none ${
-                visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-            } ${className}`}
+            className={className}
+            style={{
+                opacity: visible ? 1 : 0,
+                transform: visible || reduced ? 'none' : 'translateY(2rem)',
+                transition: 'opacity 700ms cubic-bezier(0.22, 1, 0.36, 1), transform 700ms cubic-bezier(0.22, 1, 0.36, 1)',
+                transitionDelay: delay + 'ms',
+                willChange: 'opacity, transform',
+            }}
         >
             {children}
         </div>
