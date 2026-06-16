@@ -6,6 +6,7 @@ import Reveal from '../components/Reveal';
 
 export default function Home() {
     const [mobileOpen, setMobileOpen] = useState(false);
+    const [scrollY, setScrollY] = useState(0);
     const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
 
     const closeMobile = () => setMobileOpen(false);
@@ -14,6 +15,20 @@ export default function Home() {
         const handler = () => { if (window.innerWidth >= 768) setMobileOpen(false); };
         window.addEventListener('resize', handler);
         return () => window.removeEventListener('resize', handler);
+    }, []);
+
+    useEffect(() => {
+        let handle = 0;
+        const onScroll = () => {
+            handle = requestAnimationFrame(() => {
+                setScrollY(window.scrollY);
+            });
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        return () => {
+            window.removeEventListener('scroll', onScroll);
+            cancelAnimationFrame(handle);
+        };
     }, []);
 
     const features = [
@@ -97,6 +112,20 @@ export default function Home() {
                 <div className="absolute top-1/4 left-[10%] w-72 h-72 bg-primary-300/15 rounded-full blur-3xl filter animate-blob pointer-events-none -z-10" />
                 <div className="absolute bottom-1/4 right-[10%] w-80 h-80 bg-accent-300/10 rounded-full blur-3xl filter animate-blob animation-delay-4000 pointer-events-none -z-10" />
 
+                {/* Éléments parallaxes flottants */}
+                <div 
+                    className="hidden md:block absolute left-8 top-1/3 text-primary-600/15 pointer-events-none -z-10 transition-transform duration-75 ease-out"
+                    style={{ transform: `translateY(${scrollY * -0.15}px) rotate(${scrollY * 0.05}deg)` }}
+                >
+                    <Icon name="map-pin" size={56} />
+                </div>
+                <div 
+                    className="hidden md:block absolute right-8 top-1/4 text-accent-500/10 pointer-events-none -z-10 transition-transform duration-75 ease-out"
+                    style={{ transform: `translateY(${scrollY * -0.22}px) rotate(${scrollY * -0.03}deg)` }}
+                >
+                    <Icon name="car" size={64} />
+                </div>
+
                 <div className="max-w-3xl relative z-10">
                     <Reveal delay={0} duration={1200}>
                         <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-primary-700">
@@ -153,8 +182,22 @@ export default function Home() {
             </header>
 
             {/* ── Piliers (plein écran) ── */}
-            <section className="border-t border-ink/8 bg-paper/60 flex items-center min-h-[100svh] overflow-hidden">
-                <div className="max-w-6xl mx-auto px-6 py-16 md:py-20 w-full">
+            <section className="relative border-t border-ink/8 bg-paper/60 flex items-center min-h-[100svh] overflow-hidden">
+                {/* Éléments parallaxes flottants */}
+                <div 
+                    className="hidden md:block absolute left-10 top-1/4 text-primary-500/12 pointer-events-none -z-10 transition-transform duration-75 ease-out"
+                    style={{ transform: `translateY(${(scrollY - 600) * 0.12}px) rotate(${(scrollY - 600) * -0.04}deg)` }}
+                >
+                    <Icon name="leaf" size={64} />
+                </div>
+                <div 
+                    className="hidden md:block absolute right-10 bottom-1/4 text-primary-600/12 pointer-events-none -z-10 transition-transform duration-75 ease-out"
+                    style={{ transform: `translateY(${(scrollY - 600) * -0.1}px) rotate(${(scrollY - 600) * 0.03}deg)` }}
+                >
+                    <Icon name="hands" size={56} />
+                </div>
+
+                <div className="max-w-6xl mx-auto px-6 py-16 md:py-20 w-full relative z-10">
                     <Reveal duration={1200}>
                         <h2 className="font-display text-4xl md:text-5xl font-semibold text-ink">
                             Une plateforme, trois usages
@@ -183,6 +226,20 @@ export default function Home() {
                 {/* Blobs d'arrière-plan accentué */}
                 <div className="absolute top-1/3 -right-20 w-96 h-96 bg-accent-500/8 rounded-full blur-[100px] filter animate-blob pointer-events-none -z-10" />
                 <div className="absolute bottom-1/4 -left-20 w-80 h-80 bg-primary-400/5 rounded-full blur-[80px] filter animate-blob animation-delay-4000 pointer-events-none -z-10" />
+
+                {/* Éléments parallaxes flottants */}
+                <div 
+                    className="hidden md:block absolute left-12 top-1/3 text-secondary-50/8 pointer-events-none -z-10 transition-transform duration-75 ease-out"
+                    style={{ transform: `translateY(${(scrollY - 1400) * 0.15}px) rotate(${(scrollY - 1400) * 0.05}deg)` }}
+                >
+                    <Icon name="shield" size={64} />
+                </div>
+                <div 
+                    className="hidden md:block absolute right-12 bottom-1/3 text-accent-300/10 pointer-events-none -z-10 transition-transform duration-75 ease-out"
+                    style={{ transform: `translateY(${(scrollY - 1400) * -0.12}px) rotate(${(scrollY - 1400) * -0.04}deg)` }}
+                >
+                    <Icon name="star" size={56} />
+                </div>
 
                 <div className="max-w-6xl mx-auto px-6 py-16 md:py-24 grid lg:grid-cols-2 gap-12 items-center w-full relative z-10">
                     <div>
