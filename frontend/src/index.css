@@ -185,8 +185,26 @@ h1, h2, h3, h4, .font-display {
     --color-ink: #e8eeed;
 
     /* Texte de marque (pétrole) éclairci pour rester lisible sur fond sombre */
-    .text-primary-600, .text-primary-700 {
+    .text-primary-500, .text-primary-600, .text-primary-700 {
         color: #78a6af !important;
+    }
+    .text-primary-800 {
+        color: #abc9ce !important;
+    }
+    .text-secondary-500, .text-secondary-600, .text-secondary-700 {
+        color: #79a0a1 !important;
+    }
+    .text-secondary-800 {
+        color: #aac3c4 !important;
+    }
+    .text-orange-500, .text-orange-600, .text-orange-700, .text-accent-500, .text-accent-600, .text-accent-700 {
+        color: #ec8a72 !important;
+    }
+    .text-orange-800, .text-accent-800 {
+        color: #f3b1a0 !important;
+    }
+    .text-gray-400, .text-slate-400 {
+        color: #a7b6b5 !important;
     }
 
     /* Backgrounds des pages historiques (slate/gray/white) */
@@ -200,7 +218,22 @@ h1, h2, h3, h4, .font-display {
         background-color: #18302f !important;
     }
     .bg-primary-50, .bg-blue-50 {
-        background-color: rgba(42, 63, 66, 0.45) !important;
+        background-color: rgba(120, 166, 175, 0.15) !important;
+    }
+    .bg-secondary-50 {
+        background-color: rgba(121, 160, 161, 0.15) !important;
+    }
+    .bg-orange-50, .bg-accent-50 {
+        background-color: rgba(236, 138, 114, 0.15) !important;
+    }
+    .bg-primary-100 {
+        background-color: rgba(120, 166, 175, 0.25) !important;
+    }
+    .bg-secondary-100 {
+        background-color: rgba(121, 160, 161, 0.25) !important;
+    }
+    .bg-orange-100, .bg-accent-100 {
+        background-color: rgba(236, 138, 114, 0.25) !important;
     }
 
     /* Text colors des pages historiques */
