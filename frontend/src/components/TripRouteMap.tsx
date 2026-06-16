@@ -183,14 +183,14 @@ export default function TripRouteMap({
                 </MapContainer>
 
                 {/* Legend overlay */}
-                <div className="absolute bottom-2 left-2 z-[999] flex items-center gap-3 bg-white/90 backdrop-blur-sm px-2.5 py-1.5 rounded-lg text-xs shadow-sm">
-                    <span className="flex items-center gap-1">
-                        <span style={{ display: 'inline-block', width: 10, height: 10, borderRadius: '50%', background: '#22c55e', border: '2px solid white', boxShadow: '0 1px 3px rgba(0,0,0,0.3)' }} />
+                <div className="absolute bottom-2 left-2 z-[999] flex items-center gap-3 bg-paper/90 dark:bg-secondary-900/90 border border-ink/10 dark:border-secondary-700/50 backdrop-blur-sm px-2.5 py-1.5 rounded-lg text-xs shadow-sm text-ink dark:text-secondary-100">
+                    <span className="flex items-center gap-1 font-medium">
+                        <span style={{ display: 'inline-block', width: 8, height: 8, borderRadius: '50%', background: '#22c55e', border: '1.5px solid white', boxShadow: '0 1px 2px rgba(0,0,0,0.3)' }} />
                         {departure.split(',')[0]}
                     </span>
-                    <span className="text-gray-300">→</span>
-                    <span className="flex items-center gap-1">
-                        <span style={{ display: 'inline-block', width: 10, height: 10, borderRadius: '50%', background: '#ef4444', border: '2px solid white', boxShadow: '0 1px 3px rgba(0,0,0,0.3)' }} />
+                    <span className="text-ink/30 dark:text-secondary-500">→</span>
+                    <span className="flex items-center gap-1 font-medium">
+                        <span style={{ display: 'inline-block', width: 8, height: 8, borderRadius: '50%', background: '#ef4444', border: '1.5px solid white', boxShadow: '0 1px 2px rgba(0,0,0,0.3)' }} />
                         {destination.split(',')[0]}
                     </span>
                 </div>
