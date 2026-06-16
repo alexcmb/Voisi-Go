@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { calculateDistance } from './geo';
+import { calculateDistance } from '../src/utils/geo';
 
 describe('calculateDistance (Haversine)', () => {
     it('renvoie 0 pour deux points identiques', () => {

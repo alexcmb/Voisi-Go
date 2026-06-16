@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { pushEnabled, getVapidPublicKey, sendPush } from './push';
+import { pushEnabled, getVapidPublicKey, sendPush } from '../src/utils/push';
 
 describe('push (configuration VAPID)', () => {
     it('cohérence entre pushEnabled() et getVapidPublicKey()', () => {
