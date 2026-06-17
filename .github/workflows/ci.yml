@@ -2,7 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    branches: 
+      - main
+      - 'feature/**'
   pull_request:
     branches: [main]
 
@@ -40,6 +42,16 @@ jobs:
         run: npm test
       - name: Build (tsc + Vite)
         run: npm run build
+      - name: Vérifier la taille du bundle
+        run: npx size-limit
+      - name: FinOps — taille bundle (raw)
+        run: du -sh dist/assets
+      - name: FinOps — détail assets
+        run: |
+          echo "Top 20 fichiers les plus lourds"
+          find dist/assets -type f -exec ls -lh {} \; | sort -k5 -hr | head -20
+      - name: FinOps — dépendances frontend
+        run: npm ls --prod --depth=0
 
   backend:
     name: Backend — types · tests · build
@@ -62,3 +74,7 @@ jobs:
         run: npm test
       - name: Build (tsc)
         run: npm run build
+      - name: FinOps — dépendances backend
+        run: npm ls --prod --depth=0
+      - name: FinOps — taille backend build
+        run: du -sh dist || true
