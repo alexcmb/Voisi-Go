@@ -23,10 +23,34 @@ export default function TripDetail() {
     const [loading, setLoading] = useState(true);
     const [actionLoading, setActionLoading] = useState(false);
     const [showReview, setShowReview] = useState(false);
+    const [contacting, setContacting] = useState(false);
 
     const currentUser = JSON.parse(localStorage.getItem('user') || '{}');
     const token = localStorage.getItem('token');
     const isDriver = currentUser?.id && trip?.driverId === currentUser.id;
+
+    const handleContact = async () => {
+        if (!token) { navigate('/login'); return; }
+        if (!trip || isDriver) return;
+        setContacting(true);
+        try {
+            const res = await fetch(`${API_BASE_URL}/api/messages/conversations`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+                body: JSON.stringify({ recipientId: trip.driverId, relatedType: 'trip', relatedId: trip.id }),
+            });
+            const data = await res.json();
+            if (res.ok) {
+                navigate(`/messages/${data.conversation.id}`);
+            } else {
+                toast.error(data.message || 'Impossible de démarrer la conversation');
+            }
+        } catch {
+            toast.error('Erreur réseau');
+        } finally {
+            setContacting(false);
+        }
+    };
 
     const fetchTrip = async () => {
         try {
@@ -392,12 +416,13 @@ export default function TripDetail() {
                             </div>
                         </Link>
                         {!isDriver && (
-                            <Link
-                                to={`/messages?driverId=${trip.driverId}&tripId=${trip.id}`}
-                                className="flex items-center gap-2 text-sm font-semibold text-primary-600 hover:text-primary-800 bg-primary-50 hover:bg-primary-100 px-4 py-2 rounded-xl transition-colors"
+                            <button
+                                onClick={handleContact}
+                                disabled={contacting}
+                                className="flex items-center gap-2 text-sm font-semibold text-primary-600 hover:text-primary-800 bg-primary-50 hover:bg-primary-100 px-4 py-2 rounded-xl transition-colors disabled:opacity-60"
                             >
-                                💬 Contacter
-                            </Link>
+                                {contacting ? 'Connexion…' : '💬 Contacter'}
+                            </button>
                         )}
                     </div>
 
