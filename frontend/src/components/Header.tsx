@@ -132,6 +132,7 @@ export default function Header() {
                 {/* ── Nav desktop ── */}
                 <div className="hidden md:flex gap-5 items-center">
                     <Link to="/explore" className={navLink}>Explorer</Link>
+                    <Link to="/help" className={navLink}>Aide</Link>
                     <Link to="/premium" className="font-semibold text-accent-600 hover:text-accent-700 transition-colors flex items-center gap-1.5">
                         <Icon name="sparkle" size={16} /> Premium
                     </Link>

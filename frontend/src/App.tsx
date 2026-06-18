@@ -13,6 +13,7 @@ import ServiceDetail from './pages/services/ServiceDetail';
 import EditProfile from './pages/profile/EditProfile';
 import PublicProfile from './pages/profile/PublicProfile';
 import Explore from './pages/Explore';
+import Help from './pages/Help';
 import Premium from './pages/Premium';
 import Messages from './pages/messages/Messages';
 import ConversationView from './pages/messages/ConversationView';
@@ -35,6 +36,7 @@ function App() {
           <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/explore" element={<Explore />} />
+          <Route path="/help" element={<Help />} />
           <Route path="/premium" element={<Premium />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />

@@ -24,7 +24,7 @@ export default function Footer() {
                         <h4 className="font-semibold text-secondary-50 mb-4">Contact</h4>
                         <ul className="space-y-2 text-sm">
                             <li>support@voisigo.fr</li>
-                            <li>Aide &amp; FAQ</li>
+                            <li><Link to="/help" className="hover:text-primary-300 transition-colors">Aide &amp; FAQ</Link></li>
                         </ul>
                     </div>
                 </div>
