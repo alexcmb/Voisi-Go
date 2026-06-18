@@ -18,6 +18,11 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Railway (et la plupart des PaaS) place l'app derrière un reverse-proxy qui
+// ajoute X-Forwarded-For. On fait confiance à 1 hop pour que express-rate-limit
+// identifie correctement les clients (sinon il lève ERR_ERL_UNEXPECTED_X_FORWARDED_FOR).
+app.set('trust proxy', 1);
+
 app.use(helmet());
 
 // CORS — autorise localhost (dev) + tous les *.vercel.app (demo) + origines configurées
