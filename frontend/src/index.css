@@ -301,6 +301,7 @@ h1, h2, h3, h4, .font-display {
 /* ── Garde-fou responsive : pas de scroll horizontal parasite sur mobile ── */
 html {
     -webkit-text-size-adjust: 100%;
+    transition: font-size 0.2s ease-in-out;
 }
 body {
     overflow-x: hidden;
@@ -312,4 +313,15 @@ body {
 }
 img, svg, video, canvas {
     max-width: 100%;
+}
+
+/* ── Accessibilité : Tailles globales du texte ── */
+html.ts-normal {
+    font-size: 100%;
+}
+html.ts-large {
+    font-size: 125%;
+}
+html.ts-xlarge {
+    font-size: 150%;
 }

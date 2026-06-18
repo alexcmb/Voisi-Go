@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Layout from '../components/Layout';
 import Icon from '../components/Icon';
+import { useAccessibility } from '../context/AccessibilityContext';
 
 interface FAQItem {
     question: string;
@@ -61,7 +62,7 @@ const FAQ_DATA: FAQItem[] = [
 ];
 
 export default function Help() {
-    const [textSize, setTextSize] = useState<'normal' | 'large' | 'xlarge'>('normal');
+    const { textSize, setTextSize } = useAccessibility();
     const [searchQuery, setSearchQuery] = useState('');
     const [activeGuide, setActiveGuide] = useState<'driver' | 'passenger' | 'services' | 'chat'>('driver');
     const [isPlaying, setIsPlaying] = useState<string | null>(null);
@@ -79,17 +80,6 @@ export default function Help() {
         window.speechSynthesis.cancel();
         setIsPlaying(null);
     }, [activeGuide]);
-
-    // Text Size helpers
-    const getTextSizeClass = (type: 'title' | 'body' | 'subtitle') => {
-        if (textSize === 'xlarge') {
-            return type === 'title' ? 'text-4xl' : type === 'subtitle' ? 'text-2xl' : 'text-xl';
-        }
-        if (textSize === 'large') {
-            return type === 'title' ? 'text-3xl' : type === 'subtitle' ? 'text-xl' : 'text-lg';
-        }
-        return type === 'title' ? 'text-2xl' : type === 'subtitle' ? 'text-lg' : 'text-base';
-    };
 
     // Text to Speech
     const speak = (text: string, sectionId: string) => {
@@ -249,7 +239,7 @@ export default function Help() {
 
                 {/* ─── Guides pas-à-pas (Visual Guides) ─── */}
                 <div className="mb-12">
-                    <h2 className={`font-bold text-ink mb-6 flex items-center gap-2 ${getTextSizeClass('title')}`}>
+                    <h2 className="font-bold text-ink mb-6 flex items-center gap-2 text-2xl">
                         📖 Guides Pas-à-Pas
                     </h2>
 
@@ -299,7 +289,7 @@ export default function Help() {
                             </button>
                         </div>
 
-                        <h3 className={`font-bold text-ink mb-6 border-b border-ink/8 pb-4 pr-32 ${getTextSizeClass('subtitle')}`}>
+                        <h3 className="font-bold text-ink mb-6 border-b border-ink/8 pb-4 pr-32 text-lg">
                             {guides[activeGuide].title}
                         </h3>
 
@@ -312,10 +302,10 @@ export default function Help() {
                                             {step.number}
                                         </span>
                                         <div>
-                                            <h4 className={`font-bold text-ink mb-1 ${getTextSizeClass('subtitle')}`}>
+                                            <h4 className="font-bold text-ink mb-1 text-lg">
                                                 {step.title}
                                             </h4>
-                                            <p className={`text-ink/65 leading-relaxed ${getTextSizeClass('body')}`}>
+                                            <p className="text-ink/65 leading-relaxed text-base">
                                                 {step.desc}
                                             </p>
                                         </div>
@@ -328,7 +318,7 @@ export default function Help() {
 
                 {/* ─── Foire Aux Questions (FAQ) ─── */}
                 <div className="mb-12">
-                    <h2 className={`font-bold text-ink mb-6 flex items-center gap-2 ${getTextSizeClass('title')}`}>
+                    <h2 className="font-bold text-ink mb-6 flex items-center gap-2 text-2xl">
                         ❓ Foire Aux Questions (FAQ)
                     </h2>
 
@@ -383,7 +373,7 @@ export default function Help() {
                                             onClick={() => setOpenFaqIndex(isOpen ? null : idx)}
                                             className="w-full text-left p-5 flex justify-between items-center gap-4 cursor-pointer hover:bg-ink/2 font-semibold"
                                         >
-                                            <span className={`font-bold text-ink ${getTextSizeClass('subtitle')}`}>
+                                            <span className="font-bold text-ink text-lg">
                                                 {item.question}
                                             </span>
                                             <span className={`text-xs transition-transform duration-200 text-primary-600 ${isOpen ? 'rotate-180' : ''}`}>
@@ -392,7 +382,7 @@ export default function Help() {
                                         </button>
                                         {isOpen && (
                                             <div className="px-5 pb-5 border-t border-ink/5 pt-4 bg-ink/1">
-                                                <p className={`text-ink/70 leading-relaxed ${getTextSizeClass('body')}`}>
+                                                <p className="text-ink/70 leading-relaxed text-base">
                                                     {item.answer}
                                                 </p>
                                             </div>
