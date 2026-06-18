@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Layout from '../../components/Layout';
-import { API_BASE_URL } from '../../lib/api';
+import { apiFetch } from '../../lib/api';
 import type { ConversationWithPreview } from '../../types';
 
 export default function Messages() {
@@ -9,20 +9,17 @@ export default function Messages() {
     const [loading, setLoading] = useState(true);
     const [isEditing, setIsEditing] = useState(false);
     const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
-    const token = localStorage.getItem('token');
 
     const fetchConversations = () => {
         setLoading(true);
-        fetch(`${API_BASE_URL}/api/messages/conversations`, {
-            headers: { 'Authorization': `Bearer ${token}` },
-        })
-            .then(res => res.json())
+        apiFetch<ConversationWithPreview[]>('/api/messages/conversations')
             .then(data => {
-                setConversations(data);
+                setConversations(Array.isArray(data) ? data : []);
                 setLoading(false);
             })
             .catch(err => {
                 console.error(err);
+                setConversations([]);
                 setLoading(false);
             });
     };
@@ -45,31 +42,23 @@ export default function Messages() {
         if (!confirm(`Supprimer ${selectedIds.size} conversation(s) ?`)) return;
 
         try {
-            const res = await fetch(`${API_BASE_URL}/api/messages/conversations/delete`, {
+            await apiFetch('/api/messages/conversations/delete', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`,
-                },
                 body: JSON.stringify({ conversationIds: Array.from(selectedIds) }),
             });
-
-            if (res.ok) {
-                setIsEditing(false);
-                setSelectedIds(new Set());
-                fetchConversations();
-            } else {
-                alert('Erreur lors de la suppression');
-            }
-        } catch (err) {
+            setIsEditing(false);
+            setSelectedIds(new Set());
+            fetchConversations();
+        } catch (err: any) {
             console.error(err);
-            alert('Erreur réseau');
+            alert(err.message || 'Erreur lors de la suppression');
         }
     };
 
     const formatTime = (dateStr?: string) => {
         if (!dateStr) return '';
         const d = new Date(dateStr);
+        if (isNaN(d.getTime())) return '';
         const now = new Date();
         const diffMs = now.getTime() - d.getTime();
         const diffMins = Math.floor(diffMs / 60000);

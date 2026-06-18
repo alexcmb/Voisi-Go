@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Layout from '../../components/Layout';
-import { API_BASE_URL } from '../../lib/api';
+import { apiFetch } from '../../lib/api';
 import type { Message } from '../../types';
 import { playNotificationSound } from '../../utils/sound';
 
@@ -20,7 +20,6 @@ export default function ConversationView() {
     const [loading, setLoading] = useState(true);
     const [sending, setSending] = useState(false);
     const messagesEndRef = useRef<HTMLDivElement>(null);
-    const token = localStorage.getItem('token');
     const currentUser = JSON.parse(localStorage.getItem('user') || '{}');
 
     const scrollToBottom = () => {
@@ -28,12 +27,10 @@ export default function ConversationView() {
     };
 
     const fetchMessages = () => {
-        fetch(`${API_BASE_URL}/api/messages/conversations/${id}`, {
-            headers: { 'Authorization': `Bearer ${token}` },
-        })
-            .then(res => res.json())
+        apiFetch<{ messages: Message[]; otherUser: OtherUser | null; relatedItem: any | null }>(`/api/messages/conversations/${id}`)
             .then(data => {
-                const newMessages = data.messages || [];
+                if (!data) return;
+                const newMessages = Array.isArray(data.messages) ? data.messages : [];
                 setMessages(prev => {
                     if (newMessages.length > prev.length) {
                         const lastMsg = newMessages[newMessages.length - 1];
@@ -43,8 +40,8 @@ export default function ConversationView() {
                     }
                     return newMessages;
                 });
-                setOtherUser(data.otherUser);
-                setRelatedItem(data.relatedItem);
+                setOtherUser(data.otherUser || null);
+                setRelatedItem(data.relatedItem || null);
                 setLoading(false);
             })
             .catch(err => {
@@ -70,39 +67,39 @@ export default function ConversationView() {
 
         setSending(true);
         try {
-            const res = await fetch(`${API_BASE_URL}/api/messages/conversations/${id}`, {
+            const data = await apiFetch<{ message: Message }>(`/api/messages/conversations/${id}`, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`,
-                },
                 body: JSON.stringify({ content: newMessage.trim() }),
             });
-
-            if (res.ok) {
-                const data = await res.json();
+            if (data?.message) {
                 setMessages(prev => [...prev, data.message]);
                 setNewMessage('');
             }
-        } catch {
-            alert('Erreur lors de l\'envoi');
+        } catch (err: any) {
+            console.error(err);
+            alert(err.message || "Erreur lors de l'envoi");
         } finally {
             setSending(false);
         }
     };
 
     const formatTime = (dateStr: string) => {
-        return new Date(dateStr).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
+        const d = new Date(dateStr);
+        if (isNaN(d.getTime())) return '';
+        return d.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
     };
 
     const formatDate = (dateStr: string) => {
-        return new Date(dateStr).toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' });
+        const d = new Date(dateStr);
+        if (isNaN(d.getTime())) return 'Date inconnue';
+        return d.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' });
     };
 
     // Group messages by date
     const groupedMessages: { date: string; messages: Message[] }[] = [];
     let currentDate = '';
     for (const msg of messages) {
+        if (!msg || !msg.createdAt) continue;
         const msgDate = new Date(msg.createdAt).toDateString();
         if (msgDate !== currentDate) {
             currentDate = msgDate;
@@ -147,7 +144,10 @@ export default function ConversationView() {
                                     }
                                 </p>
                                 <p className="text-primary-700 text-xs">
-                                    {new Date(relatedItem.date).toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' })}
+                                    {relatedItem.date && !isNaN(new Date(relatedItem.date).getTime())
+                                        ? new Date(relatedItem.date).toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' })
+                                        : 'Date non spécifiée'
+                                    }
                                     {(relatedItem as any).price > 0 ? ` • ${(relatedItem as any).price} €` : ' • Gratuit'}
                                 </p>
                             </div>

@@ -27,10 +27,13 @@ const allowedOrigins = process.env.ALLOWED_ORIGINS
 
 app.use(cors({
     origin: (origin, callback) => {
-        if (!origin) return callback(null, true); // curl, Postman, etc.
-        if (origin.startsWith('http://localhost')) return callback(null, true);
+        if (!origin) return callback(null, true); // curl, Postman, apps natives (origin absente)
+        // Web : localhost (dev), previews/prod Vercel, origines configurées
+        if (origin.startsWith('http://localhost') || origin.startsWith('https://localhost')) return callback(null, true);
         if (origin.endsWith('.vercel.app')) return callback(null, true);
         if (allowedOrigins.some(o => origin.startsWith(o))) return callback(null, true);
+        // Apps natives (Capacitor / Ionic / Cordova) : capacitor://localhost, ionic://localhost, file://
+        if (origin.startsWith('capacitor://') || origin.startsWith('ionic://') || origin.startsWith('file://')) return callback(null, true);
         callback(new Error(`CORS bloqué pour l'origine: ${origin}`));
     },
     credentials: true,
