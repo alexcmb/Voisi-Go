@@ -70,6 +70,8 @@ jobs:
         run: |
           rm -f package-lock.json
           npm install --no-audit --no-fund
+      - name: Lint (ESLint)
+        run: npm run lint
       - name: Tests unitaires (Vitest)
         run: npm test
       - name: Build (tsc)
