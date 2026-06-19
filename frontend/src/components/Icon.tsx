@@ -8,7 +8,7 @@ export type IconName =
     | 'search' | 'sparkle' | 'bell' | 'message' | 'sun' | 'moon'
     | 'user' | 'car' | 'hands' | 'leaf' | 'shield' | 'arrow-right'
     | 'check' | 'close' | 'menu' | 'logout' | 'home' | 'ticket'
-    | 'flag' | 'star' | 'map-pin' | 'login';
+    | 'flag' | 'star' | 'map-pin' | 'login' | 'help';
 
 type Props = SVGProps<SVGSVGElement> & {
     name: IconName;
@@ -38,6 +38,7 @@ const PATHS: Record<IconName, ReactNode> = {
     star: <path d="M12 4l2.3 4.9 5.2.6-3.9 3.6 1.1 5.3L12 16.2 7.2 18.4l1.1-5.3L4.4 9.5l5.2-.6z" />,
     'map-pin': <><path d="M12 21s-6.5-5.6-6.5-10.5a6.5 6.5 0 0 1 13 0C18.5 15.4 12 21 12 21Z" /><circle cx="12" cy="10.5" r="2.2" /></>,
     login: <><path d="M10 4H6a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h4" /><path d="M14 12H3m8-4-8 4 8 4" /></>,
+    help: <><circle cx="12" cy="12" r="9" /><path d="M9.5 9.5a2.5 2.5 0 0 1 4.5 1.5c0 1.5-2 2-2 3.5" /><path d="M12 17.5h.01" /></>,
 };
 
 export default function Icon({ name, size = 20, ...rest }: Props) {

@@ -154,6 +154,9 @@ export default function Home() {
                         <Link to="/premium" onClick={closeMobile} className="flex items-center gap-3 px-3 py-3 rounded-xl text-ink/80 font-semibold hover:bg-primary-50 transition-colors">
                             <Icon name="sparkle" /> Premium
                         </Link>
+                        <Link to="/help" onClick={closeMobile} className="flex items-center gap-3 px-3 py-3 rounded-xl text-ink/80 font-semibold hover:bg-primary-50 transition-colors">
+                            <Icon name="help" /> Aide
+                        </Link>
                         <Link to={token ? '/dashboard' : '/login'} onClick={closeMobile} className="flex items-center gap-3 px-3 py-3 rounded-xl text-ink/80 font-semibold hover:bg-primary-50 transition-colors">
                             <Icon name="home" /> {token ? 'Tableau de bord' : 'Connexion'}
                         </Link>
